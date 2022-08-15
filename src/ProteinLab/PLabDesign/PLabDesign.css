@@ -1,0 +1,465 @@
+.drft-section{
+    margin: 10rem 0rem;
+}
+
+.drft-section-title{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-items: space-between;
+    align-items: start;
+   
+}
+
+.drft-section-title-info{
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #686A6C;
+}
+
+.drft-section-title-info span{
+ font-weight: 500;
+}
+
+.drft-section-title-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.drft-section-title-btn button{
+    margin: 0px 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    color: #ffffff;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.btn-save{
+    background-color: green;
+}
+.btn-reset{
+    background-color: #990000; 
+}
+
+.btn-save:hover{
+    background-color: #12AD2B;
+}
+
+.btn-reset:hover{
+    background-color: #E41B17;
+}
+
+.drftt-amino-sequence,
+.drft-section-row,
+.drftt-amino-row{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: flex-start;
+      
+}
+
+.drft-section-row-count{
+    padding: 10px 30px;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.drftt-amino-row{
+    border: 1px solid #ccc;
+    padding:  0px 10px 0px 10px;
+    width: 100% !important;
+    margin: auto;
+   
+}
+
+.drftt-amino-sequence{
+    padding: 11px 10px 0px 10px;
+}
+.drftt-amino-sequence p{
+   text-transform: uppercase;
+   font-size: 22px;
+   font-weight: 400;
+   letter-spacing: 4px;
+}
+
+
+/* design-edit-section */
+
+.design-edit-section{
+ background-color: #D1D0CE;
+ padding: 10px 0px;
+ display: block;
+ margin: 0px auto 50px auto;
+ width: 85%;
+}
+
+.design-edit-btns{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.design-edit-btns button{
+    border: 2px solid #A9A9A9;
+    padding: 0px 15px;
+    margin: 10px;
+    text-transform: uppercase;
+    font-size: 23px;
+    border-radius: 4px;
+    height: 40px;
+    width: 50px;
+}
+
+    /* toggle in label designing */
+    .toggle {
+        position : relative ;
+        display : inline-block;
+        width : 80px;
+        height : 30px;
+        background-color: green;
+        border-radius: 80px;
+        border: 2px solid #686A6C;
+    }
+           
+    /* After slide changes */
+    .toggle:after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        top: 1px;
+        right: 1px;
+        transition:  all 0.5s;
+    }
+
+           
+    /* Checkbox checked effect */
+    .checkbox:checked + .toggle::after {
+        right : 49px;
+    }
+           
+    /* Checkbox checked toggle label bg color */
+    .checkbox:checked + .toggle {
+        background-color: red;
+    }
+           
+    /* Checkbox vanished */
+    .checkbox {
+        display : none;
+    }
+
+    .design-edit-assist{
+        display: flex;
+        justify-items: center;
+        justify-content: center;
+        align-items: start;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: #686A6C;
+    }
+
+    .design-edit-assist span{
+        color: green;
+        font-weight: 500;
+        padding: 0px 10px;
+    }
+
+
+
+
+    /* design-Review-section */
+
+    .design-review-section{
+        background-color: #D1D0CE;
+        padding: 10px 0px;
+        display: block;
+        margin: 0px auto 50px auto;
+        width: 85%;
+       }
+       
+       .design-review-btns{
+           display: flex;
+           justify-content: center;
+           justify-items: center;
+           align-items: center;
+       }
+       
+       .design-review-btns button{
+           border: 2px solid #A9A9A9;
+           padding: 0px 15px;
+           margin: 10px;
+           text-transform: uppercase;
+           font-size: 23px;
+           border-radius: 4px;
+           height: 40px;
+           width: 50px;
+           color: #ffffff;
+           background-color: #12AD2B;
+       }
+
+
+         /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+
+    .drft-section-title-info{
+        font-size: 15px;
+   
+    }
+
+    .design-edit-assist{
+        font-size: 15px;
+    }
+
+    .toggle {
+        width : 68px;
+        height : 20px;
+    }
+           
+
+    .toggle:after {
+        width: 15px;
+        height: 15px;
+    }
+
+    .drft-section-title-btn button{
+        font-size: 12px;
+    }
+
+
+    .design-edit-section,
+    .design-review-section{
+        padding: 10px 0px;
+        margin: 30px auto 50px auto;
+        width: 100%;
+       }
+
+
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 2px;
+        font-size: 9px;
+        height: 17px;
+        width: 17px;
+    }
+
+    .drft-section-row-count{
+        padding: 0px 5px;
+        font-size: 10px;
+    }
+    
+    .drftt-amino-row{
+        padding:  0px 3px 0px 3px;
+    
+    }
+    
+    .drftt-amino-sequence{
+        padding: 8px 3px 0px 3px;
+    }
+    .drftt-amino-sequence p{
+       font-size: 7px;
+       letter-spacing: 1px;
+    }
+    
+  }
+
+
+
+
+
+  @media (width: 375px){
+
+  }
+  @media (width: 414px){
+   .design-edit-btns button,
+   .design-review-btns button{
+        padding: 0px 0px;
+        margin: 3px;
+        font-size: 9px;
+        height: 17px;
+        width: 18px;
+    }
+
+    .drftt-amino-sequence p{
+        font-size: 8px;
+        letter-spacing: 1px;
+     }
+  }
+  @media (width: 390px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 3px;
+        font-size: 9px;
+        height: 17px;
+        width: 18px;
+    }
+  }
+  @media (width: 393px){
+ 
+  }
+  @media (width: 360px){
+
+  }
+  @media (width: 412px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 3px;
+        font-size: 9px;
+        height: 17px;
+        width: 18px;
+    }
+
+    .drftt-amino-sequence p{
+        font-size: 7px;
+        letter-spacing: 1px;
+     }
+  }
+  @media (width: 820px){
+   
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 5px;
+        font-size: 18px;
+        height: 38px;
+        width: 38px;
+    }
+
+    .design-edit-section,
+    .design-review-section{
+        margin: 50px auto 50px auto;
+        width: 100%;
+       }
+
+  }
+
+
+
+  @media (width: 768px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 5px;
+        font-size: 18px;
+        height: 38px;
+        width: 38px;
+    }
+
+    .design-edit-section,
+    .design-review-section{
+        margin: 50px auto 50px auto;
+        width: 100%;
+       }
+
+       
+    .drft-section-row-count{
+        padding: 0px 5px;
+        font-size: 12px;
+    }
+    
+    .drftt-amino-row{
+        padding:  0px 3px 0px 3px;
+    
+    }
+    
+    .drftt-amino-sequence{
+        padding: 8px 3px 0px 3px;
+    }
+    .drftt-amino-sequence p{
+       font-size: 13px;
+       letter-spacing: 1px;
+    }
+  }
+
+
+
+  @media (width: 912px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 5px;
+        font-size: 18px;
+        height: 38px;
+        width: 38px;
+    }
+
+    .design-edit-section,
+    .design-review-section{
+        margin: 50px auto 50px auto;
+        width: 100%;
+       }
+  }
+
+
+  @media (width: 540px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 5px;
+        font-size: 18px;
+        height: 30px;
+        width: 30px;
+    }
+
+    .design-edit-section,
+    .design-review-section{
+        margin: 50px auto 50px auto;
+        width: 100%;
+       }
+  }
+
+
+
+  @media (width: 280px){
+ 
+  }
+
+
+
+  @media (width: 1024px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 5px;
+        font-size: 25px;
+        height: 45px;
+        width: 50px;
+    }
+
+    .design-edit-section,
+    .design-review-section{
+        margin: 50px auto 50px auto;
+        width: 100%;
+       }
+  }
+
+  @media (width: 1280px){
+    .design-edit-btns button,
+    .design-review-btns button{
+        padding: 0px 0px;
+        margin: 5px;
+        font-size: 25px;
+        height: 45px;
+        width: 50px;
+    }
+
+    .design-edit-section,
+    .design-review-section{
+        margin: 50px auto 50px auto;
+        width: 84%;
+       }
+  }

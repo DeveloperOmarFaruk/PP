@@ -10,7 +10,7 @@ const ProteinDesign = () => {
   const [virus, setVirus] = useState([])
 
   useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_BASE_URL}product/by_type?product_type=bacteria`).then(res=>{
+    axios.get(`https://protein.catkinsofttech-bd.xyz/api/product/by_type?product_type=bacteria`).then(res=>{
       setBactaria(res.data)
     }).catch(err=>{
       console.log(err)
@@ -18,7 +18,7 @@ const ProteinDesign = () => {
   }, [])
 
   useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_BASE_URL}product/by_type?product_type=virus`).then(res=>{
+    axios.get(`https://protein.catkinsofttech-bd.xyz/api/product/by_type?product_type=virus`).then(res=>{
     setVirus(res.data)  
     console.log(res.data)
     }).catch(err=>{

@@ -14,19 +14,43 @@ const Dashboard = () => {
 
     useEffect(()=>{
       if(user){
-        axios.get(`${process.env.REACT_APP_BASE_URL}user/list`).then(res=>{
+        axios.get(`https://protein.catkinsofttech-bd.xyz/api/user/list`).then(res=>{
         setUserList(res.data)
         }).catch(err=>{
             console.log(err.message)
         })
       }else{
-        axios.get(`${process.env.REACT_APP_BASE_URL}product/list`).then(res=>{
+        axios.get(`https://protein.catkinsofttech-bd.xyz/api/product/list`).then(res=>{
         setProducts(res.data)
         }).catch(err=>{
             console.log(err.message)
         })
       }
     },[user])
+
+    const updateUserList = (data) => {
+      setUserList(prevState => ([...prevState, data]))
+    }
+
+    const deleteFromUserList = (data) => {
+      setUserList(prevState => prevState.filter(user => user.id !== data))
+    }
+
+    const editUserList = (data) => {
+      setUserList(prevState => prevState.map(user => user.id === data.id ? data : user))
+    }
+
+    const updateProductList = (data) => {
+      setProducts(prevState => ([...prevState, data]))
+    }
+
+    const deleteFromProductList = (data) => {
+      setProducts(prevState => prevState.filter(user => user.id !== data))
+    }
+
+    const editProducList = (data) => {
+      setProducts(prevState => prevState.map(user => user.id === data.id ? data : user))
+    }
    
   return (
       <>
@@ -45,7 +69,9 @@ const Dashboard = () => {
 
                   <div className="dashboard-container-col-9">
                  
-                      {user ? <Users userList={userList}/>  : <Product products={products}/>}
+                      {user ? <Users userList={userList} updateUserList={updateUserList} deleteFromUserList={deleteFromUserList}
+                        editUserList={editUserList}/>  : 
+                        <Product products={products} updateProductList={updateProductList} deleteFromProductList={deleteFromProductList} editProducList={editProducList}/>}
                      
               </div>
            </div>

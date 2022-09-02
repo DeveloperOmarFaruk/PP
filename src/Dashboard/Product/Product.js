@@ -12,7 +12,7 @@ import "../Users/Users.css"
 import bacteria from '../../Images/bacteria.jpg'
 import axios from 'axios'
 
-const Product = ({products}) => {
+const Product = ({products, updateProductList, deleteFromProductList, editProducList}) => {
 // Modal State
   const [addShow, setAddShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
@@ -21,14 +21,14 @@ const Product = ({products}) => {
   const handleAddShow = () => setAddShow(true);
 
   const handleEditClose = () => setEditShow(false);
+
   const handleEditShow = (id) => {
     setProductId(id)
     setEditShow(true);
-    axios.get(`${process.env.REACT_APP_BASE_URL}product/${id}`).then(res=>{
+    axios.get(`https://protein.catkinsofttech-bd.xyz/api/product/${id}`).then(res=>{
       setTitle(res.data.title)
       setType(res.data.product_type)
       setServiceList(res.data.variants)
-
       console.log(res.data)
     }).catch(err=>{
       console.log(err.message)
@@ -79,8 +79,10 @@ const Product = ({products}) => {
       "product_type": type,
       "variants": serviceList
     }
-    axios.post(`${process.env.REACT_APP_BASE_URL}product/create`, data).then(res=>{
+    axios.post(`https://protein.catkinsofttech-bd.xyz/api/product/create`, data).then(res=>{
       console.log('saved')
+      handleAddClose()
+      updateProductList(res.data)
     }).catch(err=>{
       console.log(err.message)
     })
@@ -95,8 +97,10 @@ const Product = ({products}) => {
       "variants": serviceList
     }
 
-    axios.patch(`${process.env.REACT_APP_BASE_URL}product/update`, data).then(res=>{
+    axios.patch(`https://protein.catkinsofttech-bd.xyz/api/product/update`, data).then(res=>{
       console.log('updated')
+      editProducList(res.data)
+      handleEditClose()
     }).catch(err=>{
       console.log(err.message)
     })
@@ -107,8 +111,9 @@ const Product = ({products}) => {
     const data = {
       "id": id
     }
-    axios.delete(`${process.env.REACT_APP_BASE_URL}product/delete`, {'data': data}).then(res=>{
+    axios.delete(`https://protein.catkinsofttech-bd.xyz/api/product/delete`, {'data': data}).then(res=>{
       console.log('deleted')
+      deleteFromProductList(id)
     }).catch(err=>{
       console.log(err.message)
     })

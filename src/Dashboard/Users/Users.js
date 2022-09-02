@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import "./Users.css"
 import axios from 'axios'
 
-const Users = ({userList}) => {
+const Users = ({userList, updateUserList, deleteFromUserList, editUserList}) => {
   const [userId, setUserId] = useState('')
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
@@ -23,7 +23,7 @@ const Users = ({userList}) => {
   const handleEditClose = () => setEditShow(false);
   const handleEditShow = (id) => {
     setEditShow(true)
-    axios.get(`${process.env.REACT_APP_BASE_URL}user/${id}`).then(res=>{
+    axios.get(`https://protein.catkinsofttech-bd.xyz/api/user/${id}`).then(res=>{
       setUserId(id)
       setUserName(res.data.username)
       setEmail(res.data.email)
@@ -38,8 +38,9 @@ const Users = ({userList}) => {
     const data = {
       'id': id
     }
-    axios.delete(`${process.env.REACT_APP_BASE_URL}user/delete`, {'data': data}).then(res=>{
+    axios.delete(`https://protein.catkinsofttech-bd.xyz/api/user/delete`, {'data': data}).then(res=>{
       console.log('delete')
+      deleteFromUserList(id)
     }).catch(err=>{
       console.log('err', err.message)
     })
@@ -55,8 +56,10 @@ const Users = ({userList}) => {
       'first_name': first_name,
       'last_name': last_name
     }
-    axios.post(`${process.env.REACT_APP_BASE_URL}user/create`, data).then(res=>{
+    axios.post(`https://protein.catkinsofttech-bd.xyz/api/user/create`, data).then(res=>{
       console.log('added')
+      updateUserList(res.data)
+      handleAddClose()
     }).catch(err=>{
       console.log(err.message)
     })
@@ -70,8 +73,10 @@ const Users = ({userList}) => {
       'last_name': last_name,
       'email': email
     }
-    axios.patch(`${process.env.REACT_APP_BASE_URL}user/update`, data).then(res=>{
+    axios.patch(`https://protein.catkinsofttech-bd.xyz/api/user/update`, data).then(res=>{
       console.log('update')
+      editUserList(res.data)
+      handleEditClose()
     }).catch(err=>{
       console.log(err.message)
     })
@@ -87,17 +92,16 @@ const Users = ({userList}) => {
         </div>
         <div className="dashboard-user-table-container">
         <table className="dashboard-user-table">
-          <thead>
-            <th>Name</th>
+          <thead style={{height: '.2rem'}}>
+            <th>username</th>
             <th>Email</th>
-            <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th></th>
             <th></th>
           </thead>
           <tbody>
-            { userList?.map(item=>{
+            { userList.length ? userList.map(item=>{
               return(
                 <tr>
                 <td data-label="Name">{item.username}</td>
@@ -112,7 +116,7 @@ const Users = ({userList}) => {
                 </td>
               </tr>
               )
-            }) }
+            }) : <></> }
           </tbody>
         </table>
 </div>

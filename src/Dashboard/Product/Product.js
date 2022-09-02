@@ -29,7 +29,6 @@ const Product = ({products, updateProductList, deleteFromProductList, editProduc
       setTitle(res.data.title)
       setType(res.data.product_type)
       setServiceList(res.data.variants)
-      console.log(res.data)
     }).catch(err=>{
       console.log(err.message)
     })
@@ -99,7 +98,8 @@ const Product = ({products, updateProductList, deleteFromProductList, editProduc
 
     axios.patch(`https://protein.catkinsofttech-bd.xyz/api/product/update`, data).then(res=>{
       console.log('updated')
-      editProducList(res.data)
+      editProducList(data)
+      console.log(data)
       handleEditClose()
     }).catch(err=>{
       console.log(err.message)

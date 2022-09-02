@@ -1,0 +1,201 @@
+.dashboard-section{
+    display: block;
+    margin: 70px auto;
+    width: 80%;
+}
+
+.dashboard-container{
+display: flex;
+justify-content: center;
+align-items: start;
+}
+
+.dashboard-container-col-3{
+    width: 22.5%;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    height: 100vh;
+}
+
+.dashboard-container-col-9{
+    width: 77.5%;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    height: 100vh;
+}
+
+.dashboard-left-title p{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    padding: 20px 10px;
+}
+
+.dashboard-left-btn{
+display: block;
+margin: auto;
+width: 80%;
+}
+
+.dashboard-left-btn-button{
+    padding: 5px 10px;
+    width: 100%;
+    margin: 15px 0px;
+    font-size: 18px;
+    border: 1px solid #03a9f4;
+    color: #03a9f4;
+}
+
+
+.dashboard-left-btn-button:hover{
+   
+    border: 1px solid #ccc;
+    background-color: #03a9f4;
+    color: #ffffff;
+}
+
+.active-dash-left-btn{
+    border: 1px solid #ccc;
+    background-color: #03a9f4;
+    color: #ffffff;
+}
+
+
+
+         /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .dashboard-section{
+        width: 95%;
+    }
+    .dashboard-container{
+        display: block;
+        }
+
+        .dashboard-container-col-3{
+            width: 100%;
+            border: none;
+            height: auto;
+        }
+        
+        .dashboard-container-col-9{
+            width: 100%;
+            border: none;
+            height: auto;
+        }
+  }
+
+
+
+
+
+  @media (width: 375px){
+
+  }
+
+
+
+  @media (width: 414px){
+   
+  }
+
+
+
+  @media (width: 390px){
+    
+  }
+
+
+
+  @media (width: 393px){
+ 
+  }
+
+
+  @media (width: 360px){
+
+  }
+
+
+
+  @media (width: 412px){
+   
+  }
+
+
+
+  @media (width: 820px){
+    .dashboard-section{
+        width: 95%;
+    }
+    .dashboard-container{
+        display: block;
+        }
+
+        .dashboard-container-col-3{
+            width: 100%;
+            border: none;
+            height: auto;
+        }
+        
+        .dashboard-container-col-9{
+            width: 100%;
+            border: none;
+            height: auto;
+        }
+  
+  }
+
+
+
+  @media (width: 768px){
+   
+  }
+
+
+
+  @media (width: 912px){
+    .dashboard-section{
+        width: 95%;
+    }
+    .dashboard-container{
+        display: block;
+        }
+
+        .dashboard-container-col-3{
+            width: 100%;
+            border: none;
+            height: auto;
+        }
+        
+        .dashboard-container-col-9{
+            width: 100%;
+            border: none;
+            height: auto;
+        }
+  }
+
+
+  @media (width: 540px){
+   
+  }
+
+
+
+  @media (width: 280px){
+ 
+  }
+
+
+
+  @media (width: 1024px){
+    
+  }
+
+
+  @media (width: 1280px){
+   
+  }

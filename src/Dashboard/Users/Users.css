@@ -1,0 +1,345 @@
+.user-container{
+   padding: 10px; 
+}
+
+.user-container-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-container-title p{
+    background-color: #254117;
+    padding: 10px 30px;
+    font-size: 19px;
+    font-weight: 500;
+    width: 25%;
+    color: #ffffff;
+    text-align: center;
+}
+
+.user-container-title button{
+    padding: 5px 10px;
+    width: 15%;
+    margin: 15px 0px;
+    font-size: 18px;
+    border: 1px solid #03a9f4;
+    background-color: #03a9f4;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.user-container-title button:hover{
+    color: #03a9f4;
+    background-color: #ffffff;
+}
+
+
+.user-edit-btn,
+.user-delete-btn{
+    padding: 2px 10px;
+    width: auto;
+    font-size: 16px;
+    border: 1px solid red;
+    background-color: red;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.user-edit-btn{
+    background-color: #254117;
+    border: 1px solid #254117;
+}
+
+.user-edit-btn:hover{
+    color: #254117;
+    background-color: #ffffff;
+}
+
+.user-delete-btn:hover{
+    color: red;
+    background-color: #ffffff;
+}
+
+
+
+.dashboard-user-table{
+    width: 100%;
+    height: 600px !important;
+  }
+
+  .dashboard-user-table-container{
+    height: 680px !important;
+    overflow: auto !important;
+  }
+  
+  .dashboard-user-table td,
+  .dashboard-user-table th {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .dashboard-user-table th{
+    white-space: nowrap !important; 
+  width: 50% !important; 
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;    
+  }
+
+  .dashboard-user-table td{
+    white-space: nowrap !important; 
+  width: 50% !important; 
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  height: 4rem !important;    
+  }
+
+  .td-overflow-scroll{
+    overflow: scroll;
+    height: 4rem !important; 
+  }
+
+
+
+ .pro-ord-img{
+    width: 50%;
+  }
+
+  .pro-ord-img-order{
+    width: 60%;
+  }
+
+  .dashboard-user-table tbody tr:hover{
+   background-color: #ADDFFF;
+  }
+  
+  .dashboard-user-table th {
+    background-color: #368BC1;
+    color: #ffffff;
+  }
+
+  .dashboard-user-table tbody tr:nth-child(even) {
+    background-color: #C9DFEC;
+  }
+  
+  .dashboard-user-table tbody tr:nth-child(even):hover {
+    background-color: #ADDFFF;
+  }
+  
+  /*responsive*/
+  
+  @media (max-width: 500px) {
+    .dashboard-user-table thead {
+      display: none;
+    }
+  
+    .dashboard-user-table,
+    .dashboard-user-table tbody,
+    .dashboard-user-table tr,
+    .dashboard-user-table td {
+      display: block;
+      width: 100%;
+    }
+    .dashboard-user-table tr {
+      margin-bottom: 15px;
+    }
+    .dashboard-user-table td {
+      padding-left: 50%;
+      text-align: left;
+      position: relative;
+    }
+    .dashboard-user-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+
+
+
+           /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .user-container-title{
+      display: block;
+  }
+    .user-container-title p{
+      width: 100%;
+  }
+
+  .user-container-title button{
+   
+    width: 100%;
+    
+}
+
+.dashboard-user-table td{
+
+width: 100% !important; 
+   
+}
+
+.user-edit-btn,
+.user-delete-btn{
+ 
+    width: 100%;
+    
+}
+
+.pro-ord-img-order{
+  width: 50%;
+}
+
+.td-overflow-scroll{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: start !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+.td-overflow-scroll p{
+  padding: 0px 5px !important;
+  margin: 0px;
+}
+  }
+
+
+
+
+
+  @media (width: 375px){
+
+  }
+
+
+
+  @media (width: 414px){
+   
+  }
+
+
+
+  @media (width: 390px){
+    
+  }
+
+
+
+  @media (width: 393px){
+ 
+  }
+
+
+  @media (width: 360px){
+
+  }
+
+
+
+  @media (width: 412px){
+   
+  }
+
+
+
+  @media (width: 820px){
+    .user-container-title{
+      display: block;
+  }
+    .user-container-title p{
+      width: 100%;
+  }
+
+  .user-container-title button{
+   
+    width: 100%;
+    
+}
+
+.dashboard-user-table td{
+
+width: 100% !important; 
+   
+}
+
+.user-edit-btn,
+.user-delete-btn{
+ 
+    width: 100%;
+    
+}
+  }
+
+
+
+  @media (width: 768px){
+   
+  }
+
+
+
+  @media (width: 912px){
+    .user-container-title{
+      display: block;
+  }
+    .user-container-title p{
+      width: 100%;
+  }
+
+  .user-container-title button{
+   
+    width: 100%;
+    
+}
+
+.dashboard-user-table td{
+
+width: 100% !important; 
+   
+}
+
+.user-edit-btn,
+.user-delete-btn{
+ 
+    width: 100%;
+    
+}
+  }
+
+
+  @media (width: 540px){
+   
+  }
+
+
+
+  @media (width: 280px){
+ 
+  }
+
+
+
+  @media (width: 1024px){
+    .user-container-title p{
+      width: 40%;
+  }
+  }
+
+
+  @media (width: 1280px){
+    .user-container-title p{
+      width: 40%;
+  }
+  }
+
+  

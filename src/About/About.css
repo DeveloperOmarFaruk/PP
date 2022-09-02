@@ -1,0 +1,202 @@
+.about-section{
+    margin: 120px auto 50px auto;
+    display: block;
+    width: 80%;
+}
+
+.about-header{
+text-align: center;
+background-color: #193655;
+padding: 50px;
+border: 2px solid #123456;
+border-radius: 10px;
+}
+
+.about-header h4{
+font-size: 35px;
+font-weight: 700;
+color: #ffffff;
+padding: 20px;
+}
+
+.about-header p{
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 10px;
+    width: 59.860%;
+    margin: auto;
+    }
+
+
+.about-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-col-6{
+    width: 50%;
+}
+
+.about-body-left{
+    background-color: #2e2e54;
+padding: 50px;
+border: 2px solid #123456;
+border-radius: 10px;
+margin: 10px 10px 10px 0px;
+color: #ffffff;
+height: 250px;
+}
+
+.about-body-right{
+    background-color: #374151;
+    padding: 40px;
+    border: 2px solid #123456;
+    border-radius: 10px;
+    margin: 10px 0px 10px 0px;
+    color: #ffffff;
+    height: 250px;
+}
+
+.about-body-left p{
+width: 90%;
+}
+
+.about-body-right p{
+    width: 90%;
+    }
+
+
+
+            /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .about-body{
+        display: block;
+    }
+
+    .about-header{
+        text-align: start;
+        padding: 10px;
+        }
+
+    .about-header h4{
+        font-size: 20px;
+        font-weight: 700;
+        }
+
+        .about-header p{
+            font-size: 16px;
+            padding: 10px 10px;
+            width: 100%;
+            }
+
+            .about-col-6{
+                width: 100%;
+            }
+
+            .about-body-left{
+            padding: 20px;
+            height: 280px;
+            }
+            
+            .about-body-right{
+                padding: 20px;
+                height: 280px;
+            }
+}
+
+
+
+
+
+@media (width: 375px){
+
+}
+
+
+
+@media (width: 414px){
+ 
+}
+
+
+
+@media (width: 390px){
+  
+}
+
+
+
+@media (width: 393px){
+
+}
+
+
+@media (width: 360px){
+
+}
+
+
+
+@media (width: 412px){
+ 
+}
+
+
+
+@media (width: 820px){
+    .about-body-left{
+        height: 330px;
+        }
+        
+        .about-body-right{
+            height: 330px;
+        }
+}
+
+
+
+@media (width: 768px){
+ 
+}
+
+
+
+@media (width: 912px){
+    .about-body-left{
+        height: 330px;
+        }
+        
+        .about-body-right{
+            height: 330px;
+        }
+}
+
+
+@media (width: 540px){
+ 
+}
+
+
+
+@media (width: 280px){
+
+}
+
+
+
+@media (width: 1024px){
+  
+}
+
+
+@media (width: 1280px){
+ 
+}
+
+

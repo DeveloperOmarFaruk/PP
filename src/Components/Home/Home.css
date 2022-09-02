@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.home-section{
+    margin: 72px auto 50px auto;
+    display: block;
+    width: 80%;
+}
+
+.home-header{
+    background: linear-gradient( to right, rgb(207, 123, 119), rgb(0, 0, 0, 0.6)), url('../../Images/bacground.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 150px 70px 150px 70px;
+    height: 100vh;
+}
+
+.home-header h2{
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 500;
+    color: #ffffff;
+    width: 48%;
+    padding: 10px 0px 0px 70px;
+ 
+}
+
+.home-header-link{
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 20px 0px 20px 70px;
+    width: 45% !important;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.home-header-link:hover{
+    text-decoration: underline;
+}
+
+.home-body-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-col-6-left{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2e2e54;
+    margin: 20px 10px  20px 0px;
+    padding: 20px 20px;
+    height: 250px;
+}
+
+.home-col-6-right{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #374151;
+    margin: 20px 0px  20px 10px;
+    padding: 20px;
+    height: 250px;
+}
+
+.home-col-image{
+    width: 50%;
+}
+
+.home-col-image img{
+    width: 100%;
+}
+
+.home-col-info{
+width: 50%;
+padding: 0px 20px;
+}
+
+.home-col-info h3{
+    font-size: 30px;
+    line-height: 36px;
+    color: #ffffff;
+}
+
+.home-col-info p{
+    font-size: 18px;
+    line-height: 28px;
+    color: #ffffff;
+}
+
+.home-col-info p:nth-last-child(1){
+    cursor: pointer;
+}
+
+
+.home-col-info p:nth-last-child(1):hover{
+    text-decoration: underline;
+}
+
+
+
+
+        /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .home-section{
+        margin: 60px auto 50px auto;
+        width: 87%;
+    }
+
+    .home-header{
+        padding: 100px 0px 100px 0px;
+        height: auto;
+    }
+
+    .home-header h2{
+        width: 100% !important;
+        padding: 20px 10px 20px 20px;
+     
+    }
+    
+    .home-header-link{
+        padding: 20px 10px 20px 20px;
+        width: 100% !important;
+    }
+
+    .home-body-container{
+        display: block;
+    }
+
+    .home-col-6-left{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .home-col-6-right{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .home-col-image{
+        width: 100%;
+    }
+
+    .home-col-info{
+        width: 100%;
+        padding: 20px 20px;
+        }
+}
+
+
+
+
+
+@media (width: 375px){
+
+}
+
+
+
+@media (width: 414px){
+ 
+}
+
+
+
+@media (width: 390px){
+  
+}
+
+
+
+@media (width: 393px){
+
+}
+
+
+@media (width: 360px){
+
+}
+
+
+
+@media (width: 412px){
+ 
+}
+
+
+
+@media (width: 820px){
+    .home-section{
+        margin: 60px auto 50px auto;
+        width: 80%;
+    }
+
+    .home-header{
+        padding: 150px 50px 150px 50px;
+        height: auto;
+    }
+
+    .home-header h2{
+        width: 100% !important;
+        padding: 20px 70px 20px 50px;
+     
+    }
+    
+    .home-header-link{
+        padding: 20px 70px 20px 50px;
+        width: 100% !important;
+    }
+
+    .home-body-container{
+        display: block;
+    }
+
+    .home-col-6-left{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .home-col-6-right{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .home-col-image{
+        width: 60%;
+    }
+
+    .home-col-info{
+        width: 100%;
+        padding: 20px 20px;
+        }
+}
+
+
+
+@media (width: 768px){
+    .home-section{
+        margin: 60px auto 50px auto;
+        width: 87%;
+    }
+
+    .home-header{
+        padding: 150px 50px 150px 50px;
+        height: auto;
+    }
+
+    .home-header h2{
+        width: 100% !important;
+        padding: 20px 70px 20px 50px;
+     
+    }
+    
+    .home-header-link{
+        padding: 20px 70px 20px 50px;
+        width: 100% !important;
+    }
+
+    .home-col-image{
+        width: 50%;
+    }
+}
+
+
+
+@media (width: 912px){
+    .home-section{
+        margin: 60px auto 50px auto;
+        width: 73%;
+    }
+
+    .home-header{
+        padding: 150px 50px 150px 50px;
+        height: auto;
+    }
+
+    .home-header h2{
+        width: 100% !important;
+        padding: 20px 70px 20px 50px;
+     
+    }
+    
+    .home-header-link{
+        padding: 20px 70px 20px 50px;
+        width: 100% !important;
+    }
+
+    .home-body-container{
+        display: block;
+    }
+
+    .home-col-6-left{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .home-col-6-right{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .home-col-image{
+        width: 60%;
+    }
+
+    .home-col-info{
+        width: 100%;
+        padding: 20px 20px;
+        }
+}
+
+
+@media (width: 540px){
+ 
+}
+
+
+
+@media (width: 280px){
+
+}
+
+
+
+@media (width: 1024px){
+    .home-col-6-left{
+        width: 100%;
+        display: block;
+        margin: 20px 10px  20px 0px;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .home-col-6-right{
+        width: 100%;
+        display: block;
+        margin: 20px 0px  20px 10px;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .home-col-image{
+        width: 60%;
+    }
+
+    .home-col-info{
+        width: 100%;
+        padding: 20px 20px;
+        }
+}
+
+
+@media (width: 1280px){
+ 
+}

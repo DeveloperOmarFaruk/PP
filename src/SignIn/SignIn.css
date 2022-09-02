@@ -1,0 +1,207 @@
+
+
+.signin-section{
+    margin: 150px auto 50px auto;
+    display: block;
+    width: 80%;
+}
+
+.signin-container{
+    margin: auto;
+    display: block;
+    width: 30%;
+}
+
+.signin-container h4{
+    text-align: center;
+}
+
+.signin-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signin-btn-button{
+    margin: 20px;
+    padding: 5px 10px;
+    width: 35%;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: none;
+    color: #4F4F4F;
+    background-color: #ffffff;
+}
+
+.active-link-sign{
+    color: #ffffff;
+    background-color: #1266f1;
+}
+
+.signin-checkbox{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.signin-checkbox p{
+    padding: 15px 5px 0px 5px;
+    color:#4F4F4F;
+    font-weight: 500;
+}
+
+.signin-checkbox-forgot{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forgot-navlink{
+    text-decoration: none;
+    color: #1266f1;
+    font-weight: 500;
+}
+
+.signin-submit-btn{
+    margin: 20px 0px;
+    padding: 5px 10px;
+    width: 100%;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 2px solid #1266f1;
+    color: #ffffff;
+    background-color: #1266f1;
+}
+
+
+.signin-submit-btn:hover{
+    color: #1266f1;
+    background-color: #ffffff; 
+}
+
+.not-register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.not-register p{
+    padding: 17px 10px 0px 0px;
+    color:#4F4F4F;
+    font-weight: 500;
+}
+
+
+.register-checkbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.register-checkbox p{
+    padding: 15px 5px 0px 5px;
+    color:#4F4F4F;
+    font-weight: 500;
+}
+
+
+
+
+/* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .signin-container{
+        width: 100%;
+    }
+}
+
+
+
+
+
+@media (width: 375px){
+
+}
+
+
+
+@media (width: 414px){
+ 
+}
+
+
+
+@media (width: 390px){
+  
+}
+
+
+
+@media (width: 393px){
+
+}
+
+
+@media (width: 360px){
+
+}
+
+
+
+@media (width: 412px){
+ 
+}
+
+
+
+@media (width: 820px){
+    .signin-container{
+        width: 70%;
+    }
+}
+
+
+
+@media (width: 768px){
+ 
+}
+
+
+
+@media (width: 912px){
+    .signin-container{
+        width: 70%;
+    }
+}
+
+
+@media (width: 540px){
+ 
+}
+
+
+
+@media (width: 280px){
+    .signin-container{
+        width: 100%;
+    }
+}
+
+
+
+@media (width: 1024px){
+    .signin-container{
+        width: 50%;
+    }
+}
+
+
+@media (width: 1280px){
+    .signin-container{
+        width: 50%;
+    }
+}

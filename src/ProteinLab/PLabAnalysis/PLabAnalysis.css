@@ -1,0 +1,530 @@
+.plta-title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blue-squer{
+ height: 15px !important;
+ width: 15px !important;
+ background-color: #CA6F1E;
+ margin: 120px 0px 50px 0px;
+}
+
+.control-btn{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.protein-pop-up{
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: #ffffff;
+
+  
+}
+
+
+
+.plta-title{
+    margin: 120px 0px 50px 8px;
+    font-size: 22px;
+}
+
+.plta-title span{
+   
+    padding: 5px 10px;
+    background-color: gray;
+    font-size: 10px;
+}
+
+.plta-input-container{
+    margin: auto;
+    width: 55%;
+    display: block;
+}
+
+.plta-input p{
+   padding: 0px 20px;
+   text-transform: uppercase;
+   color: #808080;
+}
+
+.plta-input input{
+    margin: 0px 20px;
+    width: 200px !important;
+}
+
+.plta-nav-menu-btn{
+    margin: 40px 20px !important;
+    width: 150px !important;
+}
+
+.plta-nav-menu-btn span{
+    color: #6495ed;
+    font-weight: 500;
+}
+
+.plta-side-btns{
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 40px 20px;
+  
+}
+
+.plta-side-btns button{
+    width: 200px !important;
+    border-radius: 5px !important;
+    margin: 10px 0px;
+}
+
+.nav-menu{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+
+
+.dropdown-menu li{
+    margin: 10px;
+    border: 1px solid #ccc !important;
+    border-radius: 3px;
+}
+
+
+
+
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+
+  .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  
+  .form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+
+
+  .form-container .cancel {
+    background-color: red;
+  }
+
+  
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+
+  .graph-container{
+    margin: 5rem 0rem;
+  }
+
+  .graph-chart{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+.graph-title{
+  text-align: center;
+  font-size: 20px;
+  margin: 30px 0px;
+}
+
+.graph-chart p{
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0px 10px;
+}
+
+.chart{
+  width: 100%;
+}
+
+.graph-sub-title{
+  font-size: 16px;
+  margin: 0px 0px 0px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+  .protein-info-container{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+margin: 0px 0px 60px 0px;
+  }
+
+
+
+  .protein-info-details{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #5DADE2;
+    width: 210px;
+    margin: 0px 20px 20px 20px;
+  }
+
+  .protein-2{
+    border: 1px solid #D35400;
+  }
+
+  .protein-3{
+    border: 1px solid #000080;
+  }
+
+  .protein-4{
+    border: 1px solid #800000;
+  }
+
+  .protein-5{
+    border: 1px solid #229954;
+  }
+
+  .protein-info-logo{
+    border-right: 1px solid #5DADE2;
+    padding: 10px 20px 10px 0px;
+  }
+
+  .protein-2-logo{
+    border-right: 1px solid #D35400;
+    padding: 10px 20px 10px 0px;
+  }
+
+
+  .protein-3-logo{
+    border-right: 1px solid #000080;
+    padding: 10px 20px 10px 0px;
+  }
+
+
+  .protein-4-logo{
+    border-right: 1px solid #800000;
+    padding: 10px 20px 10px 0px;
+  }
+
+  .protein-5-logo{
+    border-right: 1px solid #229954;
+    padding: 10px 20px 10px 0px;
+  }
+
+  .protein-info-logo p{
+    font-size: 30px;
+    font-weight: 600;
+    color: #5DADE2;
+    padding: 0px;
+    margin: 0px;
+  }
+  
+
+  .protein-2-logo p{
+    color: #D35400;
+  }
+
+
+  .protein-3-logo p{
+    color: #000080;
+  }
+
+
+  .protein-4-logo p{
+    color: #800000;
+  }
+  .protein-5-logo p{
+    color: #229954;
+  }
+
+  .protein-info-logo div{
+    width: 22px;
+    height: 5px;
+    background-color: #5DADE2;
+  }
+
+  .protein-2-logo div{
+    background-color: #D35400;
+  }
+
+  .protein-3-logo div{
+    background-color: #000080;
+  }
+
+  .protein-4-logo div{
+    background-color: #800000;
+  }
+
+  .protein-5-logo div{
+    background-color: #229954;
+  }
+
+  .protein-info-details-info{
+    text-align: center;
+    padding: 5px;
+    font-weight: 500;
+  }
+
+  .protein-info-details-info p{
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .protein-info-details-info p:nth-last-child(3){
+    font-weight: 700;
+  }
+
+
+  /* ================ */
+  /* Table design Area */
+  /* ================ */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .plta-table-container{
+    display: block;
+    margin: 70px auto 100px auto;
+    width: 100%;
+ }
+ 
+ .plta-table {
+  border: 2px solid #afafaf !important;
+ }
+ 
+ .table{
+     border: 2px solid #ccc !important;
+ }
+ 
+ .plta-table tr th{
+     color: #808080 !important;
+ }
+ 
+ .plta-table-container h3{
+     color: #6495ed;
+     text-transform: uppercase;  
+     font-size: 18px;  
+ }
+  
+  .table td,
+  .table th {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 16px;
+    
+  }
+
+  .table td{
+    color: #808080;
+    
+    
+  }
+  
+  .table th {
+  
+    color: #6495ed;
+    
+  }
+  
+  
+  
+  /*responsive*/
+  
+  @media (max-width: 500px) {
+    .table thead {
+      display: none;
+    }
+  
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
+      display: block;
+      width: 100%;
+    }
+    .table tr {
+      margin-bottom: 15px;
+    }
+    .table td {
+      padding-left: 50%;
+      text-align: left;
+      position: relative;
+    }
+    .table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+    .table tbody tr:nth-child(even) {
+      background-color: #d1e8f5;
+    }
+  }
+  
+
+  /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  @media (max-width: 768px){
+    .protein-pop-up{
+      top: 41% !important;
+      left: 24% !important;
+      opacity: 100 !important;
+  }
+
+  .plta-title{
+    font-size: 17px;
+} 
+  }
+
+  @media (width: 375px){
+    .protein-pop-up{
+      top: 51% !important;
+      left: 25% !important;
+  }
+  }
+  @media (width: 414px){
+    .protein-pop-up{
+      top: 38% !important;
+      left: 27% !important;
+  }
+  }
+  @media (width: 390px){
+    .protein-pop-up{
+      top: 41% !important;
+      left: 25% !important;
+  }
+  }
+  @media (width: 393px){
+    .protein-pop-up{
+      top: 41% !important;
+      left: 26% !important;
+  }
+  }
+  @media (width: 360px){
+    .protein-pop-up{
+      top: 47% !important;
+      left: 24% !important;
+  }
+  }
+  @media (width: 412px){
+    .protein-pop-up{
+      top: 38% !important;
+      left: 27% !important;
+  }
+  }
+  @media (width: 820px){
+    .protein-pop-up{
+      top: 16.8% !important;
+      left: 61% !important;
+  }
+
+  .graph-sub-title{
+    justify-content: center;
+  }
+
+
+  }
+
+
+
+  @media (width: 768px){
+    .protein-pop-up{
+      top: 19.5% !important;
+      left: 62% !important;
+  }
+
+  .graph-sub-title{
+    justify-content: center;
+  }
+  }
+
+
+
+  @media (width: 912px){
+    .protein-pop-up{
+      top: 14.5% !important;
+      left: 60.5% !important;
+  }
+
+  .graph-sub-title{
+    justify-content: center;
+  }
+  }
+
+
+  @media (width: 540px){
+    .protein-pop-up{
+      top: 38% !important;
+      left: 15% !important;
+  }
+
+  .graph-sub-title{
+    justify-content: center;
+  }
+  }
+
+
+
+  @media (width: 280px){
+    .protein-pop-up{
+      top: 58% !important;
+      left: 16% !important;
+  }
+
+  .plta-title{
+    font-size: 12px;
+}
+  }
+
+
+
+  @media (width: 1024px){
+    .protein-pop-up{
+      top: 33% !important;
+      left: 50% !important;
+  }
+  .graph-sub-title{
+    justify-content: center;
+  }
+  }

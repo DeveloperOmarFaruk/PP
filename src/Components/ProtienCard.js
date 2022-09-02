@@ -4,7 +4,7 @@ import "../ProteinDesign/ProteinDesign.css"
 import React from 'react'
 
 const ProtienCard = ({item}) =>{
-    let variants = item.variants
+    let variants = item.variant
     const [index, setIndex] = useState(0)
     const [clicked, setClicked] = useState(false)
   const [press, setPress] = useState("home")
@@ -15,12 +15,12 @@ const ProtienCard = ({item}) =>{
         <img src={Bacteria} alt={Bacteria} />
         <div className="pdesign-card-btn">
         <div className="pdesign-card-info">
-              <p>{item?.name}</p>
-              <p>{variants[index]?.title}</p>
-              <p>$ {variants[index]?.price}</p>
+              <p>{item.name}</p>
+              <p>{variants[index].title}</p>
+              <p>$ {variants[index].price}</p>
               </div>
               <div className="pdesign-card-multi-btn">
-                {item.variants?.map((vr)=>{return(<button key={vr.id} onClick={()=>{setIndex(vr.id-1); setCircleBtn(vr.id-1)}} className={` ${circleBtn === vr.id-1 ? 'pdesign-card-multi-btn-circle active-circle-btn' : 'pdesign-card-multi-btn-circle'}`}></button>)})}
+                {item.variant.map((vr)=>{return(<button key={vr.id} onClick={()=>{setIndex(vr.id-1); setCircleBtn(vr.id-1)}} className={` ${circleBtn === vr.id-1 ? 'pdesign-card-multi-btn-circle active-circle-btn' : 'pdesign-card-multi-btn-circle'}`}></button>)})}
               </div>
 
 

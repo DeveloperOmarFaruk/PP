@@ -5,108 +5,89 @@ import { NavLink } from 'react-router-dom';
  
 const Navbar = () => {
  
-    const [isActive, setActive] = useState("home")
-   
- 
   return (
-      <>
-      <div className="container fixed-top">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-               
-                  <img className="h-8 w-auto cursor-pointer " src={logo} alt={logo}/>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  <div className="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul className="navbar-nav">
-   
-           
-             
-              <ul className="multi-dropdown">
-                              <li><NavLink  to="/proteindesign"  className={` ${isActive === "proteinDesign" ? 'nav-link active-link' : 'nav-link'}`} onClick={() => setActive("proteinDesign")}>Protein Design</NavLink>
-            <ul className="nav-item">
-                <li><NavLink className="multi-dropdown-nav-link" to="/proteindesignbacteria">Bacteria</NavLink> </li>
-                    <li><NavLink className="multi-dropdown-nav-link" to="/proteindesignvirus">Virus</NavLink> </li>    
-            </ul>
+    <>
+    <div className="nav-section fixed-top">
+    <header>
+<nav className="navbar">
+  <div className="branding-logo">
+  <NavLink to="/">
+            <img className=" cursor-pointer " src={logo} alt={logo}/>
+            </NavLink>
+  </div>
+  <label for="input-hamburger" className="hamburger "></label>
+  <input type="checkbox" id="input-hamburger" hidden/>
+  <ul className="menu">
+  <li className="has-dropdown">
+      <NavLink to="/protein-design" className="menu-link">Protein Design &nbsp;
+        <span className="arrow"></span> 
+      </NavLink>
+      <ul className="submenu">
+        <li><NavLink  to="/protein-design-bacteria" className="menu-link">Bacteria</NavLink></li>
+        <li><NavLink to="/protein-design-virus" className="menu-link">Virus</NavLink></li>
+      </ul>
         </li>
-              </ul>
-             
-      <ul className="multi-dropdown">
-                <li>
-                <NavLink className={` ${isActive === "work" ? 'nav-link active-link' : 'nav-link'}`} onClick={() => setActive("work")} to="#">How It Works</NavLink>
-        </li>
-              </ul>
-             
- 
-         
-             
- 
- 
-              <ul className="multi-dropdown">
-        <li><NavLink to="#" className={` ${isActive === "myLab" ? 'nav-link active-link' : 'nav-link'}`} onClick={() => setActive("myLab")}>My ProteinLab</NavLink>
-            <ul>
-                <li><NavLink className="multi-dropdown-nav-link" to="#">My Analysis</NavLink>
-                    <ul>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 1</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 2</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 3</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 4</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 5</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 6</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 7</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 8</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 9</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">Analysis 10</NavLink></li>
-                       
-                     
-                       
-                    </ul>
-                    </li>
-                    <li><NavLink to="#" className="multi-dropdown-nav-link">My Protein</NavLink>
-                    <ul>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 1</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 2</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 3</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 4</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 5</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 6</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 7</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 8</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 9</NavLink></li>
-                        <li><NavLink className="multi-dropdown-nav-link" to="#">My Protein 10</NavLink></li>
-                       
-                     
-                       
-                    </ul>
-                </li>
-                    <li><NavLink className="multi-dropdown-nav-link" to="/">ProteinLab Analysis</NavLink></li>
-                    <li><NavLink className="multi-dropdown-nav-link" to="/proteinlabdesign">ProteinLab Design</NavLink></li>
-                    <li><NavLink className="multi-dropdown-nav-link" to="#">Protein Design Basics</NavLink></li>
-            </ul>
-        </li>
-                          </ul>
-                          
+        
+        <li><NavLink to="/how-it-works" className="menu-link">How It Works</NavLink></li>
 
-
-                          {/* <ul className="multi-dropdown">
-                <li>
-                <NavLink className={` ${isActive === "work" ? 'nav-link active-link' : 'nav-link'}`} onClick={() => setActive("work")} to="#">How It Works</NavLink>
-        </li>
-              </ul> */}
-                  </ul>
-                 
  
-              </div>
-             
-             
+    <li className="has-dropdown">
+      <NavLink to="#" className="menu-link">My ProteinLab &nbsp;
+        <span className="arrow"></span>
+      </NavLink>
+      <ul className="submenu">
+        
+        <li className="has-dropdown">
+          <NavLink to="#" className="menu-link">My Analysis &nbsp;
+            <span className="arrow"></span>
+          </NavLink>
+          <ul className="submenu">
+          <li><NavLink className="menu-link" to="#">Analysis 1</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 2</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 3</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 4</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 5</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 6</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 7</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 8</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 9</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">Analysis 10</NavLink></li>
+          </ul>
+            </li>
+            
+
+            <li className="has-dropdown">
+          <NavLink to="#" className="menu-link">My Protein &nbsp;
+            <span className="arrow"></span>
+          </NavLink>
+          <ul className="submenu">
+          <li><NavLink className="menu-link" to="#">My Protein 1</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 2</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 3</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 4</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 5</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 6</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 7</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 8</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 9</NavLink></li>
+                  <li><NavLink className="menu-link" to="#">My Protein 10</NavLink></li>
+          </ul>
+        </li>
+            <li><NavLink to="/protein-lab-analysis" className="menu-link">ProteinLab Analysis</NavLink></li>
+            <li><NavLink to="/protein-lab-design" className="menu-link">ProteinLab Design</NavLink></li>
+            <li><NavLink to="#" className="menu-link">Protein Design Basics</NavLink></li>
+      </ul>
+        </li>
+        
+
+        <li><NavLink to="/signin" className="menu-link">Sign In</NavLink></li>
+  </ul>
 </nav>
-       
- 
-     
+</header>
+
 </div>
-     
- 
-    </>
+
+</>
   )
 }
  

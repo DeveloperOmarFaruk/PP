@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.contact-section{
+    margin: 150px auto 50px auto;
+    display: block;
+    width: 80%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact-container{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.contact-col-3{
+    width: 35%;
+    margin-right: 20px;
+}
+
+.contact-col-6{
+    width: 65%;
+    margin-left: 20px;
+}
+
+.contact-left-container h2{
+font-size: 36px;
+font-weight: 900;
+line-height: 40px;
+color: #002A3A;
+}
+
+
+.contact-left-container p{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    color: #4B5563;
+}
+
+.contact-submit-btn{
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 28px;
+    color: #ffffff;
+    background-color: #ef426f;
+    border: 2px solid #ef426f;
+    border-radius: 8px;
+}
+
+.contact-form{
+    margin: 40px 0px;
+}
+
+.contact-submit-btn:hover{
+    color: #ef426f;
+    background-color: #ffffff;
+}
+
+
+/* =============== */
+/* Contact Us Design */
+/* =============== */
+
+.contact-us-title h4{
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 40px;
+    color: #002A3A;
+    text-align: center;
+}
+
+
+.contact-us-title h5{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #002A3A;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.contact-us-link{
+    text-align: center;
+}
+
+.contact-us-link button{
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #03A9F4;
+    text-align: center;
+    width: 15%;
+    margin: 10px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #03A9F4;
+}
+
+
+.contact-us-link button:hover{
+    border: 1px solid #03A9F4;
+    color:  #03A9F4;
+    background-color: #ffffff;
+    font-weight: 900;
+}
+
+.contact-share-form{
+    margin: 40px auto;
+    display: block;
+    width: 45%;
+}
+
+.contact-share-form label{
+    color:#002A3A;
+    padding: 20px 0px;
+    font-size: 18px;
+}
+
+.contact-share-form textarea{
+    height: 120px;
+    width: 100%;
+    border: 1px solid #03A9F4;
+    border-radius: 8px;
+    color:#002A3A;
+    padding: 5px 10px;
+}
+
+.contact-share-form textarea[type=text]:focus {
+    outline: none !important;
+  }
+
+
+
+/* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .contact-container{
+        display: block;
+    }
+
+    .contact-col-3{
+        width: 100%;
+        margin-right: 0px;
+    }
+    
+    .contact-col-6{
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .contact-us-link button{
+        width: 100%;
+    }
+
+    .contact-share-form{
+        margin: 40px auto;
+        display: block;
+        width: 100%;
+    }
+    
+}
+
+
+
+
+
+@media (width: 375px){
+
+}
+
+
+
+@media (width: 414px){
+ 
+}
+
+
+
+@media (width: 390px){
+  
+}
+
+
+
+@media (width: 393px){
+
+}
+
+
+@media (width: 360px){
+
+}
+
+
+
+@media (width: 412px){
+ 
+}
+
+
+
+@media (width: 820px){
+    .contact-container{
+        display: block;
+    }
+
+    .contact-col-3{
+        width: 100% !important;
+        margin-right: 0px;
+    }
+    
+    .contact-col-6{
+        width: 100% !important;
+        margin-left: 0px;
+    }
+}
+
+
+
+@media (width: 768px){
+ 
+}
+
+
+
+@media (width: 912px){
+    .contact-container{
+        display: block;
+    }
+
+    .contact-col-3{
+        width: 100% !important;
+        margin-right: 0px;
+    }
+    
+    .contact-col-6{
+        width: 100% !important;
+        margin-left: 0px;
+    }
+}
+
+
+@media (width: 540px){
+ 
+}
+
+
+
+@media (width: 280px){
+
+}
+
+
+
+@media (width: 1024px){
+  
+}
+
+
+@media (width: 1280px){
+ 
+}

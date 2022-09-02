@@ -1,5 +1,5 @@
 .order-section{
-    margin: 100px auto;
+    margin: 150px auto;
     display: block;
     width: 80%;
     color: #254b58;
@@ -8,7 +8,6 @@
 
 .order-section-row{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: start;
 }
@@ -205,4 +204,325 @@ padding: 0px 20px;
 .order-confirm-notice{
     margin: 20px 20px 20px 20px;
     font-size: 18px;
+}
+
+
+
+
+        /* ================ */
+  /* Responsive Area */
+  /* ================ */
+
+  
+  @media (max-width: 768px){
+    .order-section-row{
+        display: block;
+    }
+
+    .order-section-col img{
+        width: 100%;
+        height: auto;
+    }
+
+    
+.order-section-col{
+    width: 100%;
+    padding: 20px 0px;
+    height: auto;
+    margin: 40px 0px; 
+}
+
+
+.order-choose-row{
+    display: block;
+}
+
+.order-choose-col{
+    margin: 10px 0px;
+    padding: 10px 20px;
+}
+
+.order-confirm-best p{
+    width: 55%;
+}
+
+.order-confirm-best-row{
+    display: block;
+}
+
+.order-confirm-btn{
+    display: block;
+}
+
+.order-confirm-btn-button{
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+}
+
+.order-confirm-notice{
+    padding: 0px 0px 20px 0px;
+}
+
+.order-confirm p:nth-child(1){
+    width: 35%;
+}
+
+
+.order-confirm p:nth-child(2){
+    padding: 9px 15px;
+    font-size: 12px;
+    width: 65%;
+}
+}
+
+
+
+
+
+@media (width: 375px){
+
+}
+
+
+
+@media (width: 414px){
+ 
+}
+
+
+
+@media (width: 390px){
+  
+}
+
+
+
+@media (width: 393px){
+
+}
+
+
+@media (width: 360px){
+    .order-confirm p:nth-child(2){
+        padding: 9px 15px;
+        font-size: 11px;
+        width: 65%;
+    }
+}
+
+
+
+@media (width: 412px){
+ 
+}
+
+
+
+@media (width: 820px){
+    .order-section-row{
+        display: block;
+    }
+
+    .order-section-col img{
+        width: 100%;
+        height: auto;
+    }
+
+    
+.order-section-col{
+    width: 100%;
+    padding: 20px 0px;
+    height: auto;
+    margin: 40px 0px; 
+}
+
+
+.order-choose-row{
+    display: block;
+}
+
+.order-choose-col{
+    margin: 10px 0px;
+    padding: 10px 20px;
+}
+
+.order-confirm-best p{
+    width: 55%;
+}
+
+.order-confirm-best-row{
+    display: block;
+}
+
+.order-confirm-btn{
+    display: block;
+}
+
+.order-confirm-btn-button{
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+}
+
+.order-confirm-notice{
+    padding: 0px 0px 20px 0px;
+}
+
+.order-confirm p:nth-child(1){
+    width: 35%;
+}
+
+
+.order-confirm p:nth-child(2){
+    padding: 9px 15px;
+    font-size: 12px;
+    width: 65%;
+}
+}
+
+
+
+@media (width: 768px){
+ 
+}
+
+
+
+@media (width: 912px){
+    .order-section-row{
+        display: block;
+    }
+
+    .order-section-col img{
+        width: 100%;
+        height: auto;
+    }
+
+    
+.order-section-col{
+    width: 100%;
+    padding: 20px 0px;
+    height: auto;
+    margin: 40px 0px; 
+}
+
+
+.order-choose-row{
+    display: block;
+}
+
+.order-choose-col{
+    margin: 10px 0px;
+    padding: 10px 20px;
+}
+
+.order-confirm-best p{
+    width: 55%;
+}
+
+.order-confirm-best-row{
+    display: block;
+}
+
+.order-confirm-btn{
+    display: block;
+}
+
+.order-confirm-btn-button{
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+}
+
+.order-confirm-notice{
+    padding: 0px 0px 20px 0px;
+}
+
+.order-confirm p:nth-child(1){
+    width: 35%;
+}
+
+
+.order-confirm p:nth-child(2){
+    padding: 9px 15px;
+    font-size: 12px;
+    width: 65%;
+}
+}
+
+
+@media (width: 540px){
+ 
+}
+
+
+
+@media (width: 280px){
+
+}
+
+
+
+@media (width: 1024px){
+
+    .order-section-col{
+        height: auto;
+    }
+    .order-choose-row{
+        display: block;
+    }
+    
+    .order-choose-col{
+        margin: 10px 0px;
+        padding: 10px 20px;
+    }
+
+    .order-confirm-best p{
+        width: 55%;
+    }
+
+    .order-confirm-best-row{
+        display: block;
+    }
+    .order-confirm-btn{
+        display: block;
+    }
+    .order-confirm-btn-button{
+        width: 100%;
+        margin: 20px 0px 20px 0px;
+    }
+    .order-confirm-notice{
+        padding: 0px 0px 20px 0px;
+    }
+}
+
+
+@media (width: 1280px){
+    .order-section-col{
+        height: auto;
+    }
+    .order-choose-row{
+        display: block;
+    }
+    
+    .order-choose-col{
+        margin: 10px 0px;
+        padding: 10px 20px;
+    }
+
+    .order-confirm-best p{
+        width: 55%;
+    }
+
+    .order-confirm-best-row{
+        display: block;
+    }
+    .order-confirm-btn{
+        display: block;
+    }
+    .order-confirm-btn-button{
+        width: 100%;
+        margin: 20px 0px 20px 0px;
+    }
+    .order-confirm-notice{
+        padding: 0px 0px 20px 0px;
+    }
 }

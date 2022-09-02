@@ -93,10 +93,10 @@ const Users = ({userList, updateUserList, deleteFromUserList, editUserList}) => 
         <div className="dashboard-user-table-container">
         <table className="dashboard-user-table">
           <thead style={{height: '.2rem'}}>
-            <th>username</th>
+            <th>User Name</th>
             <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Product Purchased</th>
+            <th>Product Price</th>
             <th></th>
             <th></th>
           </thead>

@@ -38,7 +38,7 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 }
 
@@ -55,7 +55,7 @@ body {
 .menu-link {
   border: 1px solid #ccc;
   width: 200px;
-  margin: 5px 15px;
+  margin: 5px 10px;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -169,7 +169,6 @@ ul li:hover>ul {
  
 .navbar{
   padding: 10px 0px !important;
-  border-bottom: 1px solid #ccc;
 }
 
 
@@ -241,6 +240,11 @@ ul li:hover>ul {
     width: 100% !important; 
     padding: 0px 0px 10px 0px;
     height: 90px;
+  }
+
+  .navbar {
+    justify-content: space-between;
+
   }
 
 }
@@ -349,6 +353,11 @@ ul li:hover>ul {
     position: absolute;
     opacity: 1;
     transform: scaleY(1);
+  }
+
+  .navbar {
+    justify-content: space-between;
+
   }
 }
 
@@ -521,6 +530,11 @@ ul li:hover>ul {
     opacity: 1;
     transform: scaleY(1);
   }
+
+  .navbar {
+    justify-content: space-between;
+
+  }
 }
 
 
@@ -650,6 +664,11 @@ ul li:hover>ul {
     position: absolute;
     opacity: 1;
     transform: scaleY(1);
+  }
+
+  .navbar {
+    justify-content: space-between;
+
   }
 }
 

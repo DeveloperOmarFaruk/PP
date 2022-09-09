@@ -22,6 +22,7 @@ import Work from "./Work/Work";
 import ContactUs from "./Contact/ContactUs";
 import ContactShare from "./Contact/ContactShare";
 import Home from "./Components/Home/Home";
+import Checkout from "./Checkout/Checkout";
 
 function App() {
     return ( 
@@ -47,7 +48,8 @@ function App() {
           <Route path="/contact-share-story" element={<ContactShare/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgot-password" element={<Forgot />} />
-          <Route path="/how-it-works" element={<Work/>} />
+          <Route path="/how-it-works" element={<Work />} />
+          <Route path="/checkout" element={<Checkout/>} />
         </Routes>
         <Footer/>
 </Router>

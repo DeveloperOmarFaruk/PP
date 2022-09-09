@@ -1,0 +1,60 @@
+
+
+.cardContainer {
+  margin-top: 5rem;
+}
+
+.payment-card{
+  width: 40%;
+}
+
+.cardForm {
+  /* margin: auto; */
+  margin-top: 3rem;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardForm input {
+  margin: 0.5rem 0.5rem 0.5rem 0rem;
+  padding: 0.5rem;
+  border: 2px solid #002A3A;
+  outline: none;
+  color: #000;
+  font-size: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  border-radius: 5px;
+}
+
+.cardForm input:focus,
+.cardForm input:active {
+  border-color: #005cc8;
+}
+
+.cardForm .bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.bottom input[name="expiry"] {
+  flex: 1;
+}
+
+.bottom input[name="cvc"] {
+  width: 100px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

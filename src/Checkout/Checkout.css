@@ -1,0 +1,261 @@
+.checkout-section{
+    margin: 150px auto 50px auto;
+    display: block;
+    width: 80%;
+}
+
+.checkout-container{
+display: flex;
+justify-content: center;
+align-items: start;
+}
+
+.checkout-col-9{
+    width: 65%;
+}
+
+.checkout-col-3{
+    width: 35%;
+}
+
+.checkout-left-btn-button{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 2px solid #ffffff;
+    margin: 20px 30px 10px 0px;
+    color: #576569;
+    font-size: 18px;
+    line-height: 20px;
+    padding-bottom: 5px;
+}
+
+.checkout-left-btn-button:hover{
+    border-bottom: 2px solid #00a5ae;
+}
+
+.checkout-active-choose{
+    border-bottom: 2px solid #00a5ae;
+    color: #002A3A;
+}
+
+/* +++++Shipping Address Design++++++ */
+
+.shipping-title{
+    font-size: 60px;
+    font-weight: 500;
+    line-height: 60px;
+    color: #002A3A;
+    margin: 40px auto 20px auto;
+    letter-spacing: 2px;
+}
+
+.shipping-alert{
+    color: #6B7280;
+    font-size: 19px;
+    line-height: 24px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.shipping-form-container{
+    width: 80%;
+}
+
+.shipping-form-container-devider{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 40px 0px;
+}
+
+.form-container-devider-box-1{
+    margin: 0px 10px 0px 0px !important;
+}
+
+.form-container-devider-box-2{
+    margin:  0px 0px 0px 10px !important;
+}
+
+.shipping-submit-btn{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    padding: 13px 30px;
+    color: #ffffff;
+    background-color: #002a3a;
+    letter-spacing: 1px;
+    border: 2px solid #002A3A;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-submit-btn{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    padding: 0px 30px;
+    color: #ffffff;
+    background-color: #002a3a;
+    letter-spacing: 1px;
+    border: 2px solid #002A3A;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shipping-submit-btn:hover{
+    font-weight: 600;
+    color: #002A3A;
+    background-color: #ffffff;
+}
+
+
+.payment-submit-btn:hover{
+    font-weight: 600;
+    color: #002A3A;
+    background-color: #ffffff;
+}
+
+
+.paypal-icon{
+    color:#EF426F;
+    font-size: 25px;
+    padding: 0px 5px;
+}
+
+.payment-submit-btn p{
+    padding-top: 20px; 
+}
+
+.payment-sub-title{
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #002A3A;
+    padding-top: 45px;
+}
+
+.payment-option{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+
+.payment-option input{
+    margin: 10px 10px 10px 0px;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.payment-option label{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #002A3A;
+}
+
+.payment-option svg{
+    padding: 10px;
+    font-size: 47px;
+}
+
+.payment-option-notice{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000000;
+    padding: 40px 0px;
+    width: 65%;
+}
+
+.payment-navlink{
+    color: #EF426F;
+    text-decoration: none;
+}
+
+.payment-navlink:hover{
+    text-decoration: underline;
+    color: #EF426F;
+
+}
+
+
+/* =======Cart Design======= */
+
+.cart-sumary-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cart-sumary-title p{
+ font-size: 20px;
+ font-weight: 600;
+ line-height: 28px;
+ color: #002A3A;
+ padding-top: 18px;
+}
+
+.cart-arrow{
+    color: #EF426F;
+    font-size: 25px;
+    padding: 0px 10px;
+    font-weight: 700;
+}
+
+.cart-container-product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    border: 1px solid #6B7280;
+    padding: 10px;
+}
+
+
+.cart-col-4{
+    width: 33.33%;
+   
+}
+
+.cart-col-4 p{
+    font-size: 18px;
+    line-height: 24px;
+    color:#002A3A;
+    font-weight: 600;
+}
+
+.cart-prouct-amount{
+    text-align: end;
+}
+
+.cart-container-product img{
+    width: 70%;
+}
+
+.cart-prouct-amount button{
+border: none;
+color: red;
+}
+
+.cart-amount-tex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: .5rem auto;
+}
+
+.cart-amount-tex p{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    color:#002A3A;
+}

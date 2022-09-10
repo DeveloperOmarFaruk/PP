@@ -227,6 +227,28 @@ ul li:hover>ul {
   transform: rotate(225deg);
 }
 
+.nav-cart{
+  font-size: 23px;
+  margin: 10px 0px 10px 30px !important;
+  color: #2e2e54;
+  text-decoration: none;
+}
+
+.nav-cart:hover{
+  color: #2e2e54;
+}
+
+.cart-amount{
+position: absolute;
+top: 5;
+font-size: 13px;
+background-color: #2e2e54;
+color: #fff;
+padding: 0px 6px;
+border: none;
+border-radius: 50%;
+}
+
 @media only screen and (max-width: 78.75em) {
   .submenu .submenu .submenu {
     left: -100%;
@@ -698,6 +720,13 @@ ul li:hover>ul {
     justify-content: center;
     align-items: center;
   }
+  
+.nav-cart{
+  font-size: 20px;
+  margin: 10px 0px 10px 3px !important;
+
+}
+
 }
 
 

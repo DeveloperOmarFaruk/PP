@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import "./Navbar.css"
 import logo from "../../Images/logo.png"
 import { NavLink } from 'react-router-dom';
+import Cart from '../../Cart/Cart';
  
 const Navbar = () => {
  
@@ -81,6 +82,7 @@ const Navbar = () => {
         
 
         <li><NavLink to="/signin" className="menu-link">Sign In</NavLink></li>
+        <NavLink to="/cart" className="nav-cart"><i class="fa-solid fa-cart-shopping"></i><span className="cart-amount">0</span></NavLink>
   </ul>
 </nav>
 </header>

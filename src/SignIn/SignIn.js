@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import { NavLink} from 'react-router-dom';
+import axios from 'axios'
 
 
 const SignIn = () => {
@@ -11,6 +12,13 @@ const SignIn = () => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [login, setLogin] = useState(true);
   const [register, setRegister] = useState(true);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPass, setLoginPass] = useState('');
+  const [resEmail, setResEmail]  = useState('');
+  const [resPass, setResPass] = useState('');
+  const [resUserName, setResUserName] = useState('');
+  const [resConPass, setResConPass] = useState('');
+
   const handelLogin = () => {
     setLogin(true);
     setRegister(false);
@@ -21,6 +29,36 @@ const SignIn = () => {
     setRegister(true);
   }
 
+  const handleLogin = (e) =>{
+    e.preventDefault();
+    const data = {
+      "email": loginEmail,
+      "password": loginPass
+    }
+    axios.post(`http://localhost:8000/api/user/token`, data).then(res=>{
+      localStorage.setItem('accessToken', res.data.accessToken)
+      window.location.href = "/"
+    }).catch(er=>{
+      console.log(er)
+    })
+  }
+
+  const handleSignUp=(e)=>{
+    e.preventDefault();
+    const data = {
+      "username": resUserName,
+      "first_name": "",
+      "last_name": "",
+      "email": resEmail,
+      "password": resPass,
+      "confirm_password": resConPass
+    }
+    axios.post(`http://localhost:8000/api/user/create`, data).then(res=>{
+      window.location.href = '/signin'
+    }).catch(er=>{
+      console.log(er)
+    })
+  }
 
 
   return (
@@ -43,7 +81,7 @@ const SignIn = () => {
         margin: "20px 0px"
       }}
     >
-      <TextField fullWidth label="Email" id="fullWidth" type="email"/>
+      <TextField fullWidth label="Email" id="fullWidth" type="email" onChange={(e)=>setLoginEmail(e.target.value)}/>
               </Box>
               
 
@@ -54,7 +92,7 @@ const SignIn = () => {
                   margin: "20px 0px",
       }}
     >
-      <TextField fullWidth label="Password" id="fullWidth" type="password"/>
+      <TextField fullWidth label="Password" id="fullWidth" type="password" onChange={(e)=>setLoginPass(e.target.value)}/>
               </Box>
               
               <div className="signin-checkbox-forgot">
@@ -68,7 +106,7 @@ const SignIn = () => {
                 </div>
               </div>
 
-              <button className="signin-submit-btn">SIGN IN</button>
+              <button onClick={handleLogin} className="signin-submit-btn">SIGN IN</button>
 
               <div className="not-register">
                 <p>Not a member?</p>
@@ -85,7 +123,7 @@ const SignIn = () => {
         margin: "20px 0px"
       }}
     >
-      <TextField fullWidth label="Name" id="fullWidth" type="text"/>
+      <TextField fullWidth label="Name" id="fullWidth" type="text" onChange={(e)=>setResUserName(e.target.value)}/>
               </Box>
 
 
@@ -96,7 +134,7 @@ const SignIn = () => {
         margin: "20px 0px"
       }}
     >
-      <TextField fullWidth label="Email" id="fullWidth" type="email"/>
+      <TextField fullWidth label="Email" id="fullWidth" type="email" onChange={(e)=>setResEmail(e.target.value)}/>
               </Box>
               
 
@@ -107,7 +145,7 @@ const SignIn = () => {
                   margin: "20px 0px",
       }}
     >
-      <TextField fullWidth label="Password" id="fullWidth" type="password"/>
+      <TextField fullWidth label="Password" id="fullWidth" type="password" onChange={(e)=>setResPass(e.target.value)}/>
               </Box>
 
 
@@ -118,7 +156,7 @@ const SignIn = () => {
                   margin: "20px 0px",
       }}
     >
-      <TextField fullWidth label="Confirm Password" id="fullWidth" type="password"/>
+      <TextField fullWidth label="Confirm Password" id="fullWidth" type="password" onChange={(e)=>setResConPass(e.target.value)}/>
               </Box>
               
              
@@ -130,7 +168,7 @@ const SignIn = () => {
             
           
 
-              <button className="signin-submit-btn">SIGN UP</button>
+              <button onClick={handleSignUp} className="signin-submit-btn">SIGN UP</button>
 
               <div className="not-register">
                 <p>Already member?</p>

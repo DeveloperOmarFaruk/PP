@@ -4,11 +4,11 @@ import "../ProteinDesign/ProteinDesign.css"
 import React from 'react'
 
 const ProtienCard = ({item}) =>{
-    let variants = item.variant
+    let variants = item.variants
     const [index, setIndex] = useState(0)
     const [clicked, setClicked] = useState(false)
-  const [press, setPress] = useState("home")
-  const [circleBtn, setCircleBtn] = useState("btn")
+    const [press, setPress] = useState("home")
+    const [circleBtn, setCircleBtn] = useState("btn")
 
     return (
             <div className="pdesign-card">
@@ -20,7 +20,7 @@ const ProtienCard = ({item}) =>{
               <p>$ {variants[index].price}</p>
               </div>
               <div className="pdesign-card-multi-btn">
-                {item.variant.map((vr)=>{return(<button key={vr.id} onClick={()=>{setIndex(vr.id-1); setCircleBtn(vr.id-1)}} className={` ${circleBtn === vr.id-1 ? 'pdesign-card-multi-btn-circle active-circle-btn' : 'pdesign-card-multi-btn-circle'}`}></button>)})}
+                {item.variants.map((vr)=>{return(<button key={vr.id} onClick={()=>{setIndex(vr.id-1); setCircleBtn(vr.id-1)}} className={` ${circleBtn === vr.id-1 ? 'pdesign-card-multi-btn-circle active-circle-btn' : 'pdesign-card-multi-btn-circle'}`}></button>)})}
               </div>
 
 

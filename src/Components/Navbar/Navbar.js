@@ -39,7 +39,7 @@ const Navbar = () => {
       <ul className="submenu">
         
         <li className="has-dropdown">
-          <NavLink to="#" className="menu-link">My Analysis &nbsp;
+          <NavLink to="#" className="menu-link menu-link-respons">My Analysis &nbsp;
             <span className="arrow"></span>
           </NavLink>
           <ul className="submenu">
@@ -58,11 +58,11 @@ const Navbar = () => {
             
 
             <li className="has-dropdown">
-          <NavLink to="#" className="menu-link">My Protein &nbsp;
+          <NavLink to="#" className="menu-link menu-link-respons">My Protein &nbsp;
             <span className="arrow"></span>
           </NavLink>
           <ul className="submenu">
-          <li><NavLink className="menu-link" to="#">My Protein 1</NavLink></li>
+          <li><NavLink className="menu-link " to="#">My Protein 1</NavLink></li>
                   <li><NavLink className="menu-link" to="#">My Protein 2</NavLink></li>
                   <li><NavLink className="menu-link" to="#">My Protein 3</NavLink></li>
                   <li><NavLink className="menu-link" to="#">My Protein 4</NavLink></li>
@@ -74,9 +74,9 @@ const Navbar = () => {
                   <li><NavLink className="menu-link" to="#">My Protein 10</NavLink></li>
           </ul>
         </li>
-            <li><NavLink to="/protein-lab-analysis" className="menu-link">ProteinLab Analysis</NavLink></li>
-            <li><NavLink to="/protein-lab-design" className="menu-link">ProteinLab Design</NavLink></li>
-            <li><NavLink to="#" className="menu-link">Protein Design Basics</NavLink></li>
+            <li><NavLink to="/protein-lab-analysis" className="menu-link menu-link-respons">ProteinLab Analysis</NavLink></li>
+            <li><NavLink to="/protein-lab-design" className="menu-link menu-link-respons">ProteinLab Design</NavLink></li>
+            <li><NavLink to="#" className="menu-link menu-link-respons">Protein Design Basics</NavLink></li>
       </ul>
         </li>
         

@@ -182,6 +182,7 @@ ul li:hover>ul {
   white-space: nowrap;
   padding: 1.5em 0;
   min-width: auto;
+  width: auto;
   opacity: 0;
   transform: scaleY(0);
   transform-origin: top center;
@@ -255,7 +256,8 @@ border-radius: 50%;
     top: 0.5em;
   }
   .submenu {
-    min-width: 16em;
+    min-width: auto;
+    width: auto;
   }
 
   .nav-section{
@@ -276,7 +278,7 @@ border-radius: 50%;
   }
 }
 
-@media only screen and (max-width: 50em) {
+@media only screen and (max-width: 1000px) {
   header {
 
     padding: 1.5em 2em;
@@ -750,3 +752,28 @@ border-radius: 50%;
   
 }
 
+
+
+
+@media only screen and (max-width: 1550px) and (min-width: 780px)  {
+  .menu-link {
+    border: 1px solid #ccc;
+    width: 130px;
+    margin: 5px 10px;
+    font-size: 14px;
+  }
+
+  .menu-link-respons{
+    width: auto;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-section{
+    width: auto;
+  }
+}

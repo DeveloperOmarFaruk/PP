@@ -39,7 +39,7 @@ function App() {
           <Route path="/protein-design" element={<ProteinDesign />} />
           <Route path="/protein-design-bacteria" element={<ProteinDesignBacteria/>} />
           <Route path="/protein-design-virus" element={<ProteinDesignVirus />} />
-          <Route path="/order" element={<Order />} />
+          <Route path="/order/:id" element={<Order />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq />} />

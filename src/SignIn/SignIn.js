@@ -35,7 +35,7 @@ const SignIn = () => {
       "email": loginEmail,
       "password": loginPass
     }
-    axios.post(`http://localhost:8000/api/user/token`, data).then(res=>{
+    axios.post(`https://protein.catkinsofttech-bd.xyz/api/user/token`, data).then(res=>{
       localStorage.setItem('accessToken', res.data.accessToken)
       window.location.href = "/"
     }).catch(er=>{
@@ -53,7 +53,7 @@ const SignIn = () => {
       "password": resPass,
       "confirm_password": resConPass
     }
-    axios.post(`http://localhost:8000/api/user/create`, data).then(res=>{
+    axios.post(`https://protein.catkinsofttech-bd.xyz/api/user/create`, data).then(res=>{
       window.location.href = '/signin'
     }).catch(er=>{
       console.log(er)

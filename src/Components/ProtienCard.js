@@ -1,5 +1,6 @@
 import Bacteria from '../Images/bacteria.jpg'
 import {useState, useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
 import "../ProteinDesign/ProteinDesign.css"
 import React from 'react'
 
@@ -8,6 +9,7 @@ const ProtienCard = ({item}) =>{
     const [index, setIndex] = useState(0)
     const [clicked, setClicked] = useState(false)
     const [press, setPress] = useState("home")
+    const navigate = useNavigate();
     const [circleBtn, setCircleBtn] = useState("btn")
 
     return (
@@ -26,7 +28,9 @@ const ProtienCard = ({item}) =>{
 
               <div className="pdesign-card-chart-btn">
                 <button className="normal-click">Show me more!</button>
-            <button id={item.id} key={item.id} onClick={() => { setClicked(true); setPress("clic")}} className={` ${press === "clic" ? 'normal-click active-click' : 'normal-click'}`} >{clicked ? 'View my cart' : 'Add to cart'} </button>
+                <button id={item.id} key={item.id} onClick={() => navigate(`/order/${item.id}`)} 
+                  className={'normal-click'} >
+                    {clicked ? 'View my cart' : 'Add to cart'} </button>
               </div>
         </div>
              

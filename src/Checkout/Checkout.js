@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 import {ProductData} from "./ProductData"
 import {MenuItemData} from "./ProductData"
 import "./Checkout.css"
+import { useEffect } from 'react';
 // import PaymentForm from './PaymentForm';
 
 
@@ -27,6 +28,8 @@ const Checkout = () => {
 
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
+
+  const [formData, setFormData] = useState([]);
 
   const handleState = (event) => {
     setCountry(event.target.value);
@@ -65,6 +68,12 @@ const Checkout = () => {
   const handelcartShow = () => {
     setCartShow(current => !current)
   }
+
+  useEffect(() => {
+    const data = localStorage.getItem('cart')
+    setFormData(data)
+  });
+
 
 
   return (
@@ -205,7 +214,10 @@ const Checkout = () => {
                     {
                       credit &&
                         <>
+                        <form action="http://localhost:8000/api/order/create-checkout-session" method="POST">
+                          <input hidden name="data" value={formData} />
                           <button className="payment-submit-btn" ><i className="fa-brands fa-cc-visa paypal-icon"></i><p>Checkout</p></button>
+                        </form>
                         </> }  
                     { paypal &&
                         <>

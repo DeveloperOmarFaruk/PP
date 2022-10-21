@@ -1,13 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import "./SignIn.css"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import { NavLink} from 'react-router-dom';
+import { login as userLogin} from './../context/action/auth'
+import { GlobalContext } from '../context/Provider';
+import {useNavigate } from "react-router-dom";
+
+
 import axios from 'axios'
 
 
 const SignIn = () => {
+  const {authState, authDispatch} = useContext(GlobalContext)
+  const history = useNavigate()
+
   const [isActive, setActive] = useState("signin")
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [login, setLogin] = useState(true);
@@ -35,12 +43,28 @@ const SignIn = () => {
       "email": loginEmail,
       "password": loginPass
     }
-    axios.post(`https://protein.catkinsofttech-bd.xyz/api/user/token`, data).then(res=>{
-      localStorage.setItem('accessToken', res.data.accessToken)
-      window.location.href = "/"
-    }).catch(er=>{
-      console.log(er)
+    userLogin(data)
+    .then(res => {
+      console.log(res)
+      if(res.status === 400){
+        authDispatch({
+          type: "LOG_OUT",
+        })
+      } else if(res.status === 200){
+        authDispatch({
+          type: "LOGIN_SUCCESS",
+          payload:res.result
+        })
+        history("/")
+        // window.location.href = "/"
+      }
     })
+    // axios.post(`https://protein.catkinsofttech-bd.xyz/api/user/token`, data).then(res=>{
+    //   localStorage.setItem('accessToken', res.data.accessToken)
+    //   window.location.href = "/"
+    // }).catch(er=>{
+    //   console.log(er)
+    // })
   }
 
   const handleSignUp=(e)=>{

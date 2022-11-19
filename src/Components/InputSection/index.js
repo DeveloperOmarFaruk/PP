@@ -107,7 +107,7 @@ const InputSection = () => {
           <div className="flex items-center justify-center mt-6 mb-0 plta-title-container">
             <div className="blue-squer" ></div>
             <h1 className="text-center plta-title">ProteinLab Table Analysis</h1>
-            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis All Classes</h1> */}
+            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> */}
             {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Class</h1> */}
           </div>
           
@@ -193,7 +193,7 @@ const InputSection = () => {
 
 
       <FormControl variant="filled" className={classes.formControl} style={{border:"1px solid #808080", borderRadius:"5px", width:"170px"}}>
-        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>CLASS</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>REGION</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"

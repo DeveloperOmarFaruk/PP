@@ -159,7 +159,7 @@ const PLabDesign = () => {
 
 
       <FormControl variant="filled" className={classes.formControl} style={{border:"1px solid #808080", borderRadius:"5px", width:"170px"}}>
-        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>CLASS</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>REGION</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"

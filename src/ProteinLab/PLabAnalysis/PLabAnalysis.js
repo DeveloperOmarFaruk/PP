@@ -110,7 +110,7 @@ const PLabAnalysis = () => {
           <div className="flex items-center justify-center mt-6 mb-0 plta-title-container">
             <div className="blue-squer" ></div>
             { analysis === 20 && <h1 className="text-center plta-title">ProteinLab Table Analysis</h1>}
-            { analysis === 10 && (classs === 50 ? <h1 className="text-center plta-title">ProteinLab Graph Analysis All Classes</h1> :
+            { analysis === 10 && (classs === 50 ? <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> :
             <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Class</h1> )}
             
           </div>
@@ -215,7 +215,7 @@ const PLabAnalysis = () => {
 
 
       <FormControl variant="filled" className={classes.formControl} style={{border:"1px solid #808080", borderRadius:"5px", width:"170px", }}>
-        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>CLASS</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>REGION</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
@@ -246,7 +246,7 @@ const PLabAnalysis = () => {
         {analysis === 10 && <div className="graph-container">
           
           <div className="graph-chart">
-            { classs === 50 ?<p>Classes</p> :
+            { classs === 50 ?<p>Regions</p> :
             <p>Ag</p>}
             <div className="chart">
             <ApexChart />
@@ -255,7 +255,7 @@ const PLabAnalysis = () => {
           
           <p className="graph-title">Amino Acid Positions</p>
           <div className="graph-sub-title">
-            {classs === 50 ? <p>All Classes: &nbsp;</p> :
+            {classs === 50 ? <p>All Regions: &nbsp;</p> :
             <p>Class 1: &nbsp;</p>}
             <p> Amino Acid and Substitute Pair</p>
           </div>

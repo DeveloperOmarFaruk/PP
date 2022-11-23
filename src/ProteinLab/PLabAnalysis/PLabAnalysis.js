@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
-import "./PLabAnalysis.css"
-
+import "./PLabAnalysis.css";
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,8 +8,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PLabTableAnalysis from './PLabTableAnalysis';
-import ApexChart from "./ApexChart"
-
+import ApexChart from "./ApexChart";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -22,19 +21,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const PLabAnalysis = () => {
-  
   const classes = useStyles();
   const ref = useRef()
   const [lab, setLab] = useState(10);
   const [analysis, setAnalysis] = useState(20);
   const [classs, setClasss] = useState(10);
   const [value, setValue] = useState({});
-  const [error, setError] = useState({})
-
+  const [error, setError] = useState({});
   const [showProtein, setShowProtein] = useState(false);
+	const [protienDetailA, setProtienDetailsA] = useState({});
+	const [protienDetailB, setProtienDetailsB] = useState({});
+	const [protienDetailC, setProtienDetailsC] = useState({});
+	const [protienDetailD, setProtienDetailsD] = useState({});
+	const [protienDetailE, setProtienDetailsE] = useState({});
+	let ready = false;
 
   useEffect(() => {
     const checkIfClickedOutside = e => {
@@ -42,36 +43,52 @@ const PLabAnalysis = () => {
         setShowProtein(false);
       }
     }
-
     document.addEventListener("mousedown", checkIfClickedOutside)
-
     return () => {
         document.removeEventListener("mousedown", checkIfClickedOutside)
     }
   }, [showProtein])
 
-
   const handleChangeShowProtein = () => {
     setShowProtein(true);
-
   };
-  
   const handleChangeHiddenProtein = () => {
     setShowProtein(false);
     };
-  
+	  const handleSetProtienDetails = (value) => {
+			if (value == 10) {
+				ready = true;
+			}
+			if (ready && value) {
+				const data = {
+					"position": value
+				};
+				const a = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-1-query', data);
+				const b = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-2-query', data);
+				const c = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-3-query', data);
+				const d = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-4-query', data);
+				const e = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-5-query', data);
+			
+				axios.all([a, b, c, d, e]).then(axios.spread((...responses) => {
+					setProtienDetailsA({'a': responses[0].data});
+					setProtienDetailsB({'b': responses[1].data});
+					setProtienDetailsC({'c': responses[2].data});
+					setProtienDetailsD({'d': responses[3].data});
+					setProtienDetailsE({'e': responses[4].data});
+				})).catch(errors => {
+					console.log("errors----", errors);
+				})
+			}
+		};
   const handleChangeLab = (event) => {
   setLab(event.target.value);
   };
-
   const handleChangeAnalysis = (event) => {
     setAnalysis(event.target.value);
   };
-  
   const handleChangeClasss = (event) => {
     setClasss(event.target.value);
     };
-
   const handleProteinSpike = (event) => {
     let spike = value.protein?.spike || {}
     let spike_value = parseInt(event.target.value)
@@ -82,7 +99,6 @@ const PLabAnalysis = () => {
     } else setError(prevState => ({...prevState, spike:{...prevState.spike, [event.target.name]:false}}))
 
   }
-
   const handleProteinM = (event) => {
     let m = value.protein?.m || {}
     let m_value = parseInt(event.target.value)
@@ -101,7 +117,6 @@ const PLabAnalysis = () => {
       setError(prevState => ({...prevState, n:{...prevState.n, [event.target.name]:true}}))
     } else setError(prevState => ({...prevState, n:{...prevState.n, [event.target.name]:false}}))
   }
-
 
   return (
       <>
@@ -191,13 +206,10 @@ const PLabAnalysis = () => {
               
 
 
-
-
               {/* <div className={classes.formControl} onClick={handleChangeShowProtein} style={{ border: "1px solid #808080", borderBottom:'2px solid #808080', borderRadius: "5px", width: "170px", cursor:"pointer", display:'flex', justifyContent:'space-between',}}>
                 <button style={{ color: "#6495ed", border: "none", margin: '0px 0px 0px 20px', fontSize:'17px' }}>PROTEIN</button>
                 <i class="fa-solid fa-sort-down" style={{ color: "#808080", margin: '17px 10px 0px 20px' }}></i>
               </div>
-
 
               {
             showProtein ? 
@@ -210,8 +222,6 @@ const PLabAnalysis = () => {
                     
           </div> : null
           } */}
-
-
 
 
       <FormControl variant="filled" className={classes.formControl} style={{border:"1px solid #808080", borderRadius:"5px", width:"170px", }}>
@@ -228,31 +238,22 @@ const PLabAnalysis = () => {
           <MenuItem value={40}>19</MenuItem>
           <MenuItem value={50}>All</MenuItem>
         </Select>
-              </FormControl> 
-              
+				</FormControl> 
+         </div>
+      </nav>
+    </div>
 
-
-
-     
-            </div>
-          </nav>
-        </div>
-
-            
         {analysis === 20 && <div>
           <PLabTableAnalysis/>
         </div>}
-        
         {analysis === 10 && <div className="graph-container">
-          
           <div className="graph-chart">
             { classs === 50 ?<p>Regions</p> :
             <p>Ag</p>}
             <div className="chart">
-            <ApexChart />
+            <ApexChart showProtein={handleSetProtienDetails}/>
             </div>
           </div>
-          
           <p className="graph-title">Amino Acid Positions</p>
           <div className="graph-sub-title">
             {classs === 50 ? <p>All Regions: &nbsp;</p> :
@@ -260,92 +261,81 @@ const PLabAnalysis = () => {
             <p> Amino Acid and Substitute Pair</p>
           </div>
           <div className="protein-info-container">
-          
+
             <div className="protein-info-details">
               <div className="protein-info-logo">
-                <p>V</p>
+                <p>{protienDetailA.a ? protienDetailA.a.amino_acid_1_ltr : '--'}</p>
                 <div></div>
-                <p>N</p>
+                <p>{protienDetailA.a ? protienDetailA.a.sub_1_ltr : '--'}</p>
               </div>
-              
               <div className="protein-info-details-info">
                 <p>Spike Protein</p>
-                <p>158</p>
+                <p>{protienDetailA.a ? protienDetailA.a.id : '--'}</p>
                 {classs === 50 ? <p>Class 1</p> :
-                  <p>1.741 Ag</p>}
+                  <p>{protienDetailA.a ? protienDetailA.a.ag : '0.0'} Ag</p>}
               </div>
             </div>
-
-
 
             <div className="protein-info-details  protein-2">
               <div className="protein-info-logo protein-2-logo">
-                <p>S</p>
+                <p>{protienDetailB.b ? protienDetailB.b.amino_acid_1_ltr : '--'}</p>
                 <div></div>
-                <p>E</p>
+                <p>{protienDetailB.b ? protienDetailB.b.sub_1_ltr : '--'}</p>
               </div>
-              
               <div className="protein-info-details-info">
                 <p>Protein 2</p>
-                <p>158</p>
+                <p>{protienDetailB.b ? protienDetailB.b.id : '--'}</p>
                 {classs === 50 ? <p>Class 8</p> :
-                <p>8.119 Ag</p> }
+                <p>{protienDetailB.b ? protienDetailB.b.ag : '0.0'} Ag</p> }
               </div>
             </div>
-
-
 
             <div className="protein-info-details  protein-3">
               <div className="protein-info-logo protein-3-logo">
-                <p>A</p>
+                <p>{protienDetailC.c ? protienDetailC.c.amino_acid_1_ltr : '--'}</p>
                 <div></div>
-                <p>D</p>
+                <p>{protienDetailC.c ? protienDetailC.c.sub_1_ltr : '--'}</p>
               </div>
-              
               <div className="protein-info-details-info">
                 <p>Protein 3</p>
-                <p>158</p>
+                <p>{protienDetailC.c ? protienDetailC.c.id : '--'}</p>
                 {classs === 50 ? <p>Class 12</p> :
-                <p>15.63 Ag</p>}
+                <p>{protienDetailC.c ? protienDetailC.c.ag : '0.0'} Ag</p>}
               </div>
             </div>
-
 
             <div className="protein-info-details  protein-4">
               <div className="protein-info-logo protein-4-logo">
-                <p>T</p>
+                <p>{protienDetailD.d ? protienDetailD.d.amino_acid_1_ltr : '--'}</p>
                 <div></div>
-                <p>S</p>
+                <p>{protienDetailD.d ? protienDetailD.d.sub_1_ltr : '--'}</p>
               </div>
-              
               <div className="protein-info-details-info">
                 <p>Protein 4</p>
-                <p>158</p>
+                <p>{protienDetailD.d ? protienDetailD.d.id : '--'}</p>
                 {classs === 50 ? <p>Class 14</p> :
-                  <p>19.22 Ag</p> }
+                  <p>{protienDetailD.d ? protienDetailD.d.ag : '0.0'} Ag</p> }
               </div>
             </div>
 
-
             <div className="protein-info-details protein-5">
               <div className="protein-info-logo protein-5-logo">
-                <p>A</p>
+                <p>{protienDetailE.e ? protienDetailE.e.amino_acid_1_ltr : '--'}</p>
                 <div></div>
-                <p>P</p>
+                <p>{protienDetailE.e ? protienDetailE.e.sub_1_ltr : '--'}</p>
               </div>
-              
               <div className="protein-info-details-info">
                 <p>Protein 5</p>
-                <p>158</p>
-                {classs === 50 ? <p>Class 19</p> : <p>23.45 Ag</p>}
+                <p>{protienDetailE.e ? protienDetailE.e.id : '--'}</p>
+                {classs === 50 ? <p>Class 19</p> : 
+									<p>{protienDetailE.e ? protienDetailE.e.ag : '0.0'} Ag</p>}
               </div>
             </div>
           </div>
         </div>}
       </section>
-      
-      </>
+    </>
   )
 }
 
-export default PLabAnalysis
+export default PLabAnalysis;

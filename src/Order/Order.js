@@ -111,7 +111,7 @@ const Order = () => {
                   <div className='order-confirm-best-row'>
                     <div className='order-confirm-best-col'>
                       <p>
-                        <span><i class="fa-solid fa-diamond"></i> Class 1 - 19</span>
+                        <span><i class="fa-solid fa-diamond"></i> Region 1 - 19</span>
                       </p>
                       
                       <p>

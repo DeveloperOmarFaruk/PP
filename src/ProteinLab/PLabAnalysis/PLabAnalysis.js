@@ -126,7 +126,7 @@ const PLabAnalysis = () => {
             <div className="blue-squer" ></div>
             { analysis === 20 && <h1 className="text-center plta-title">ProteinLab Table Analysis</h1>}
             { analysis === 10 && (classs === 50 ? <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> :
-            <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Class</h1> )}
+            <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Region</h1> )}
             
           </div>
           <nav className="nav-menu">
@@ -257,7 +257,7 @@ const PLabAnalysis = () => {
           <p className="graph-title">Amino Acid Positions</p>
           <div className="graph-sub-title">
             {classs === 50 ? <p>All Regions: &nbsp;</p> :
-            <p>Class 1: &nbsp;</p>}
+            <p>Region 1: &nbsp;</p>}
             <p> Amino Acid and Substitute Pair</p>
           </div>
           <div className="protein-info-container">
@@ -271,7 +271,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Spike Protein</p>
                 <p>{protienDetailA.a ? protienDetailA.a.id : '--'}</p>
-                {classs === 50 ? <p>Class 1</p> :
+                {classs === 50 ? <p>Region 1</p> :
                   <p>{protienDetailA.a ? protienDetailA.a.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -285,7 +285,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 2</p>
                 <p>{protienDetailB.b ? protienDetailB.b.id : '--'}</p>
-                {classs === 50 ? <p>Class 8</p> :
+                {classs === 50 ? <p>Region 8</p> :
                 <p>{protienDetailB.b ? protienDetailB.b.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -299,7 +299,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 3</p>
                 <p>{protienDetailC.c ? protienDetailC.c.id : '--'}</p>
-                {classs === 50 ? <p>Class 12</p> :
+                {classs === 50 ? <p>Region 12</p> :
                 <p>{protienDetailC.c ? protienDetailC.c.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -313,7 +313,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 4</p>
                 <p>{protienDetailD.d ? protienDetailD.d.id : '--'}</p>
-                {classs === 50 ? <p>Class 14</p> :
+                {classs === 50 ? <p>Region 14</p> :
                   <p>{protienDetailD.d ? protienDetailD.d.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -327,7 +327,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 5</p>
                 <p>{protienDetailE.e ? protienDetailE.e.id : '--'}</p>
-                {classs === 50 ? <p>Class 19</p> : 
+                {classs === 50 ? <p>Region 19</p> : 
 									<p>{protienDetailE.e ? protienDetailE.e.ag : '0.0'} Ag</p>}
               </div>
             </div>

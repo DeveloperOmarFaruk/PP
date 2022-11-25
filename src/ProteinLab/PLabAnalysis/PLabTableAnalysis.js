@@ -15,7 +15,7 @@ const PLabTableAnalysis = () => {
       <th scope="col" >Amino Acid</th>
       <th scope="col" >Substitute</th>
                 <th scope="col" >Ag</th>
-                <th scope="col">Class</th>
+                <th scope="col">Region</th>
   </thead>
   <tbody>
     <tr>
@@ -23,7 +23,7 @@ const PLabTableAnalysis = () => {
       <td data-label="Amino Acid">Leucine</td>
       <td data-label="Substitute">Metheonine</td>
                 <td data-label="Ag">1.352</td>
-                <td data-label="Class">1</td>
+                <td data-label="Region">1</td>
     </tr>
 
     <tr>
@@ -31,7 +31,7 @@ const PLabTableAnalysis = () => {
       <td data-label="Amino Acid">Valine</td>
       <td data-label="Substitute">Alanine</td>
                 <td data-label="Ag">0.637</td>
-                <td data-label="Class">9</td>
+                <td data-label="Region">9</td>
     </tr>
 
     <tr>
@@ -39,7 +39,7 @@ const PLabTableAnalysis = () => {
       <td data-label="Amino Acid">Proline</td>
       <td data-label="Substitute">Glutamine</td>
                 <td data-label="Ag">1.421</td>
-                <td data-label="Class">4</td>
+                <td data-label="Region">4</td>
               </tr>
   
 
@@ -48,7 +48,7 @@ const PLabTableAnalysis = () => {
       <td data-label="Amino Acid">Aspartate</td>
       <td data-label="Substitute">Valine</td>
                 <td data-label="Ag">0.047</td>
-                <td data-label="Class">1</td>
+                <td data-label="Region">1</td>
             </tr>
             
             <tr>
@@ -56,7 +56,7 @@ const PLabTableAnalysis = () => {
       <td data-label="Amino Acid">Threonine</td>
       <td data-label="Substitute">Serine</td>
                 <td data-label="Ag">2.766</td>
-                <td data-label="Class">3</td>
+                <td data-label="Region">3</td>
     </tr>
   </tbody>
 </table>

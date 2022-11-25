@@ -108,7 +108,7 @@ const InputSection = () => {
             <div className="blue-squer" ></div>
             <h1 className="text-center plta-title">ProteinLab Table Analysis</h1>
             {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> */}
-            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Class</h1> */}
+            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Region</h1> */}
           </div>
           
           

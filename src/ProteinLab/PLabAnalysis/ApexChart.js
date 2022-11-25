@@ -59,7 +59,7 @@ export default class ApexChart extends React.Component {
 					},
 				},
 				xaxis: {
-					categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+					categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
 					labels: {
 						formatter: function (value) {
 							props.showProtein(value);
@@ -93,17 +93,17 @@ async componentDidMount() {
 			series: [
 				{
 					id: "spike",
-					name: "M Protein",
+					name: "Spike Protein",
 					data: responseOne.data.graph_data,
 				},
 				{
 					id: 2,
-					name: "N Protein",
+					name: "Protein 2",
 					data: responseTwo.data.graph_data,
 				},
 				{
 					id: 3,
-					name: "E Protein",
+					name: "Protein 3",
 					data: responesThree.data.graph_data,
 				},
 				{
@@ -123,6 +123,7 @@ async componentDidMount() {
 	})
 }
 	render() {
+
 		return (
 			<div id="chart">
 				<ReactApexChart

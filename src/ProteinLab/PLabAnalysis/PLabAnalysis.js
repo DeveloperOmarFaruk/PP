@@ -125,7 +125,7 @@ const PLabAnalysis = () => {
           <div className="flex items-center justify-center mt-6 mb-0 plta-title-container">
             <div className="blue-squer" ></div>
             { analysis === 20 && <h1 className="text-center plta-title">ProteinLab Table Analysis</h1>}
-            { analysis === 10 && (classs === 50 ? <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> :
+            { analysis === 10 && (classs === 0 ? <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> :
             <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Region</h1> )}
             
           </div>
@@ -224,19 +224,39 @@ const PLabAnalysis = () => {
           } */}
 
 
-      <FormControl variant="filled" className={classes.formControl} style={{border:"1px solid #808080", borderRadius:"5px", width:"170px", }}>
-        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>REGION</InputLabel>
+      <FormControl 
+				variant="filled" className={classes.formControl} 
+				style={{border:"1px solid #808080", borderRadius:"5px", width:"170px", }}
+			>
+        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>
+					REGION
+				</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           value={classs}
           onChange={handleChangeClasss}
         >
-          <MenuItem value={10}>1</MenuItem>
-          <MenuItem value={20}>2</MenuItem>
-          <MenuItem value={30}>3</MenuItem>
-          <MenuItem value={40}>19</MenuItem>
-          <MenuItem value={50}>All</MenuItem>
+					<MenuItem value={1}>1</MenuItem>
+					<MenuItem value={2}>2</MenuItem>
+					<MenuItem value={3}>3</MenuItem>
+					<MenuItem value={4}>4</MenuItem>
+					<MenuItem value={5}>5</MenuItem>
+					<MenuItem value={6}>6</MenuItem>
+					<MenuItem value={7}>7</MenuItem>
+					<MenuItem value={8}>8</MenuItem>
+					<MenuItem value={9}>9</MenuItem>
+					<MenuItem value={10}>10</MenuItem>
+					<MenuItem value={11}>11</MenuItem>
+					<MenuItem value={12}>12</MenuItem>
+					<MenuItem value={13}>13</MenuItem>
+					<MenuItem value={14}>14</MenuItem>
+					<MenuItem value={15}>15</MenuItem>
+					<MenuItem value={16}>16</MenuItem>
+					<MenuItem value={17}>17</MenuItem>
+					<MenuItem value={18}>18</MenuItem>
+					<MenuItem value={19}>19</MenuItem>
+					<MenuItem value={0}>All</MenuItem>
         </Select>
 				</FormControl> 
          </div>
@@ -248,7 +268,7 @@ const PLabAnalysis = () => {
         </div>}
         {analysis === 10 && <div className="graph-container">
           <div className="graph-chart">
-            { classs === 50 ?<p>Regions</p> :
+            { classs === 0 ?<p>Regions</p> :
             <p>Ag</p>}
             <div className="chart">
             <ApexChart showProtein={handleSetProtienDetails}/>
@@ -256,8 +276,8 @@ const PLabAnalysis = () => {
           </div>
           <p className="graph-title">Amino Acid Positions</p>
           <div className="graph-sub-title">
-            {classs === 50 ? <p>All Regions: &nbsp;</p> :
-            <p>Region 1: &nbsp;</p>}
+            {classs === 0 ? <p>All Regions: &nbsp;</p> :
+            <p>Region {classs} : &nbsp;</p>}
             <p> Amino Acid and Substitute Pair</p>
           </div>
           <div className="protein-info-container">
@@ -270,8 +290,8 @@ const PLabAnalysis = () => {
               </div>
               <div className="protein-info-details-info">
                 <p>Spike Protein</p>
-                <p>{protienDetailA.a ? protienDetailA.a.id : '--'}</p>
-                {classs === 50 ? <p>Region 1</p> :
+                <p>{protienDetailA.a ? protienDetailA.a.position : '--'}</p>
+                {classs === 0 ? <p>Region {protienDetailA.a.region}</p> :
                   <p>{protienDetailA.a ? protienDetailA.a.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -284,8 +304,8 @@ const PLabAnalysis = () => {
               </div>
               <div className="protein-info-details-info">
                 <p>Protein 2</p>
-                <p>{protienDetailB.b ? protienDetailB.b.id : '--'}</p>
-                {classs === 50 ? <p>Region 8</p> :
+                <p>{protienDetailB.b ? protienDetailB.b.position : '--'}</p>
+                {classs === 0 ? <p>Region {protienDetailB.b.region}</p> :
                 <p>{protienDetailB.b ? protienDetailB.b.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -298,8 +318,8 @@ const PLabAnalysis = () => {
               </div>
               <div className="protein-info-details-info">
                 <p>Protein 3</p>
-                <p>{protienDetailC.c ? protienDetailC.c.id : '--'}</p>
-                {classs === 50 ? <p>Region 12</p> :
+                <p>{protienDetailC.c ? protienDetailC.c.position : '--'}</p>
+                {classs === 0 ? <p>Region {protienDetailC.c.region}</p> :
                 <p>{protienDetailC.c ? protienDetailC.c.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -312,8 +332,8 @@ const PLabAnalysis = () => {
               </div>
               <div className="protein-info-details-info">
                 <p>Protein 4</p>
-                <p>{protienDetailD.d ? protienDetailD.d.id : '--'}</p>
-                {classs === 50 ? <p>Region 14</p> :
+                <p>{protienDetailD.d ? protienDetailD.d.position : '--'}</p>
+                {classs === 0 ? <p>Region {protienDetailD.d.region}</p> :
                   <p>{protienDetailD.d ? protienDetailD.d.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -326,8 +346,8 @@ const PLabAnalysis = () => {
               </div>
               <div className="protein-info-details-info">
                 <p>Protein 5</p>
-                <p>{protienDetailE.e ? protienDetailE.e.id : '--'}</p>
-                {classs === 50 ? <p>Region 19</p> : 
+                <p>{protienDetailE.e ? protienDetailE.e.position : '--'}</p>
+                {classs === 0 ? <p>Region {protienDetailE.e.region}</p> : 
 									<p>{protienDetailE.e ? protienDetailE.e.ag : '0.0'} Ag</p>}
               </div>
             </div>

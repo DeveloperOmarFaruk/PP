@@ -4,7 +4,11 @@ import ReactApexChart from "react-apexcharts";
 import axios from "axios";
 
 export default class ApexChart extends React.Component {
+
 	constructor(props) {
+		console.log('====================================');
+		console.log('----->', props);
+		console.log('====================================');
 		super(props);
 		this.state = {
 			series: [

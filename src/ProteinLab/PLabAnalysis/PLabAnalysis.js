@@ -26,7 +26,7 @@ const PLabAnalysis = () => {
   const ref = useRef()
   const [lab, setLab] = useState(10);
   const [analysis, setAnalysis] = useState(20);
-  const [classs, setClasss] = useState(10);
+  const [classs, setClasss] = useState(0);
   const [value, setValue] = useState({});
   const [error, setError] = useState({});
   const [showProtein, setShowProtein] = useState(false);
@@ -291,7 +291,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Spike Protein</p>
                 <p>{protienDetailA.a ? protienDetailA.a.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailA.a.region}</p> :
+                {classs === 0 ? <p>Region {protienDetailA.a ? protienDetailA.a.region : '--'}</p> :
                   <p>{protienDetailA.a ? protienDetailA.a.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -305,7 +305,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 2</p>
                 <p>{protienDetailB.b ? protienDetailB.b.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailB.b.region}</p> :
+                {classs === 0 ? <p>Region {protienDetailB.b ? protienDetailA.a.region : '--'}</p> :
                 <p>{protienDetailB.b ? protienDetailB.b.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -319,7 +319,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 3</p>
                 <p>{protienDetailC.c ? protienDetailC.c.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailC.c.region}</p> :
+                {classs === 0 ? <p>Region {protienDetailC.c ? protienDetailA.a.region : '--'}</p> :
                 <p>{protienDetailC.c ? protienDetailC.c.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -333,7 +333,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 4</p>
                 <p>{protienDetailD.d ? protienDetailD.d.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailD.d.region}</p> :
+                {classs === 0 ? <p>Region {protienDetailD.d ? protienDetailA.a.region : '--'}</p> :
                   <p>{protienDetailD.d ? protienDetailD.d.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -347,7 +347,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 5</p>
                 <p>{protienDetailE.e ? protienDetailE.e.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailE.e.region}</p> : 
+                {classs === 0 ? <p>Region {protienDetailE.e ? protienDetailA.a.region : '--'}</p> : 
 									<p>{protienDetailE.e ? protienDetailE.e.ag : '0.0'} Ag</p>}
               </div>
             </div>

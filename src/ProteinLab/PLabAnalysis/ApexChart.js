@@ -7,9 +7,9 @@ export default class ApexChart extends React.Component {
 
 	constructor(props) {
 		const allGraphValue = props.getAllGraphs();
-		console.log('====================================');
-		console.log('---ApexChart--0000-->', allGraphValue);
-		console.log('====================================');
+		// console.log('====================================');
+		// console.log('---ApexChart--0000-->', allGraphValue);
+		// console.log('====================================');
 		super(props);
 		this.state = {
 			series: [
@@ -75,63 +75,8 @@ export default class ApexChart extends React.Component {
 		}
 	};
 }
-	
-// async componentDidMount() {
-// 	const data = {
-// 		region: 0,
-// 		lowPosition: 1,
-// 		highPosition: 20,
-// 	};
-// 	const a = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph', data);
-// 	const b = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph', data);
-// 	const c = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph', data);
-// 	const d = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph', data);
-// 	const e = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph', data);
-
-// 	await axios.all([a, b, c, d, e]).then(axios.spread((...responses) => {
-// 		const responseOne = responses[0];
-// 		const responseTwo = responses[1];
-// 		const responesThree = responses[2];
-// 		const responseFour = responses[3];
-// 		const responesFive = responses[4];
-// 		this.setState({
-// 			series: [
-// 				{
-// 					id: "spike",
-// 					name: "Spike Protein",
-// 					data: responseOne.data.graph_data,
-// 				},
-// 				{
-// 					id: 2,
-// 					name: "Protein 2",
-// 					data: responseTwo.data.graph_data,
-// 				},
-// 				{
-// 					id: 3,
-// 					name: "Protein 3",
-// 					data: responesThree.data.graph_data,
-// 				},
-// 				{
-// 					id: 4,
-// 					name: "Protein 4",
-// 					data: responseFour.data.graph_data,
-// 				},
-// 				{
-// 					id: 5,
-// 					name: "Protein 5",
-// 					data: responesFive.data.graph_data,
-// 				},
-// 			]
-// 		});
-// 	})).catch(errors => {
-// 		console.log("errors----", errors);
-// 	})
-// }
-
-
 
 	render() {
-
 		return (
 			<div id="chart">
 				<ReactApexChart

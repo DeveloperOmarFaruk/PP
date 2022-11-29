@@ -288,7 +288,7 @@ const PLabAnalysis = () => {
 
         {
 					analysis === 20 && 
-					<div><PLabTableAnalysis showProtein={handleSetProtienDetails}/></div>
+					<div><PLabTableAnalysis graphValue={graphValue}/></div>
 				}
         {analysis === 10 && <div className="graph-container">
           <div className="graph-chart">

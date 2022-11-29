@@ -1,42 +1,49 @@
 import React from "react";
 import "./PLabAnalysis.css";
 import ReactApexChart from "react-apexcharts";
-import axios from "axios";
 
 export default class ApexChart extends React.Component {
 
 	constructor(props) {
-		const allGraphValue = props.getAllGraphs();
-		// console.log('====================================');
-		// console.log('---ApexChart--0000-->', allGraphValue);
-		// console.log('====================================');
+		const graphValue = props.graphValue;
+
+		console.log('====================================');
+		console.log('ApexChart--->', graphValue);
+		console.log('====================================');
+
+		const spike = graphValue.res ? graphValue.res[0].data.graph_data : null;
+		const p2 = graphValue.res ? graphValue.res[1].data.graph_data : null;
+		const p3 = graphValue.res ? graphValue.res[2].data.graph_data : null;
+		const p4 = graphValue.res ? graphValue.res[3].data.graph_data : null;
+		const p5 = graphValue.res ? graphValue.res[4].data.graph_data : null;
+
 		super(props);
 		this.state = {
 			series: [
 				{
 					id: "spike",
 					name: "Spike Protein",
-					data: allGraphValue.res[0].data.graph_data,
+					data: spike,
 				},
 				{
 					id: 2,
 					name: "Protein 2",
-					data: allGraphValue.res[1].data.graph_data,
+					data: p2,
 				},
 				{
 					id: 3,
 					name: "Protein 3",
-					data: allGraphValue.res[2].data.graph_data,
+					data: p3,
 				},
 				{
 					id: 4,
 					name: "Protein 4",
-					data: allGraphValue.res[3].data.graph_data,
+					data: p4,
 				},
 				{
 					id: 5,
 					name: "Protein 5",
-					data: allGraphValue.res[4].data.graph_data,
+					data: p5,
 				}
 			],
 			options: {

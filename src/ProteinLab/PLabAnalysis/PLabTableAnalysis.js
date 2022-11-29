@@ -4,6 +4,10 @@ import "./PLabAnalysis.css"
 const PLabTableAnalysis = (props) => {
 	const graphValue = props.graphValue;
 
+	console.log('====================================');
+	console.log('PLabTableAnalysis--->', graphValue);
+	console.log('====================================');
+
 	const spike = graphValue.res ? graphValue.res[0].data.all_data : null;
 	const p2 = graphValue.res ? graphValue.res[1].data.all_data : null;
 	const p3 = graphValue.res ? graphValue.res[2].data.all_data : null;

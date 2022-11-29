@@ -38,7 +38,6 @@ const PLabAnalysis = () => {
 	const [graphValue, setGraphValue] = useState({});
 	let lowPosition = 1;
 	let highPosition = 100;
-	let ready = false;
 
   useEffect(() => {
     const checkIfClickedOutside = e => {
@@ -65,10 +64,7 @@ const PLabAnalysis = () => {
   };
 
 	  const handleSetProtienDetails = (value) => {
-			if (value == highPosition) {
-				ready = true;
-			}
-			if (ready && value) {
+			if (value) {
 				setProtienDetailsA({'a': graphValue.res[0].data.all_data[value-1]});
 				setProtienDetailsB({'b': graphValue.res[1].data.all_data[value-1]});
 				setProtienDetailsC({'c': graphValue.res[2].data.all_data[value-1]});
@@ -295,7 +291,7 @@ const PLabAnalysis = () => {
             { classs === 0 ?<p>Regions</p> :
             <p>Ag</p>}
             <div className="chart">
-            <ApexChart showProtein={handleSetProtienDetails} getAllGraphs={getAllGraphs}/>
+            <ApexChart showProtein={handleSetProtienDetails} graphValue={graphValue}/>
             </div>
           </div>
           <p className="graph-title">Amino Acid Positions</p>

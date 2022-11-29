@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, useReducer} from 'react'
 import "./PLabAnalysis.css";
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -35,6 +35,9 @@ const PLabAnalysis = () => {
 	const [protienDetailC, setProtienDetailsC] = useState({});
 	const [protienDetailD, setProtienDetailsD] = useState({});
 	const [protienDetailE, setProtienDetailsE] = useState({});
+	const [graphValue, setGraphValue] = useState({});
+	let lowPosition = 1;
+	let highPosition = 100;
 	let ready = false;
 
   useEffect(() => {
@@ -49,37 +52,57 @@ const PLabAnalysis = () => {
     }
   }, [showProtein])
 
+	useEffect(() => {
+		handleAllGraphs();
+  }, [classs])
+
   const handleChangeShowProtein = () => {
     setShowProtein(true);
   };
+
   const handleChangeHiddenProtein = () => {
     setShowProtein(false);
-    };
+  };
+
 	  const handleSetProtienDetails = (value) => {
-			if (value == 10) {
+			if (value == highPosition) {
 				ready = true;
 			}
 			if (ready && value) {
-				const data = {
-					"position": value
-				};
-				const a = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-1-query', data);
-				const b = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-2-query', data);
-				const c = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-3-query', data);
-				const d = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-4-query', data);
-				const e = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-graph-5-query', data);
-			
-				axios.all([a, b, c, d, e]).then(axios.spread((...responses) => {
-					setProtienDetailsA({'a': responses[0].data});
-					setProtienDetailsB({'b': responses[1].data});
-					setProtienDetailsC({'c': responses[2].data});
-					setProtienDetailsD({'d': responses[3].data});
-					setProtienDetailsE({'e': responses[4].data});
-				})).catch(errors => {
-					console.log("errors----", errors);
-				})
+				setProtienDetailsA({'a': graphValue.res[0].data.all_data[value-1]});
+				setProtienDetailsB({'b': graphValue.res[1].data.all_data[value-1]});
+				setProtienDetailsC({'c': graphValue.res[2].data.all_data[value-1]});
+				setProtienDetailsD({'d': graphValue.res[3].data.all_data[value-1]});
+				setProtienDetailsE({'e': graphValue.res[4].data.all_data[value-1]});
 			}
 		};
+
+		const handleAllGraphs = async () => {
+			const data = {
+				region: classs,
+				lowPosition: lowPosition,
+				highPosition: highPosition,
+			};
+			const a = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph', data);
+			const b = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph', data);
+			const c = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph', data);
+			const d = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph', data);
+			const e = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph', data);
+			await axios.all([a, b, c, d, e]).then(axios.spread((...responses) => {
+				setGraphValue({'res': responses});
+			})).catch(errors => {
+				console.log("errors----", errors);
+			})
+		};
+
+	const getAllGraphs = () => {
+		handleAllGraphs();
+		console.log('====================================');
+		console.log('graphValue--->', graphValue);
+		console.log('====================================');
+		return graphValue;
+	}
+
   const handleChangeLab = (event) => {
   setLab(event.target.value);
   };
@@ -263,15 +286,16 @@ const PLabAnalysis = () => {
       </nav>
     </div>
 
-        {analysis === 20 && <div>
-          <PLabTableAnalysis/>
-        </div>}
+        {
+					analysis === 20 && 
+					<div><PLabTableAnalysis showProtein={handleSetProtienDetails}/></div>
+				}
         {analysis === 10 && <div className="graph-container">
           <div className="graph-chart">
             { classs === 0 ?<p>Regions</p> :
             <p>Ag</p>}
             <div className="chart">
-            <ApexChart showProtein={handleSetProtienDetails}/>
+            <ApexChart showProtein={handleSetProtienDetails} getAllGraphs={getAllGraphs}/>
             </div>
           </div>
           <p className="graph-title">Amino Acid Positions</p>
@@ -305,7 +329,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 2</p>
                 <p>{protienDetailB.b ? protienDetailB.b.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailB.b ? protienDetailA.a.region : '--'}</p> :
+                {classs === 0 ? <p>Region {protienDetailB.b ? protienDetailB.b.region : '--'}</p> :
                 <p>{protienDetailB.b ? protienDetailB.b.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -319,7 +343,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 3</p>
                 <p>{protienDetailC.c ? protienDetailC.c.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailC.c ? protienDetailA.a.region : '--'}</p> :
+                {classs === 0 ? <p>Region {protienDetailC.c ? protienDetailC.c.region : '--'}</p> :
                 <p>{protienDetailC.c ? protienDetailC.c.ag : '0.0'} Ag</p>}
               </div>
             </div>
@@ -333,7 +357,7 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 4</p>
                 <p>{protienDetailD.d ? protienDetailD.d.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailD.d ? protienDetailA.a.region : '--'}</p> :
+                {classs === 0 ? <p>Region {protienDetailD.d ? protienDetailD.d.region : '--'}</p> :
                   <p>{protienDetailD.d ? protienDetailD.d.ag : '0.0'} Ag</p> }
               </div>
             </div>
@@ -347,12 +371,13 @@ const PLabAnalysis = () => {
               <div className="protein-info-details-info">
                 <p>Protein 5</p>
                 <p>{protienDetailE.e ? protienDetailE.e.position : '--'}</p>
-                {classs === 0 ? <p>Region {protienDetailE.e ? protienDetailA.a.region : '--'}</p> : 
+                {classs === 0 ? <p>Region {protienDetailE.e ? protienDetailE.e.region : '--'}</p> : 
 									<p>{protienDetailE.e ? protienDetailE.e.ag : '0.0'} Ag</p>}
               </div>
             </div>
           </div>
         </div>}
+
       </section>
     </>
   )

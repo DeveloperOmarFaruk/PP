@@ -53,6 +53,7 @@ const PLabAnalysis = () => {
 
 	useEffect(() => {
 		handleAllGraphs();
+		handleSetProtienDetails(null);
   }, [classs])
 
   const handleChangeShowProtein = () => {
@@ -70,6 +71,12 @@ const PLabAnalysis = () => {
 				setProtienDetailsC({'c': graphValue.res[2].data.all_data[value-1]});
 				setProtienDetailsD({'d': graphValue.res[3].data.all_data[value-1]});
 				setProtienDetailsE({'e': graphValue.res[4].data.all_data[value-1]});
+			} else {
+				setProtienDetailsA({});
+				setProtienDetailsB({});
+				setProtienDetailsC({});
+				setProtienDetailsD({});
+				setProtienDetailsE({});
 			}
 		};
 
@@ -90,14 +97,6 @@ const PLabAnalysis = () => {
 				console.log("errors----", errors);
 			})
 		};
-
-	const getAllGraphs = () => {
-		handleAllGraphs();
-		console.log('====================================');
-		console.log('graphValue--->', graphValue);
-		console.log('====================================');
-		return graphValue;
-	}
 
   const handleChangeLab = (event) => {
   setLab(event.target.value);

@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import PLabTableAnalysis from './PLabTableAnalysis';
 import ApexChart from "./ApexChart";
 import axios from "axios";
+import { height } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

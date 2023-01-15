@@ -37,16 +37,16 @@ const PLabAnalysis = () => {
 	const [protienDetailD, setProtienDetailsD] = useState({});
 	const [protienDetailE, setProtienDetailsE] = useState({});
 	const [graphValue, setGraphValue] = useState({});
-	const [aMin, setAMin] = useState(1);
-	const [aMax, setAMax] = useState(100);
-	const [bMin, setBMin] = useState(1);
-	const [bMax, setBMax] = useState(100);
-	const [cMin, setCMin] = useState(1);
-	const [cMax, setCMax] = useState(100);
-	const [dMin, setDMin] = useState(1);
-	const [dMax, setDMax] = useState(100);
-	const [eMin, setEMin] = useState(1);
-	const [eMax, setEMax] = useState(100);
+	const [aMin, setAMin] = useState(0);
+	const [aMax, setAMax] = useState(0);
+	const [bMin, setBMin] = useState(0);
+	const [bMax, setBMax] = useState(0);
+	const [cMin, setCMin] = useState(0);
+	const [cMax, setCMax] = useState(0);
+	const [dMin, setDMin] = useState(0);
+	const [dMax, setDMax] = useState(0);
+	const [eMin, setEMin] = useState(0);
+	const [eMax, setEMax] = useState(0);
 
   useEffect(() => {
     const checkIfClickedOutside = e => {
@@ -106,10 +106,11 @@ const PLabAnalysis = () => {
 			.catch(error => {
 				console.log(error);
 			});
-		}
-
+		} 
 		const handleAllGraphs = async () => {
-			getInitValue();
+			if (aMin==0 && aMax ==0 && bMin==0 && bMax ==0 && cMin==0 && cMax==0 && dMin==0 && dMax==0 && eMin==0 && eMax==0) {
+				getInitValue();
+			}
 			const a = axios.post(
 				'https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph',
 				{region: classs, lowPosition: aMin, highPosition: aMax}
@@ -145,36 +146,15 @@ const PLabAnalysis = () => {
   };
   const handleChangeClasss = (event) => {
     setClasss(event.target.value);
-    };
-  const handleProteinSpike = (event) => {
-    let spike = value.protein?.spike || {}
-    let spike_value = parseInt(event.target.value)
-    spike[event.target.name] = spike_value
-    setValue(prevState => ({...prevState, protein:{...prevState.protein, spike:spike}}))
-    if(spike_value >= 1 && spike_value <= 1273){
-      setError(prevState => ({...prevState, spike:{...prevState.spike, [event.target.name]:true}}))
-    } else setError(prevState => ({...prevState, spike:{...prevState.spike, [event.target.name]:false}}))
-
-  }
-  const handleProteinM = (event) => {
-    let m = value.protein?.m || {}
-    let m_value = parseInt(event.target.value)
-    m[event.target.name] = m_value
-    setValue(prevState => ({...prevState, protein:{...prevState.protein, m:m}}))
-    if(m_value >= 20 && m_value <= 450){
-      setError(prevState => ({...prevState, m:{...prevState.m, [event.target.name]:true}}))
-    } else setError(prevState => ({...prevState, m:{...prevState.m, [event.target.name]:false}}))
-  }
-  const handleProteinN = (event) => {
-    let n = value.protein?.n || {}
-    let n_value = parseInt(event.target.value)
-    n[event.target.name] = n_value
-    setValue(prevState => ({...prevState, protein:{...prevState.protein, spike:n}}))
-    if(n_value >= 90 && n_value <= 260){
-      setError(prevState => ({...prevState, n:{...prevState.n, [event.target.name]:true}}))
-    } else setError(prevState => ({...prevState, n:{...prevState.n, [event.target.name]:false}}))
-  }
-
+  };
+  const handleProteinSpikeMin = (event) => {setAMin(event.target.value)}
+	const handleProteinSpikeMax = (event) => {setAMax(event.target.value)}
+	const handleProteinMMin = (event) => {setBMin(event.target.value)}
+	const handleProteinMMax = (event) => {setBMax(event.target.value)}
+	const handleProteinNMin = (event) => {setCMin(event.target.value)}
+	const handleProteinNMax = (event) => {setCMax(event.target.value)}
+	const handleProteinPMin = (event) => {setDMin(event.target.value)}
+	const handleProteinPMax = (event) => {setDMax(event.target.value)}
   return (
       <>
        <section className="container">
@@ -223,46 +203,50 @@ const PLabAnalysis = () => {
 
 
       <div className={classes.formControl} onClick={handleChangeShowProtein} style={{ border: "1px solid #808080", borderBottom:'2px solid #808080', borderRadius: "5px", width: "170px", height:"58px", cursor:"pointer", display:'flex', justifyContent:'space-between',}}>
-                <button style={{ color: "#6495ed", border: "none", margin: '0px 0px 0px 20px', fontSize:'17px' }}>PROTEIN</button>
+                <button style={{ color: "#6495ed", border: "none", margin: '0px 0px 0px 20px', fontSize:'17px' }}>PROTEIN </button>
                 <i class="fa-solid fa-sort-down" style={{ color: "#808080", margin: '17px 10px 0px 20px' }}></i>
               </div>
-
-
               {
             showProtein ? 
-                  <div  className="protein-pop-up " ref={ref}>
-                    <div className="testing">
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px', }}>
-                      <p style={{ margin:'20px 5px',}}>Spike</p>
-                      <input type='number' onChange={handleProteinSpike} id="low" name="low" value={value.protein?.spike?.low && value.protein.spike.low }
-                        placeholder='1' style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}} />
-                      <input type='number' id="high" name="high" onChange={handleProteinSpike} value={value.protein?.spike?.high && value.protein.spike.high }
-                        placeholder='1273' 
-                        style={{border:`1px solid #808080}`, borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
-                    </div>
-                    
-                    { analysis !== 20 && <><div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px',}}>
-                      <p style={{ margin:'20px 5px'}}>M</p>
-                      <input type='number' id="low" name="low" onChange={handleProteinM} placeholder='20' value={value.protein?.m?.low && value.protein.m.low }
-                        style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px 0px 30px", padding:'3px 5px'}} />
-                      <input type='number' id="high" name="high" onChange={handleProteinM} placeholder='450' value={value.protein?.m?.high && value.protein.m.high }
-                      style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
-                    </div>
-                    
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px',}}>
-                      <p style={{ margin:'20px 5px'}}>N</p>
-                      <input type='number' id="low" name="low" onChange={handleProteinN} placeholder='90' value={value.protein?.n?.low && value.protein.n.low }
-                      style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px 0px 30px", padding:'3px 5px'}} />
-                      <input type='number' id="high" name="high" onChange={handleProteinN} placeholder='260' value={value.protein?.n?.high && value.protein.n.high }
-                      style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
-                    </div></>}
-                    
-          </div>
-                  </div> : null
-              }
+							<div  className="protein-pop-up " ref={ref}>
+								<div className="testing">
+								<div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px', }}>
+									<p style={{ margin:'20px 5px',}}>Spike</p>
+									<input type='number' onChange={handleProteinSpikeMin} id="low" name="low" value={aMin}
+										placeholder='1' style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}} />
+									<input type='number' id="high" name="high" onChange={handleProteinSpikeMax} value={aMax}
+										placeholder='1273' 
+										style={{border:`1px solid #808080}`, borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
+								</div>
+								
+								<><div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px',}}>
+									<p style={{ margin:'20px 5px'}}>M</p>
+									<input type='number' id="low" name="low" onChange={handleProteinMMin} placeholder='20' value={bMin}
+										style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px 0px 30px", padding:'3px 5px'}} />
+									<input type='number' id="high" name="high" onChange={handleProteinMMax} placeholder='450' value={bMax}
+									style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
+								</div>
+								
+								<div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px',}}>
+									<p style={{ margin:'20px 5px'}}>N</p>
+									<input type='number' id="low" name="low" onChange={handleProteinNMin} placeholder='90' value={cMin}
+									style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px 0px 30px", padding:'3px 5px'}} />
+									<input type='number' id="high" name="high" onChange={handleProteinNMax} placeholder='260' value={cMax}
+									style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
+								</div>
+
+								<div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px',}}>
+									<p style={{ margin:'20px 5px'}}>P</p>
+									<input type='number' id="low" name="low" onChange={handleProteinPMin} placeholder='90' value={dMin}
+									style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px 0px 30px", padding:'3px 5px'}} />
+									<input type='number' id="high" name="high" onChange={handleProteinPMax} placeholder='260' value={dMax}
+									style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
+								</div>
+								</>
+							</div>
+              </div> : null
+            }
               
-
-
               {/* <div className={classes.formControl} onClick={handleChangeShowProtein} style={{ border: "1px solid #808080", borderBottom:'2px solid #808080', borderRadius: "5px", width: "170px", cursor:"pointer", display:'flex', justifyContent:'space-between',}}>
                 <button style={{ color: "#6495ed", border: "none", margin: '0px 0px 0px 20px', fontSize:'17px' }}>PROTEIN</button>
                 <i class="fa-solid fa-sort-down" style={{ color: "#808080", margin: '17px 10px 0px 20px' }}></i>

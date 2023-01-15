@@ -20,15 +20,12 @@
 
 .protein-pop-up{
   position: absolute;
+	z-index: 999;
   top: 25%;
   left: 50%;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background-color: #ffffff;
-
-  
 }
-
-
 
 .plta-title{
     margin: 120px 0px 50px 8px;

@@ -37,8 +37,16 @@ const PLabAnalysis = () => {
 	const [protienDetailD, setProtienDetailsD] = useState({});
 	const [protienDetailE, setProtienDetailsE] = useState({});
 	const [graphValue, setGraphValue] = useState({});
-	let lowPosition = 1;
-	let highPosition = 100;
+	const [aMin, setAMin] = useState(1);
+	const [aMax, setAMax] = useState(100);
+	const [bMin, setBMin] = useState(1);
+	const [bMax, setBMax] = useState(100);
+	const [cMin, setCMin] = useState(1);
+	const [cMax, setCMax] = useState(100);
+	const [dMin, setDMin] = useState(1);
+	const [dMax, setDMax] = useState(100);
+	const [eMin, setEMin] = useState(1);
+	const [eMax, setEMax] = useState(100);
 
   useEffect(() => {
     const checkIfClickedOutside = e => {
@@ -55,7 +63,7 @@ const PLabAnalysis = () => {
 	useEffect(() => {
 		handleAllGraphs();
 		handleSetProtienDetails(null);
-  }, [classs])
+  }, [classs, aMin, aMax, bMin, bMax, cMin, cMax, dMin, dMax, eMin, eMax])
 
   const handleChangeShowProtein = () => {
     setShowProtein(true);
@@ -81,17 +89,47 @@ const PLabAnalysis = () => {
 			}
 		};
 
+		const getInitValue = async () => {
+			await axios.get('https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range')
+			.then(response => {
+				setAMin(response.data.spike_table.min);
+				setAMax(response.data.spike_table.max);
+				setBMin(response.data.table_2.min);
+				setBMax(response.data.table_2.max);
+				setCMin(response.data.table_3.min); 
+				setCMax(response.data.table_3.max); 
+				setDMin(response.data.table_4.min); 
+				setDMax(response.data.table_4.max); 
+				setEMin(response.data.table_5.min);
+				setEMax(response.data.table_5.max);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		}
+
 		const handleAllGraphs = async () => {
-			const data = {
-				region: classs,
-				lowPosition: lowPosition,
-				highPosition: highPosition,
-			};
-			const a = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph', data);
-			const b = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph', data);
-			const c = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph', data);
-			const d = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph', data);
-			const e = axios.post('https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph', data);
+			getInitValue();
+			const a = axios.post(
+				'https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph',
+				{region: classs, lowPosition: aMin, highPosition: aMax}
+			);
+			const b = axios.post(
+				'https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph', 
+				{	region: classs,	lowPosition: bMin,	highPosition: bMax}
+			);
+			const c = axios.post(
+				'https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph', 
+				{	region: classs,	lowPosition: cMin,	highPosition: cMax}
+			);
+			const d = axios.post(
+				'https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph', 
+				{region: classs, lowPosition: dMin, highPosition: dMax}
+			);
+			const e = axios.post(
+				'https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph', 
+				{region: classs, lowPosition: eMin, highPosition: eMax}
+			);
 			await axios.all([a, b, c, d, e]).then(axios.spread((...responses) => {
 				setGraphValue({'res': responses});
 			})).catch(errors => {

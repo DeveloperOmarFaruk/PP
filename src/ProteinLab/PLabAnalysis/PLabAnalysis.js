@@ -108,7 +108,7 @@ const PLabAnalysis = () => {
 			});
 		} 
 		const handleAllGraphs = async () => {
-			if (aMin==0 && aMax ==0 && bMin==0 && bMax ==0 && cMin==0 && cMax==0 && dMin==0 && dMax==0 && eMin==0 && eMax==0) {
+			if (aMin===0 && aMax ===0 && bMin===0 && bMax ===0 && cMin===0 && cMax===0 && dMin===0 && dMax===0 && eMin===0 && eMax===0) {
 				getInitValue();
 			}
 			const a = axios.post(

@@ -4,7 +4,6 @@ import "../PLabAnalysis/PLabAnalysis.css";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import PLabDesignDraft from "./PLabDesignDraft";
@@ -54,10 +53,6 @@ const PLabDesign = () => {
 
   const handleChangeShowProtein = () => {
     setShowProtein(true);
-  };
-
-  const handleChangeHiddenProtein = () => {
-    setShowProtein(false);
   };
 
   const handleChangeDLab = (event) => {

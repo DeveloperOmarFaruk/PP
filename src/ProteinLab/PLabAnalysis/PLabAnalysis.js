@@ -1,16 +1,13 @@
-import React, {useState, useRef, useEffect, useReducer} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import "./PLabAnalysis.css";
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PLabTableAnalysis from './PLabTableAnalysis';
 import ApexChart from "./ApexChart";
 import axios from "axios";
-import { height } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -28,8 +25,6 @@ const PLabAnalysis = () => {
   const [lab, setLab] = useState(10);
   const [analysis, setAnalysis] = useState(20);
   const [classs, setClasss] = useState(0);
-  const [value, setValue] = useState({});
-  const [error, setError] = useState({});
   const [showProtein, setShowProtein] = useState(false);
 	const [protienDetailA, setProtienDetailsA] = useState({});
 	const [protienDetailB, setProtienDetailsB] = useState({});
@@ -69,10 +64,6 @@ const PLabAnalysis = () => {
     setShowProtein(true);
   };
 
-  const handleChangeHiddenProtein = () => {
-    setShowProtein(false);
-  };
-
 	  const handleSetProtienDetails = (value) => {
 			if (value) {
 				setProtienDetailsA({'a': graphValue.res[0].data.all_data[value-1]});
@@ -92,16 +83,56 @@ const PLabAnalysis = () => {
 		const getInitValue = async () => {
 			await axios.get('https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range')
 			.then(response => {
-				setAMin(response.data.spike_table.min);
-				setAMax(response.data.spike_table.max);
-				setBMin(response.data.table_2.min);
-				setBMax(response.data.table_2.max);
-				setCMin(response.data.table_3.min); 
-				setCMax(response.data.table_3.max); 
-				setDMin(response.data.table_4.min); 
-				setDMax(response.data.table_4.max); 
-				setEMin(response.data.table_5.min);
-				setEMax(response.data.table_5.max);
+				if (response.data.spike_table.min < 1 || response.data.spike_table.min > response.data.spike_table.max) {
+					setAMin(1);
+				} else {
+					setAMin(response.data.spike_table.min);
+				}
+				if (response.data.spike_table.max > 1273 || response.data.spike_table.min > response.data.spike_table.max) {
+					setAMax(1273);
+				} else {
+					setAMax(response.data.spike_table.max);
+				}
+				if (response.data.table_2.min < 20 || response.data.table_2.min > response.data.table_2.max) {
+					setBMin(20);
+				} else {
+					setBMin(response.data.table_2.min);
+				}
+				if (response.data.table_2.max > 450 || response.data.table_2.min > response.data.table_2.max) {
+					setBMax(450);
+				} else {
+					setBMax(response.data.table_2.max);
+				}
+				if (response.data.table_3.min < 90 || response.data.table_3.min > response.data.table_3.max) {
+					setCMin(90);
+				} else {
+					setCMin(response.data.table_3.min);
+				}
+				if (response.data.table_3.max > 260 || response.data.table_3.min > response.data.table_3.max) {
+					setCMax(260);
+				} else {
+					setCMax(response.data.table_3.max);
+				}
+				if (response.data.table_4.min < 90 || response.data.table_4.min > response.data.table_4.max) {
+					setDMin(90);
+				} else {
+					setDMin(response.data.table_4.min);
+				}
+				if (response.data.table_4.max > 260 || response.data.table_4.min > response.data.table_4.max) {
+					setDMax(260);
+				} else {
+					setDMax(response.data.table_4.max);
+				}
+				if (response.data.table_5.min < 90 || response.data.table_5.min > response.data.table_5.max) {
+					setEMin(90);
+				} else {
+					setEMin(response.data.table_5.min);
+				}
+				if (response.data.table_5.max > 260 || response.data.table_5.min > response.data.table_5.max) {
+					setEMax(260);
+				} else {
+					setEMax(response.data.table_5.max);
+				}
 			})
 			.catch(error => {
 				console.log(error);
@@ -133,6 +164,7 @@ const PLabAnalysis = () => {
 			);
 			await axios.all([a, b, c, d, e]).then(axios.spread((...responses) => {
 				setGraphValue({'res': responses});
+				console.log('**********responses**********', responses)
 			})).catch(errors => {
 				console.log("errors----", errors);
 			})
@@ -246,24 +278,6 @@ const PLabAnalysis = () => {
 							</div>
               </div> : null
             }
-              
-              {/* <div className={classes.formControl} onClick={handleChangeShowProtein} style={{ border: "1px solid #808080", borderBottom:'2px solid #808080', borderRadius: "5px", width: "170px", cursor:"pointer", display:'flex', justifyContent:'space-between',}}>
-                <button style={{ color: "#6495ed", border: "none", margin: '0px 0px 0px 20px', fontSize:'17px' }}>PROTEIN</button>
-                <i class="fa-solid fa-sort-down" style={{ color: "#808080", margin: '17px 10px 0px 20px' }}></i>
-              </div>
-
-              {
-            showProtein ? 
-                  <div className="protein-pop-up" onClick={handleChangeHiddenProtein}>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center', padding:'0px 10px'}}>
-                      <p style={{ margin:'20px 5px',}}>Spike</p>
-                      <input type='number' placeholder='1' style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}} />
-                      <input type='number' placeholder='1273' style={{border:"1px solid #808080", borderRadius:"5px" , width:"50px", margin:"0px 5px", padding:'3px 5px'}}/>
-                    </div>
-                    
-          </div> : null
-          } */}
-
 
       <FormControl 
 				variant="filled" className={classes.formControl} 

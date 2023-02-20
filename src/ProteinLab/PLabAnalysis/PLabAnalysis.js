@@ -56,6 +56,7 @@ const PLabAnalysis = () => {
   }, [showProtein])
 
 	useEffect(() => {
+		setGraphValue({});
 		handleAllGraphs();
 		handleSetProtienDetails(null);
   }, [classs, aMin, aMax, bMin, bMax, cMin, cMax, dMin, dMax, eMin, eMax])

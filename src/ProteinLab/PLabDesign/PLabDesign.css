@@ -91,6 +91,9 @@
   display: block;
   margin: 0px auto 50px auto;
   width: 85%;
+  height: 615px;
+  max-height: 615px;
+  overflow-y: scroll;
 }
 
 .design-edit-btns {

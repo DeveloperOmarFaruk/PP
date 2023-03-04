@@ -8,6 +8,7 @@ import Select from "@material-ui/core/Select";
 import PLabTableAnalysis from "./PLabTableAnalysis";
 import ApexChart from "./ApexChart";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -187,23 +188,23 @@ const PLabAnalysis = () => {
     ) {
       getInitValue();
     }
-    const a = axios.post(
+    const a = await axios.post(
       "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
       { region: classs, lowPosition: aMin, highPosition: aMax }
     );
-    const b = axios.post(
+    const b = await axios.post(
       "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
       { region: classs, lowPosition: bMin, highPosition: bMax }
     );
-    const c = axios.post(
+    const c = await axios.post(
       "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
       { region: classs, lowPosition: cMin, highPosition: cMax }
     );
-    const d = axios.post(
+    const d = await axios.post(
       "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
       { region: classs, lowPosition: dMin, highPosition: dMax }
     );
-    const e = axios.post(
+    const e = await axios.post(
       "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
       { region: classs, lowPosition: eMin, highPosition: eMax }
     );
@@ -298,8 +299,22 @@ const PLabAnalysis = () => {
                   value={lab}
                   onChange={handleChangeLab}
                 >
-                  <MenuItem value={10}>Analysis</MenuItem>
-                  <MenuItem value={20}>Design</MenuItem>
+                  <MenuItem value={10}>
+                    <NavLink
+                      to="/protein-lab-analysis"
+                      className="text-black text-decoration-none"
+                    >
+                      Analysis
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem value={20}>
+                    <NavLink
+                      to="/protein-lab-design"
+                      className="text-black text-decoration-none"
+                    >
+                      Design
+                    </NavLink>
+                  </MenuItem>
                 </Select>
               </FormControl>
 

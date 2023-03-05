@@ -357,24 +357,13 @@ const PLabDesign = () => {
 
         <div>
           {design === 30 && allData.res.length && <PLabDesignDraft />}
-          {console.log("allllllllllllllll5555", allData)}
-          {console.log(
-            "allllllllllllllll5555",
-            typeof allData.res,
-            allData.res
+          {design === 10 && allData && (
+            <PLabDesignEdit
+              proteinData={classs !== 0 ? proteinData.data.all_data : []}
+              allData={allData.res}
+              proteinNo={protein}
+            />
           )}
-          {
-            design === 10 && allData && (
-              <PLabDesignEdit
-                proteinData={classs !== 0 ? proteinData.data.all_data : []}
-                allData={allData.res}
-                proteinNo={protein}
-              />
-            )
-            // ) : (
-            //   <p>Loading...</p>
-            // )
-          }
           {design === 20 && <PLabDesignReview graphValue={proteinData} />}
           {design === 40 && <PLabDesignMyProtein />}
         </div>

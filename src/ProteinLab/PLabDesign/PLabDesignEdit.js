@@ -1,3 +1,4 @@
+import { Grid, Typography } from "@material-ui/core";
 import React from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
@@ -9,34 +10,91 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo }) => {
 
   return (
     <>
-      <div
+      <Grid
+        Container
         style={{
-          width: "85%",
-          display: "block",
+          width: "100%",
           margin: "100px auto 0px auto",
+          fontWeight: "600",
         }}
       >
-        <div className="drft-section-title">
-          <div className="drft-section-title-info">
-            <p>
-              <span>7</span> Substitutions: <span>7</span> design-assisted,{" "}
-              <span>0</span> Manual
-            </p>
-          </div>
-
-          <div className="design-edit-assist">
-            <p>
-              Design-Assist <span>On</span>
-            </p>
-            <input type="checkbox" id="switch" class="checkbox" />
-            <label for="switch" class="toggle" />
-          </div>
-
-          <div className="drft-section-title-btn">
-            <button className="btn-reset">Reset</button>
-          </div>
-        </div>
-      </div>
+        <Grid
+          container
+          spacing={2}
+          className="mb-2 text-secondary d-flex justify-content-center align-items-center"
+        >
+          <Grid item className="d-flex align-items-center flex-row">
+            <Typography style={{ fontWeight: "600" }}>
+              AMINO ACIDS &nbsp;
+            </Typography>
+            <span
+              style={{
+                border: "2px solid #6c757d",
+                padding: "3px 5px",
+                display: "inline",
+              }}
+            >
+              222
+            </span>
+          </Grid>
+          <Grid item className="d-flex align-items-center flex-row">
+            <Typography style={{ fontWeight: "600" }}>REGION &nbsp;</Typography>
+            <span
+              style={{
+                border: "2px solid #6c757d",
+                padding: "3px 5px",
+                display: "inline",
+              }}
+            >
+              222
+            </span>
+          </Grid>
+          <Grid item className="d-flex align-items-center flex-row">
+            <Typography style={{ fontWeight: "600" }}>
+              POSITION &nbsp;
+            </Typography>
+            <span
+              style={{
+                border: "2px solid #6c757d",
+                padding: "3px 5px",
+                display: "inline",
+              }}
+            >
+              222
+            </span>
+          </Grid>
+          <Grid item className="d-flex align-items-center flex-row">
+            <Typography style={{ fontWeight: "600" }}>
+              SUBSTITUTIONS:&nbsp;
+            </Typography>
+            <Grid item className="d-flex align-items-center flex-row">
+              <Typography>AUTO&nbsp;</Typography>
+              <span
+                style={{
+                  border: "2px solid #6c757d",
+                  padding: "3px 5px",
+                  display: "inline",
+                  marginRight: "5px",
+                }}
+              >
+                222
+              </span>
+            </Grid>
+            <Grid item className="d-flex align-items-center flex-row">
+              <Typography>MENUAL&nbsp;</Typography>
+              <span
+                style={{
+                  border: "2px solid #6c757d",
+                  padding: "3px 5px",
+                  display: "inline",
+                }}
+              >
+                222
+              </span>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
       <div className="design-edit-section">
         <div className="design-edit-btns">
           {allproteinData &&

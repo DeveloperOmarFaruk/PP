@@ -27,13 +27,17 @@ const PLabDesign = () => {
   const ref = useRef();
 
   const classes = useStyles();
+  const [classs, setDesignClasss] = useState(0);
   const [dlab, setDLab] = useState(10);
   const [design, setDesign] = useState(10);
-  const [classs, setDesignClasss] = useState(0);
+  const [protein, setProtein] = useState(1);
+  const [myProtein, setMyProtein] = useState(1);
 
   const [showProtein, setShowProtein] = useState(false);
-  const [graphValue, setGraphValue] = useState({});
-  const [allGraphValue, setAllGraphValue] = useState({});
+
+  // const [graphValue, setGraphValue] = useState({});
+  const [allData, setAllData] = useState({});
+  const [proteinData, setProteinData] = useState({});
 
   let lowPosition = 1;
   let highPosition = 100;
@@ -58,14 +62,6 @@ const PLabDesign = () => {
 
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);
-  };
-
-  const handleChangeDesign = (event) => {
-    setDesign(event.target.value);
-  };
-
-  const handleChangeDClasss = (event) => {
-    setDesignClasss(event.target.value);
   };
 
   const handleAllGraphs = async () => {
@@ -100,10 +96,8 @@ const PLabDesign = () => {
       .then(
         axios.spread((...responses) => {
           if (data.region === 0) {
-            setAllGraphValue({ res: responses });
-            setGraphValue({ res: null });
-          } else {
-            setGraphValue({ res: responses });
+            setAllData({ res: responses });
+            console.log("tttttttttttttttttfirst", allData.res);
           }
         })
       )
@@ -114,7 +108,69 @@ const PLabDesign = () => {
 
   useEffect(() => {
     handleAllGraphs();
-  }, [classs]);
+  }, []);
+
+  useEffect(() => {
+    const data = {
+      region: classs,
+      lowPosition: lowPosition,
+      highPosition: highPosition,
+    };
+    const getProteinData = async () => {
+      switch (protein) {
+        case 1:
+          console.log("heeeeeeeeeeeeloollllllllllllllllll");
+          await axios
+            .post(
+              "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
+              data
+            )
+            .then((response) => setProteinData(response))
+            .catch((error) => console.log("protein error", error));
+          break;
+        case 2:
+          await axios
+            .post(
+              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
+              data
+            )
+            .then((response) => setProteinData(response))
+            .catch((error) => console.log("protein error", error));
+          break;
+        case 3:
+          await axios
+            .post(
+              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
+              data
+            )
+            .then((response) => setProteinData(response))
+            .catch((error) => console.log("protein error", error));
+          break;
+        case 4:
+          await axios
+            .post(
+              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
+              data
+            )
+            .then((response) => setProteinData(response))
+            .catch((error) => console.log("protein error", error));
+          break;
+        case 5:
+          await axios
+            .post(
+              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
+              data
+            )
+            .then((response) => setProteinData(response))
+            .catch((error) => console.log("protein error", error));
+          break;
+        default:
+          break;
+      }
+    };
+    getProteinData();
+    console.log("444444444444", proteinData);
+  }, [classs, protein]);
 
   return (
     <>
@@ -189,150 +245,69 @@ const PLabDesign = () => {
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
                   value={design}
-                  onChange={handleChangeDesign}
+                  onChange={(e) => setDesign(e.target.value)}
                 >
                   <MenuItem value={10}>Auto</MenuItem>
-                  <MenuItem value={20}>Simplified</MenuItem>
                   <MenuItem value={30}>Manual</MenuItem>
-                  {/* <MenuItem value={40}>My Protein</MenuItem> */}
                 </Select>
               </FormControl>
 
-              <div
+              <FormControl
+                variant="filled"
                 className={classes.formControl}
-                onClick={handleChangeShowProtein}
                 style={{
                   border: "1px solid #808080",
-                  borderBottom: "2px solid #808080",
                   borderRadius: "5px",
                   width: "170px",
-                  height: "58px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
                 }}
               >
-                <button
-                  style={{
-                    color: "#6495ed",
-                    border: "none",
-                    margin: "0px 0px 0px 20px",
-                    fontSize: "17px",
-                  }}
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{ color: "#6495ed" }}
                 >
                   PROTEIN
-                </button>
-                <i
-                  class="fa-solid fa-sort-down"
-                  style={{ color: "#808080", margin: "17px 10px 0px 20px" }}
-                ></i>
-              </div>
-
-              {showProtein ? (
-                <div className="protein-pop-up" ref={ref}>
-                  <div className="testing">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <p style={{ margin: "20px 5px" }}>Spike</p>
-                      <input
-                        type="number"
-                        placeholder="1"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "50px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                      <input
-                        type="number"
-                        placeholder="1273"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "50px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <p style={{ margin: "20px 5px" }}>M</p>
-                      <input
-                        type="number"
-                        placeholder="20"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "50px",
-                          margin: "0px 5px 0px 30px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                      <input
-                        type="number"
-                        placeholder="450"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "50px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <p style={{ margin: "20px 5px" }}>N</p>
-                      <input
-                        type="number"
-                        placeholder="90"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "50px",
-                          margin: "0px 5px 0px 30px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                      <input
-                        type="number"
-                        placeholder="260"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "50px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={protein}
+                  onChange={(e) => setProtein(e.target.value)}
+                >
+                  <MenuItem value={1}>Spike</MenuItem>
+                  <MenuItem value={2}>Protein 2</MenuItem>
+                  <MenuItem value={3}>Protein 3</MenuItem>
+                  <MenuItem value={4}>Protein 4</MenuItem>
+                  <MenuItem value={5}>Protein 5</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl
+                variant="filled"
+                className={classes.formControl}
+                style={{
+                  border: "1px solid #808080",
+                  borderRadius: "5px",
+                  width: "170px",
+                }}
+              >
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{ color: "#6495ed" }}
+                >
+                  MYPROTEIN
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={myProtein}
+                  onChange={(e) => setMyProtein(e.target.value)}
+                >
+                  <MenuItem value={1}>MySpike</MenuItem>
+                  <MenuItem value={2}>MyProtein 2</MenuItem>
+                  <MenuItem value={3}>MyProtein 3</MenuItem>
+                  <MenuItem value={4}>MyProtein 4</MenuItem>
+                  <MenuItem value={5}>MyProtein 5</MenuItem>
+                </Select>
+              </FormControl>
               <FormControl
                 variant="filled"
                 className={classes.formControl}
@@ -352,7 +327,7 @@ const PLabDesign = () => {
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
                   value={classs}
-                  onChange={handleChangeDClasss}
+                  onChange={(e) => setDesignClasss(e.target.value)}
                 >
                   <MenuItem value={1}>1</MenuItem>
                   <MenuItem value={2}>2</MenuItem>
@@ -381,17 +356,26 @@ const PLabDesign = () => {
         </div>
 
         <div>
-          {design === 30 && <PLabDesignDraft />}
-
-          {design === 10 && graphValue ? (
-            <PLabDesignEdit
-              graphValue={graphValue}
-              allGraphValue={allGraphValue}
-            />
-          ) : (
-            <p>Loading...</p>
+          {design === 30 && allData.res.length && <PLabDesignDraft />}
+          {console.log("allllllllllllllll5555", allData)}
+          {console.log(
+            "allllllllllllllll5555",
+            typeof allData.res,
+            allData.res
           )}
-          {design === 20 && <PLabDesignReview graphValue={graphValue} />}
+          {
+            design === 10 && allData && (
+              <PLabDesignEdit
+                proteinData={classs !== 0 ? proteinData.data.all_data : []}
+                allData={allData.res}
+                proteinNo={protein}
+              />
+            )
+            // ) : (
+            //   <p>Loading...</p>
+            // )
+          }
+          {design === 20 && <PLabDesignReview graphValue={proteinData} />}
           {design === 40 && <PLabDesignMyProtein />}
         </div>
       </section>

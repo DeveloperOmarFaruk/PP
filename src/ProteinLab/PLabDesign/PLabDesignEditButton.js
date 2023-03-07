@@ -18,7 +18,7 @@ const PLabDesignEditButton = (props) => {
           style={
             color
               ? {
-                  border: "2px solid green",
+                  border: "3px solid green",
                 }
               : {}
           }

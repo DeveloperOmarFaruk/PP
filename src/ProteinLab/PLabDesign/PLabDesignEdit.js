@@ -3,10 +3,12 @@ import React from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
 
-const PLabDesignEdit = ({ proteinData, allData, proteinNo }) => {
+const PLabDesignEdit = ({ proteinData, allData, proteinNo, region }) => {
   const data = allData?.filter((p, index) => index === proteinNo - 1);
   const allproteinData = (data && data[0].data.all_data) || [];
   const singleProtein = proteinData ? proteinData : [];
+
+  
 
   return (
     <>
@@ -34,7 +36,7 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo }) => {
                 display: "inline",
               }}
             >
-              222
+              {allproteinData.length}
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
@@ -42,11 +44,11 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo }) => {
             <span
               style={{
                 border: "2px solid #6c757d",
-                padding: "3px 5px",
+                padding: "3px 8px",
                 display: "inline",
               }}
             >
-              222
+              {region===0?"All":region}
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">

@@ -362,6 +362,7 @@ const PLabDesign = () => {
               proteinData={classs !== 0 ? proteinData.data.all_data : []}
               allData={allData.res}
               proteinNo={protein}
+              region={classs}
             />
           )}
           {design === 20 && <PLabDesignReview graphValue={proteinData} />}

@@ -9,6 +9,7 @@ const PLabDesignEditButton = (props) => {
   const changeAcidName = () => {
     setShowAcid(!showAcid);
   };
+  // console.log("dataaaaa", data);
 
   return (
     <div onClick={() => changeAcidName()}>

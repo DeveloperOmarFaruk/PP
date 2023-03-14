@@ -1,15 +1,31 @@
 import { Grid, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
 
 const PLabDesignEdit = ({ proteinData, allData, proteinNo, region }) => {
-  const data = allData?.filter((p, index) => index === proteinNo - 1);
-  const allproteinData = (data && data[0].data.all_data) || [];
-  const singleProtein = proteinData ? proteinData : [];
+  const [allproteinData, setAllProteinData] = useState([]);
+  const [singleProtein, setSingleProtein] = useState([]);
+  const [subProtein, setSubProtein] = useState([]);
 
-  
+  useEffect(() => {
+    const data = allData?.filter((p, index) => index === proteinNo - 1);
+    const allprotein = data && data[0].data.all_data;
+    setAllProteinData(allprotein);
 
+    setSubProtein([]);
+    allprotein?.forEach((element) => {
+      element.sub_1_ltr &&
+        setSubProtein((prev) => [...prev, element.sub_1_ltr]);
+    });
+  }, [allData, proteinNo]);
+
+  useEffect(() => {
+    proteinData ? setSingleProtein(proteinData) : setSingleProtein([]);
+  }, [proteinData]);
+
+  console.log("protineeeeeeeee", subProtein);
+  console.log("protineeeeeeeee", allproteinData);
   return (
     <>
       <Grid
@@ -36,7 +52,7 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo, region }) => {
                 display: "inline",
               }}
             >
-              {allproteinData.length}
+              {allproteinData?.length}
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
@@ -48,7 +64,7 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo, region }) => {
                 display: "inline",
               }}
             >
-              {region===0?"All":region}
+              {region === 0 ? "All" : region}
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">

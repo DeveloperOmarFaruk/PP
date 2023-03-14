@@ -97,7 +97,7 @@ const PLabDesign = () => {
         axios.spread((...responses) => {
           if (data.region === 0) {
             setAllData({ res: responses });
-            console.log("tttttttttttttttttfirst", allData.res);
+            // console.log("tttttttttttttttttfirst", allData.res);
           }
         })
       )

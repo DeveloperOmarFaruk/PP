@@ -169,7 +169,7 @@ const PLabDesign = () => {
       }
     };
     getProteinData();
-    console.log("444444444444", proteinData);
+    // console.log("444444444444", proteinData);
   }, [classs, protein]);
 
   return (

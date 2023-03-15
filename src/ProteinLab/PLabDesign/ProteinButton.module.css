@@ -1,0 +1,26 @@
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+.bg_default {
+  background-color: white;
+  border: 3px solid #a9a9a9;
+  color: black;
+  text-align: center;
+  
+}
+.bg_red {
+  background-color: red;
+  color: whitesmoke;
+}
+.bg_green {
+  background-color: green;
+  color: whitesmoke;
+  /* border: 3px solid #a9a9a9; */
+}

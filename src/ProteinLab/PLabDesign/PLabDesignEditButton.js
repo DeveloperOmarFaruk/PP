@@ -1,42 +1,42 @@
 import React, { useState } from "react";
+import classes from "./ProteinButton.module.css";
 
-const PLabDesignEditButton = (props) => {
-  const data = props.data;
-  const color = props.color;
+const PLabDesignEditButton = ({ data, color, subProtein }) => {
+  const { amino_acid_1_ltr, sub_1_ltr } = data;
 
-  const [showAcid, setShowAcid] = useState(true);
+  const [protein, setProtein] = useState(amino_acid_1_ltr);
 
-  const changeAcidName = () => {
-    setShowAcid(!showAcid);
-  };
-  // console.log("dataaaaa", data);
+  console.log("dataaaaa", subProtein);
 
   return (
-    <div onClick={() => changeAcidName()}>
-      {/* if showAcid true then print amino_acid_1_ltr otherwise sub_1_ltr */}
-      {showAcid ? (
-        <button
-          style={
-            color
-              ? {
-                  border: "3px solid green",
-                }
-              : {}
+    <div>
+      <select
+        value={protein}
+        onChange={(e) => setProtein(e.target.value)}
+        style={
+          color && {
+            border: "3px solid green",
           }
-        >
-          {data.amino_acid_1_ltr}
-        </button>
-      ) : (
-        <button
-          style={{
-            color: "#ffffff",
-            backgroundColor: "green",
-            border: "2px solid #a9a9a9",
-          }}
-        >
-          {data.sub_1_ltr}
-        </button>
-      )}
+        }
+        className={
+          protein === amino_acid_1_ltr
+            ? classes.bg_default
+            : protein === sub_1_ltr
+            ? classes.bg_green
+            : classes.bg_red
+        }
+      >
+        {subProtein.map((sub) => {
+          return (
+            <option
+              value={sub}
+              className={classes.bg_default}
+            >
+              {sub}
+            </option>
+          );
+        })}
+      </select>
     </div>
   );
 };

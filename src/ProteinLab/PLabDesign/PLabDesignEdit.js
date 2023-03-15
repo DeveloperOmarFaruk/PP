@@ -24,8 +24,6 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo, region }) => {
     proteinData ? setSingleProtein(proteinData) : setSingleProtein([]);
   }, [proteinData]);
 
-  console.log("protineeeeeeeee", subProtein);
-  console.log("protineeeeeeeee", allproteinData);
   return (
     <>
       <Grid
@@ -126,10 +124,17 @@ const PLabDesignEdit = ({ proteinData, allData, proteinNo, region }) => {
                     key={data.id}
                     data={data}
                     color={true}
+                    subProtein={subProtein}
                   />
                 );
               }
-              return <PLabDesignEditButton key={data.id} data={data} />;
+              return (
+                <PLabDesignEditButton
+                  key={data.id}
+                  data={data}
+                  subProtein={subProtein}
+                />
+              );
             })}
         </div>
       </div>

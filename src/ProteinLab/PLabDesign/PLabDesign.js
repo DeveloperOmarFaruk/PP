@@ -38,6 +38,7 @@ const PLabDesign = () => {
   // const [graphValue, setGraphValue] = useState({});
   const [allData, setAllData] = useState({});
   const [proteinData, setProteinData] = useState({});
+  const [position, setPosition] = useState("");
 
   let lowPosition = 1;
   let highPosition = 100;
@@ -112,20 +113,22 @@ const PLabDesign = () => {
 
   useEffect(() => {
     const data = {
-      region: classs,
+      region: classs === 0 ? 1 : classs,
       lowPosition: lowPosition,
       highPosition: highPosition,
     };
     const getProteinData = async () => {
       switch (protein) {
         case 1:
-          console.log("heeeeeeeeeeeeloollllllllllllllllll");
           await axios
             .post(
               "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
               data
             )
-            .then((response) => setProteinData(response))
+            .then((response) => {
+              setProteinData(response);
+              setPosition(response.data.all_data[0].position);
+            })
             .catch((error) => console.log("protein error", error));
           break;
         case 2:
@@ -134,7 +137,10 @@ const PLabDesign = () => {
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
               data
             )
-            .then((response) => setProteinData(response))
+            .then((response) => {
+              setProteinData(response);
+              setPosition(response.data.all_data[0].position);
+            })
             .catch((error) => console.log("protein error", error));
           break;
         case 3:
@@ -143,7 +149,10 @@ const PLabDesign = () => {
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
               data
             )
-            .then((response) => setProteinData(response))
+            .then((response) => {
+              setProteinData(response);
+              setPosition(response.data.all_data[0].position);
+            })
             .catch((error) => console.log("protein error", error));
           break;
         case 4:
@@ -152,7 +161,10 @@ const PLabDesign = () => {
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
               data
             )
-            .then((response) => setProteinData(response))
+            .then((response) => {
+              setProteinData(response);
+              setPosition(response.data.all_data[0].position);
+            })
             .catch((error) => console.log("protein error", error));
           break;
         case 5:
@@ -161,7 +173,10 @@ const PLabDesign = () => {
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
               data
             )
-            .then((response) => setProteinData(response))
+            .then((response) => {
+              setProteinData(response);
+              setPosition(response.data.all_data[0].position);
+            })
             .catch((error) => console.log("protein error", error));
           break;
         default:
@@ -169,6 +184,7 @@ const PLabDesign = () => {
       }
     };
     getProteinData();
+    // console.log("444444444444", classs);
     // console.log("444444444444", proteinData);
   }, [classs, protein]);
 
@@ -363,6 +379,7 @@ const PLabDesign = () => {
               allData={allData.res}
               proteinNo={protein}
               region={classs}
+              positionValue={position}
             />
           )}
           {design === 20 && <PLabDesignReview graphValue={proteinData} />}

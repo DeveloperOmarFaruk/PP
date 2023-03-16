@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./ProteinButton.module.css";
 
-const PLabDesignEditButton = ({ data, color, subProtein }) => {
-  const { amino_acid_1_ltr, sub_1_ltr } = data;
+const PLabDesignEditButton = ({ data, color, subProtein, positionHandler }) => {
+  const { amino_acid_1_ltr, sub_1_ltr, position } = data;
 
   const [protein, setProtein] = useState(amino_acid_1_ltr);
 
-  console.log("dataaaaa", subProtein);
+  // console.log("dataaaaa", data);
+  useEffect(() => {
+    setProtein(amino_acid_1_ltr);
+  }, [amino_acid_1_ltr]);
 
   return (
-    <div>
+    <div onClick={() => positionHandler(position)}>
       <select
         value={protein}
         onChange={(e) => setProtein(e.target.value)}
@@ -28,10 +31,7 @@ const PLabDesignEditButton = ({ data, color, subProtein }) => {
       >
         {subProtein.map((sub) => {
           return (
-            <option
-              value={sub}
-              className={classes.bg_default}
-            >
+            <option value={sub} className={classes.bg_default}>
               {sub}
             </option>
           );

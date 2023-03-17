@@ -68,9 +68,10 @@ const PLabDesignEdit = ({
             <span
               style={{
                 border: "2px solid #6c757d",
-                padding: "3px 5px",
                 display: "inline",
                 width: "60px",
+                height: "35px",
+                lineHeight: "32px",
                 textAlign: "center",
                 borderRadius: "5px",
               }}
@@ -83,7 +84,8 @@ const PLabDesignEdit = ({
             <span
               style={{
                 border: "2px solid #6c757d",
-                padding: "3px 8px",
+                height: "35px",
+                lineHeight: "32px",
                 display: "inline",
                 width: "60px",
                 textAlign: "center",
@@ -100,7 +102,8 @@ const PLabDesignEdit = ({
             <span
               style={{
                 border: "2px solid #6c757d",
-                padding: "3px 5px",
+                height: "35px",
+                lineHeight: "32px",
                 display: "inline",
                 width: "60px",
                 textAlign: "center",
@@ -119,7 +122,8 @@ const PLabDesignEdit = ({
               <span
                 style={{
                   border: "2px solid #6c757d",
-                  padding: "3px 5px",
+                  height: "35px",
+                  lineHeight: "32px",
                   display: "inline",
                   marginRight: "5px",
                   width: "60px",
@@ -135,7 +139,8 @@ const PLabDesignEdit = ({
               <span
                 style={{
                   border: "2px solid #6c757d",
-                  padding: "3px 5px",
+                  height: "35px",
+                  lineHeight: "32px",
                   display: "inline",
                   width: "60px",
                   textAlign: "center",

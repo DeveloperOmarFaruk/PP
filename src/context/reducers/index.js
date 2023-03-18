@@ -1,3 +1,4 @@
 import auth from "./auth";
+import cart from './cart'
 
-export {auth}
+export {auth, cart}

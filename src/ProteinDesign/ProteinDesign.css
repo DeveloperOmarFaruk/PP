@@ -1,157 +1,199 @@
-.pdesing-section{
-    margin: 100px auto;
-    display: block;
-    width: 80%;
+.pdesing-section {
+  margin: 100px auto;
+  display: block;
+  width: 80%;
 }
 
-.pdesing-title{
-    text-align: center;
-    margin: 130px auto 0px auto;
-    font-size: 35px;
-    font-weight: 600;
-    color: #254117;
+.pdesing-title {
+  text-align: center;
+  margin: 130px auto 0px auto;
+  font-size: 45px;
+  font-weight: 600;
+  color: #254117;
 }
 
-.pdesign-protein-title p{
- color: #ffffff;
- background-color: #254117;
- padding: 6px;
- width: 13%;
- text-align: center;
- font-size: 18px;
+.pdesing-title p:nth-last-child(1) {
+  color: black;
+  font-size: 20px;
+  font-weight: 400;
+  color: #384d2e;
 }
 
-.pdesign-card-multi-btn{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    
+.pdesign-protein-title p {
+  color: #ffffff;
+  background-color: #254117;
+  padding: 6px;
+  width: 13%;
+  text-align: center;
+  font-size: 18px;
 }
 
-.pdesign-card-multi-btn-circle{
-    padding: 5px 5px;
-    margin: 10px;
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    border: 1px solid #ccc;
+.pdesign-card-multi-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.pdesign-card-multi-btn-circle:nth-last-child(4){
-    background-color: #E799A3;
+.pdesign-card-multi-btn-circle {
+  padding: 5px 5px;
+  margin: 10px;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #ccc;
 }
 
-.pdesign-card-multi-btn-circle:nth-last-child(3){
-    background-color: #03A9F4;
+.pdesign-card-multi-btn-circle:nth-last-child(4) {
+  background-color: #e799a3;
 }
-.pdesign-card-multi-btn-circle:nth-last-child(2){
-    background-color: #CC6600;
+
+.pdesign-card-multi-btn-circle:nth-last-child(3) {
+  background-color: #03a9f4;
 }
-.pdesign-card-multi-btn-circle:nth-last-child(1){
-    background-color: #454545;
+.pdesign-card-multi-btn-circle:nth-last-child(2) {
+  background-color: #cc6600;
+}
+.pdesign-card-multi-btn-circle:nth-last-child(1) {
+  background-color: #454545;
 }
 
 .pdesign-card-multi-btn-circle:nth-last-child(1):hover,
 .pdesign-card-multi-btn-circle:nth-last-child(2):hover,
 .pdesign-card-multi-btn-circle:nth-last-child(3):hover,
-.pdesign-card-multi-btn-circle:nth-last-child(4):hover{
-    border: 1px solid black;
+.pdesign-card-multi-btn-circle:nth-last-child(4):hover {
+  border: 1px solid black;
 }
 
-.active-circle-btn{
-    border: 3px solid black;
+.active-circle-btn {
+  border: 3px solid black;
 }
 
-
-.pdesign-card-container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+.pdesign-card {
+  margin: 20px 0px 30px 0px;
+  width: 100%;
+  transition: box-shadow 0.2s ease-in-out, transform 0.35s ease-in-out;
 }
 
-.pdesign-card{
-    margin: 20px 25px 30px 0px;
-    width: 23%;
-    transition: box-shadow 0.2s ease-in-out, transform 0.35s ease-in-out;
+.pdesign-card:hover {
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
 }
 
-.pdesign-card:hover{
-    box-shadow: 0 11px 11px 0 rgba(0, 0, 0, .4);
-    transform: translateY(-5px);
+.pdesign-card-added {
+  margin: 0px auto;
+  display: block;
+  width: 27%;
 }
 
-.pdesign-card img{
-    width: 100%;
+.pdesign-card-added p {
+  text-align: center;
+  background-color: #fd3f6d;
+  color: #ffffff;
+  padding: 5px 10px;
+  position: absolute;
 }
 
-.pdesign-card-btn{
-    background-color: #cccc;
+.pdesign-card img {
+  width: 100%;
+  height: 200px;
 }
 
-.pdesign-card-info{
-    margin: auto;
-    display: block;
-    width: 70%;
+.pdesign-card-btn {
+  background-color: #cccc;
 }
 
-.pdesign-card-info p:nth-child(1){
-    font-size: 22px;
-    font-weight: 700;
-    text-transform: capitalize;
-    padding: 15px 0px 0px 0px;
-    margin: 0px;
+.pdesign-card-info {
+  margin: auto;
+  display: block;
+  width: 85%;
 }
 
-.pdesign-card-info p:nth-child(2){
-    font-size: 20px;
-    font-weight: 500;
-    text-transform: lowercase;
-    padding: 0px 0px 0px 0px;
-    margin: 0px;
+.pdesign-card-organism {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #000000;
 }
 
-.pdesign-card-info p:nth-child(3){
-    font-size: 18px;
-    font-weight: 500;
-    padding: 5px 0px 0px 0px;
-    color: #686A6C;
+.pdesign-card-organism p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.pdesign-card-chart-btn{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+.pdesign-card-protein {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: #000000;
 }
 
-
-.normal-click{
-    padding: 10px;
-    margin-top: 30px;
-    margin-bottom: 0px;
-    text-align: center;
-    width: 48%;
-    background-color: #fd3f6d;
-    color: #ffffff;
-    border: 1px solid #fd3f6d;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
+.pdesign-card-protein p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.normal-click:hover{
-    background-color: #ffffff;
-    color: #fd3f6d;
-    border: 1px solid #fd3f6d;
+.pdesign-card-price {
+  font-size: 20px;
+  font-weight: 500;
+  color: #000000;
 }
 
+.pdesign-card-chart-btn {
+  margin-top: 30px;
+}
 
-.active-click{
-    background-color: #ffffff;
-    color: #fd3f6d;
-    border: 1px solid #fd3f6d;
+.pdesign-card-info p span {
+  font-size: 10px;
+}
+
+.normal-click {
+  padding: 10px;
+  margin-bottom: 0px;
+  text-align: center;
+  width: 100%;
+  background-color: #fd3f6d;
+  color: #ffffff;
+  border: 1px solid #fd3f6d;
+  font-size: 16px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 3.2em;
+  white-space: nowrap;
+}
+
+.normal-click:hover {
+  color: #000000;
+}
+
+.active-click {
+  background-color: #ffffff;
+  color: #fd3f6d;
+  border: 1px solid #fd3f6d;
+}
+
+.show-click {
+  padding: 10px;
+  /* margin-top: 5px; */
+  margin-bottom: 0px;
+  text-align: center;
+  width: 100%;
+  background-color: #ffffff;
+  color: #fd3f6d;
+  border: 1px solid #fd3f6d;
+  font-size: 16px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 3.2em;
+  white-space: nowrap;
+}
+
+.show-click:hover {
+  color: #000000;
 }
 
 /* 
@@ -170,252 +212,190 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+/* ================ */
+/* Responsive Area */
+/* ================ */
 
-
-
-
-         /* ================ */
-  /* Responsive Area */
-  /* ================ */
-
-  
-  @media (max-width: 768px){
-
-    .pdesing-section{
-        margin: 40px auto;
-        width: 85%;
-    }
-
-
-    .pdesign-card{
-        margin: 20px 0px 30px 0px;
-        width: 100%;
-    }
-
-    .pdesign-card-chart-btn button{
-        margin-top: 30px;
-        margin-bottom: 0px;
-        width: 100%;
-    }
-    
-
-    .pdesign-protein-title p{
-        width: 50%;
-       }
-
-       .pdesing-title{
-        margin: 130px auto 0px auto;
-        font-size: 25px;
-    }
-    
+@media (max-width: 768px) {
+  .pdesing-section {
+    margin: 40px auto;
+    width: 85%;
   }
 
-
-
-
-
-  @media (width: 375px){
-
+  .pdesign-card {
+    margin: 20px 0px 30px 0px;
   }
 
-
-
-  @media (width: 414px){
-   
+  .pdesign-card-chart-btn button {
+    margin-bottom: 0px;
+    width: 100%;
   }
 
-
-
-  @media (width: 390px){
-    
+  .pdesign-protein-title p {
+    width: 50%;
   }
 
+  .pdesing-title {
+    margin: 130px auto 0px auto;
+    font-size: 25px;
+  }
+}
 
+@media (width: 375px) {
+}
 
-  @media (width: 393px){
- 
+@media (width: 414px) {
+}
+
+@media (width: 390px) {
+}
+
+@media (width: 393px) {
+}
+
+@media (width: 360px) {
+}
+
+@media (width: 412px) {
+}
+
+@media (width: 820px) {
+  .pdesing-section {
+    margin: 40px auto;
+    width: 85%;
   }
 
-
-  @media (width: 360px){
-
+  .pdesign-card {
+    margin: 20px 10px 30px 10px;
   }
 
-
-
-  @media (width: 412px){
-   
+  .pdesign-card-chart-btn button {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 100%;
   }
 
-
-
-  @media (width: 820px){
-
-    .pdesing-section{
-        margin: 40px auto;
-        width: 85%;
-    }
-
-
-    .pdesign-card{
-        margin: 20px 10px 30px 10px;
-        width: 47%;
-    }
-
-    .pdesign-card-chart-btn button{
-        margin-top: 30px;
-        margin-bottom: 0px;
-        width: 100%;
-    }
-    
-
-    .pdesign-protein-title p{
-        width: 50%;
-        margin-left: 10px;
-       }
-
-       .pdesing-title{
-        margin: 130px auto 0px auto;
-        font-size: 25px;
-    }
-    
-    
+  .pdesign-protein-title p {
+    width: 50%;
+    margin-left: 10px;
   }
 
+  .pdesing-title {
+    margin: 130px auto 0px auto;
+    font-size: 25px;
+  }
+}
 
-
-  @media (width: 768px){
-    .pdesing-section{
-        margin: 40px auto;
-        width: 85%;
-    }
-
-
-    .pdesign-card{
-        margin: 20px 10px 30px 10px;
-        width: 46%;
-    }
-
-    .pdesign-card-chart-btn button{
-        margin-top: 30px;
-        margin-bottom: 0px;
-        width: 100%;
-    }
-    
-
-    .pdesign-protein-title p{
-        width: 50%;
-        margin-left: 12px;
-       }
-
-       .pdesing-title{
-        margin: 130px auto 0px auto;
-        font-size: 25px;
-    }
+@media (width: 768px) {
+  .pdesing-section {
+    margin: 40px auto;
+    width: 85%;
   }
 
-
-
-  @media (width: 912px){
-    .pdesing-section{
-        margin: 40px auto;
-        width: 85%;
-    }
-
-
-    .pdesign-card{
-        margin: 20px 10px 30px 10px;
-        width: 46%;
-    }
-
-    .pdesign-card-chart-btn button{
-        margin-top: 30px;
-        margin-bottom: 0px;
-        width: 100%;
-    }
-    
-
-    .pdesign-protein-title p{
-        width: 50%;
-        margin-left: 20px;
-       }
-
-       .pdesing-title{
-        margin: 130px auto 0px auto;
-        font-size: 25px;
-    }
+  .pdesign-card {
+    margin: 20px 10px 30px 10px;
   }
 
-
-  @media (width: 540px){
-   
+  .pdesign-card-chart-btn button {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 100%;
   }
 
-
-
-  @media (width: 280px){
- 
+  .pdesign-protein-title p {
+    width: 50%;
+    margin-left: 12px;
   }
 
+  .pdesing-title {
+    margin: 130px auto 0px auto;
+    font-size: 25px;
+  }
+}
 
-
-  @media (width: 1024px){
-    .pdesing-section{
-        margin: 40px auto;
-        width: 85%;
-    }
-
-
-    .pdesign-card{
-        margin: 20px 10px 30px 10px;
-        width: 30%;
-    }
-
-    .pdesign-card-chart-btn button{
-        margin-top: 30px;
-        margin-bottom: 0px;
-        width: 100%;
-    }
-    
-
-    .pdesign-protein-title p{
-        width: 30%;
-        margin-left: 20px;
-       }
-
-       .pdesing-title{
-        margin: 130px auto 0px auto;
-        font-size: 25px;
-    }
+@media (width: 912px) {
+  .pdesing-section {
+    margin: 40px auto;
+    width: 85%;
   }
 
-
-  @media (width: 1280px){
-    .pdesing-section{
-        margin: 40px auto;
-        width: 85%;
-    }
-
-
-    .pdesign-card{
-        margin: 20px 10px 30px 10px;
-        width: 23%;
-    }
-
-    .pdesign-card-chart-btn button{
-        margin-top: 30px;
-        margin-bottom: 0px;
-        width: 100%;
-    }
-    
-
-    .pdesign-protein-title p{
-        width: 30%;
-        margin-left: 15px;
-       }
-
-       .pdesing-title{
-        margin: 130px auto 0px auto;
-        font-size: 25px;
-    }
+  .pdesign-card {
+    margin: 20px 10px 30px 10px;
   }
+
+  .pdesign-card-chart-btn button {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 100%;
+  }
+
+  .pdesign-protein-title p {
+    width: 50%;
+    margin-left: 20px;
+  }
+
+  .pdesing-title {
+    margin: 130px auto 0px auto;
+    font-size: 25px;
+  }
+}
+
+@media (width: 540px) {
+}
+
+@media (width: 280px) {
+}
+
+@media (width: 1024px) {
+  .pdesing-section {
+    margin: 40px auto;
+    width: 85%;
+  }
+
+  .pdesign-card {
+    margin: 20px 10px 30px 10px;
+  }
+
+  .pdesign-card-chart-btn button {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 100%;
+  }
+
+  .pdesign-protein-title p {
+    width: 30%;
+    margin-left: 20px;
+  }
+
+  .pdesing-title {
+    margin: 130px auto 0px auto;
+    font-size: 25px;
+  }
+}
+
+@media (width: 1280px) {
+  .pdesing-section {
+    margin: 40px auto;
+    width: 85%;
+  }
+
+  .pdesign-card {
+    margin: 20px 10px 30px 10px;
+  }
+
+  .pdesign-card-chart-btn button {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 100%;
+  }
+
+  .pdesign-protein-title p {
+    width: 30%;
+    margin-left: 15px;
+  }
+
+  .pdesing-title {
+    margin: 130px auto 0px auto;
+    font-size: 25px;
+  }
+}

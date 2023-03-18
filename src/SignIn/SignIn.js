@@ -46,17 +46,17 @@ const SignIn = () => {
     userLogin(data)
     .then(res => {
       console.log(res)
-      if(res.status === 400){
+      if('message' in res.result){
+        alert("Failed to login")
         authDispatch({
           type: "LOG_OUT",
         })
-      } else if(res.status === 200){
+      } else{
         authDispatch({
           type: "LOGIN_SUCCESS",
           payload:res.result
         })
         history("/")
-        // window.location.href = "/"
       }
     })
     // axios.post(`https://protein.catkinsofttech-bd.xyz/api/user/token`, data).then(res=>{

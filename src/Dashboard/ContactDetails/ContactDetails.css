@@ -1,0 +1,29 @@
+.contact-details-title {
+  margin: 23px 10px;
+}
+
+.contact-details-title p {
+  background-color: #254117;
+  padding: 10px 30px;
+  font-size: 19px;
+  font-weight: 500;
+  width: 30%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.td {
+  width: 40% !important;
+}
+
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .contact-details-title p {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 900px) {
+  .contact-details-title p {
+    width: 100%;
+  }
+}

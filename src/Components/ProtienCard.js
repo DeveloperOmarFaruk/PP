@@ -13,8 +13,15 @@ const ProtienCard = ({ item }) => {
   const [press, setPress] = useState("home");
   const navigate = useNavigate();
   const [circleBtn, setCircleBtn] = useState(0);
+  const [cartList, setCartList] = useState([])
 
-    const addToCart = () => {
+  useEffect(() => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let x = cart.map(i => i.id)
+      setCartList(x)
+  }, [item])
+
+  const addToCart = () => {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let newItem = {
         id: item.id,
@@ -23,6 +30,7 @@ const ProtienCard = ({ item }) => {
         image: `https://protein.catkinsofttech-bd.xyz/${item.checkout_image_path}`,
       };
       cart.push(newItem);
+      setCartList(prevState => [...prevState, item.id])
       cartDispatch({
         type: "ADD_PRODUCT",
         payload: cart.length,
@@ -34,7 +42,7 @@ const ProtienCard = ({ item }) => {
   return (
     <>
       <div className="pdesign-card">
-        { clicked && <div className="pdesign-card-added">
+        { cartList.includes(item.id) && <div className="pdesign-card-added">
           <p>
             Added <i className="fa-solid fa-check"></i>
           </p>

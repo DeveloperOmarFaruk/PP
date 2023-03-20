@@ -34,6 +34,14 @@ const Order = () => {
             });
     }, []);
 
+    useEffect(() => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let x = cart.map(i => i.id)
+        if (x.includes(parseInt(id))){
+            setIsAddCart(true)
+        }
+    }, [id])
+
     const addToCart = () => {
         setIsAddCart(true);
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -80,8 +88,8 @@ const Order = () => {
 
                             <div className="order-section-col">
                                 <img
-                                    src={`https://protein.catkinsofttech-bd.xyz/${product.checkout_image_path}`}
-                                    alt={`https://protein.catkinsofttech-bd.xyz/${product.checkout_image_path}`}
+                                    src={`https://protein.catkinsofttech-bd.xyz/${product.image_path}`}
+                                    alt={`https://protein.catkinsofttech-bd.xyz/${product.image_path}`}
                                 />
                             </div>
                         </Slider>
@@ -139,10 +147,10 @@ const Order = () => {
                                                         {v.variant_type === 'researcher' && <h5>Researcher Platform</h5> }
                                                         {/* <h5>Researcher Platform</h5> <h5>Designer Platform</h5> */}
                                                     </div>
-                                                    <p>${v.price}/Resigon Positions</p>
-                                                    {v.variant_type === 'starter' && <p>15 Resigon Positions</p> }
-                                                    {v.variant_type === 'designer' && <p>150 Resigon Positions</p> }
-                                                    {v.variant_type === 'researcher' && <p>50 Resigon Positions</p> }
+                                                    <p>${v.rate}/Region Positions</p>
+                                                    {v.variant_type === 'starter' && <p>15 Region Positions</p> }
+                                                    {v.variant_type === 'designer' && <p>150 Region Positions</p> }
+                                                    {v.variant_type === 'researcher' && <p>50 Region Positions</p> }
 
                                                 </div>
                                             </div>
@@ -151,10 +159,10 @@ const Order = () => {
                                 </div>
 
                                 <div className="order-protein-container">
-                                    <h3>{product.title}</h3>
+                                    <h3>{product.organism_name}</h3>
                                     <div className="order-protein-row">
-                                        <p>polymerase</p>
-                                        <p>$19.95</p>
+                                        <p>{product.protein_name}</p>
+                                        <p>${changeActive.price}</p>
                                     </div>
                                 </div>
 
@@ -179,7 +187,7 @@ const Order = () => {
                                             <div className="order-confirm-best-col-region">
                                                 <p>
                           <span style={{ fontSize: "35px" }}>
-                            ${changeActive.price} /{" "}
+                            ${changeActive.rate} /{" "}
                           </span>
                                                     REGION POSITION
                                                 </p>

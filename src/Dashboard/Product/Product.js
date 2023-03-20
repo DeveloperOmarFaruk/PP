@@ -158,6 +158,7 @@ const Product = ({
                 // z.variants = new_vr;
                 // console.log(z)
                 updateProductList(res.data);
+                setProductData({'complimentary': false})
               })
               .catch((err) => {
                 console.log(err.message);

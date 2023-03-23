@@ -47,7 +47,7 @@ const Order = () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         let newItem = {
             id: product.id,
-            title: product.title,
+            title: product.protein_name,
             variant: changeActive,
             image: `https://protein.catkinsofttech-bd.xyz/${product.checkout_image_path}`,
         };

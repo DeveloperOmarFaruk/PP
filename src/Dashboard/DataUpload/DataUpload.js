@@ -22,6 +22,21 @@ const DataUpload = () => {
       });
   };
 
+  const deleteProteinData = (name) => {
+      let body = {};
+      axios
+          .post(
+            `https://protein.catkinsofttech-bd.xyz/api/import-protein-table/${name}`,
+            body
+          )
+          .then((res) => {
+            alert("Data successfully delete");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+  }
+
   return (
     <>
       <div className="data-upload-section">
@@ -34,52 +49,83 @@ const DataUpload = () => {
 
           <div className="data-upload-label-holder">
             <p> Spike Protein</p>
-            <form onSubmit={(e) => saveProteinData(e, "spike-create")}>
-              <input type="file" id="pr_file" name="pr_file" />
-              <button className="data-upload-btn-save" type="submit">
-                Save
+              <div className={"button-group"}>
+                <form onSubmit={(e) => saveProteinData(e, "spike-create")}>
+                  <input type="file" id="pr_file" name="pr_file" />
+                  <button className="data-upload-btn-save" type="submit">
+                    Save
+                  </button>
+                </form>
+
+              <button className="data-upload-btn-save" type="submit" onClick={ () => deleteProteinData("delete-all-spike-protien")}>
+                  Delete
               </button>
-            </form>
+              </div>
           </div>
 
           <div className="data-upload-label-holder">
             <p> Protein 2</p>
-            <form onSubmit={(e) => saveProteinData(e, "protien-2-create")}>
-              <input type="file" id="pr_file" name="pr_file" />
-              <button className="data-upload-btn-save" type="submit">
-                Save
-              </button>
-            </form>
+              <div className={"button-group"}>
+                <form onSubmit={(e) => saveProteinData(e, "protien-2-create")}>
+                  <input type="file" id="pr_file" name="pr_file" />
+                  <button className="data-upload-btn-save" type="submit">
+                    Save
+                  </button>
+                </form>
+
+                <button className="data-upload-btn-save" type="button" onClick={ () => deleteProteinData("delete-all-spike-protien-2")}>
+                  Delete
+                </button>
+              </div>
           </div>
 
           <div className="data-upload-label-holder">
             <p> Protein 3</p>
-            <form onSubmit={(e) => saveProteinData(e, "protien-3-create")}>
-              <input type="file" id="pr_file" name="pr_file" />
-              <button className="data-upload-btn-save" type="submit">
-                Save
+              <div className={"button-group"}>
+                <form onSubmit={(e) => saveProteinData(e, "protien-3-create")}>
+                  <input type="file" id="pr_file" name="pr_file" />
+                  <button className="data-upload-btn-save" type="submit">
+                    Save
+                  </button>
+                </form>
+
+              <button className="data-upload-btn-save" type="button" onClick={ () => deleteProteinData("delete-all-spike-protien-3")}>
+                  Delete
               </button>
-            </form>
+              </div>
           </div>
 
           <div className="data-upload-label-holder">
             <p> Protein 4</p>
-            <form onSubmit={(e) => saveProteinData(e, "protien-4-create")}>
-              <input type="file" id="pr_file" name="pr_file" />
-              <button className="data-upload-btn-save" type="submit">
-                Save
-              </button>
-            </form>
+
+              <div className={"button-group"}>
+                <form onSubmit={(e) => saveProteinData(e, "protien-4-create")}>
+                  <input type="file" id="pr_file" name="pr_file" />
+                  <button className="data-upload-btn-save">
+                    Save
+                  </button>
+                </form>
+
+                  <button className="data-upload-btn-save" type="button" onClick={ () => deleteProteinData("delete-all-spike-protien-4")}>
+                      Delete
+                  </button>
+              </div>
           </div>
 
           <div className="data-upload-label-holder">
             <p> Protein 5</p>
-            <form onSubmit={(e) => saveProteinData(e, "protien-5-create")}>
-              <input type="file" id="pr_file" name="pr_file" />
-              <button className="data-upload-btn-save" type="submit">
-                Save
+            <div className={"button-group"}>
+              <form onSubmit={(e) => saveProteinData(e, "protien-5-create")}>
+                <input type="file" id="pr_file" name="pr_file" />
+                <button className="data-upload-btn-save" type="submit">
+                  Save
+                </button>
+              </form>
+
+              <button className="data-upload-btn-save" type="button" onClick={ () => deleteProteinData("delete-all-spike-protien-5")}>
+                  Delete
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>

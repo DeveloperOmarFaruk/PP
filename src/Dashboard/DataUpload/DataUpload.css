@@ -26,6 +26,12 @@
   margin: 1rem;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
 .data-upload-label-holder p {
   font-size: 20px;
   padding: 10px 20px 0px 0px;

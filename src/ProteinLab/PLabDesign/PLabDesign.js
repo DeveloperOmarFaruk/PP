@@ -43,27 +43,16 @@ const PLabDesign = () => {
   let lowPosition = 1;
   let highPosition = 100;
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (showProtein && ref.current && !ref.current.contains(e.target)) {
-        setShowProtein(false);
-      }
-    };
-
-    document.addEventListener("mousedown", checkIfClickedOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [showProtein]);
-
-  const handleChangeShowProtein = () => {
-    setShowProtein(true);
-  };
-
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);
   };
+
+  const handleDesignChange = (event) => {
+    if(event.target.value===10){
+      setDesignClasss(0);
+    }
+    setDesign(event.target.value)
+  }
 
   const handleAllGraphs = async () => {
     const data = {
@@ -261,10 +250,10 @@ const PLabDesign = () => {
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
                   value={design}
-                  onChange={(e) => setDesign(e.target.value)}
+                  onChange={(event) => handleDesignChange(event)}
                 >
                   <MenuItem value={10}>Auto</MenuItem>
-                  <MenuItem value={30}>Manual</MenuItem>
+                  <MenuItem value={20}>Manual</MenuItem>
                 </Select>
               </FormControl>
 
@@ -339,41 +328,63 @@ const PLabDesign = () => {
                 >
                   REGION
                 </InputLabel>
-                <Select
-                  labelId="demo-simple-select-filled-label"
-                  id="demo-simple-select-filled"
-                  value={classs}
-                  onChange={(e) => setDesignClasss(e.target.value)}
-                >
-                  <MenuItem value={1}>1</MenuItem>
-                  <MenuItem value={2}>2</MenuItem>
-                  <MenuItem value={3}>3</MenuItem>
-                  <MenuItem value={4}>4</MenuItem>
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={6}>6</MenuItem>
-                  <MenuItem value={7}>7</MenuItem>
-                  <MenuItem value={8}>8</MenuItem>
-                  <MenuItem value={9}>9</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={11}>11</MenuItem>
-                  <MenuItem value={12}>12</MenuItem>
-                  <MenuItem value={13}>13</MenuItem>
-                  <MenuItem value={14}>14</MenuItem>
-                  <MenuItem value={15}>15</MenuItem>
-                  <MenuItem value={16}>16</MenuItem>
-                  <MenuItem value={17}>17</MenuItem>
-                  <MenuItem value={18}>18</MenuItem>
-                  <MenuItem value={19}>19</MenuItem>
-                  <MenuItem value={0}>All</MenuItem>
-                </Select>
+                {design === 10 ? (
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={classs}
+                    onChange={(e) => setDesignClasss(e.target.value)}
+                  >
+                    <MenuItem selected value={0}>
+                      All
+                    </MenuItem>
+                  </Select>
+                ) : (
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={classs}
+                    onChange={(e) => setDesignClasss(e.target.value)}
+                  >
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                    <MenuItem value={7}>7</MenuItem>
+                    <MenuItem value={8}>8</MenuItem>
+                    <MenuItem value={9}>9</MenuItem>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={11}>11</MenuItem>
+                    <MenuItem value={12}>12</MenuItem>
+                    <MenuItem value={13}>13</MenuItem>
+                    <MenuItem value={14}>14</MenuItem>
+                    <MenuItem value={15}>15</MenuItem>
+                    <MenuItem value={16}>16</MenuItem>
+                    <MenuItem value={17}>17</MenuItem>
+                    <MenuItem value={18}>18</MenuItem>
+                    <MenuItem value={19}>19</MenuItem>
+                    <MenuItem value={0}>All</MenuItem>
+                  </Select>
+                )}
               </FormControl>
             </div>
           </nav>
         </div>
 
         <div>
-          {design === 30 && allData.res.length && <PLabDesignDraft />}
           {design === 10 && allData && (
+            // <PLabDesignDraft />
+            <PLabDesignEdit
+              proteinData={classs !== 0 ? proteinData.data.all_data : []}
+              allData={allData.res}
+              proteinNo={protein}
+              region={0}
+              positionValue={position}
+            />
+          )}
+          {design === 20 && allData && (
             <PLabDesignEdit
               proteinData={classs !== 0 ? proteinData.data.all_data : []}
               allData={allData.res}
@@ -382,8 +393,8 @@ const PLabDesign = () => {
               positionValue={position}
             />
           )}
-          {design === 20 && <PLabDesignReview graphValue={proteinData} />}
-          {design === 40 && <PLabDesignMyProtein />}
+          {/* {design === 20 && <PLabDesignReview graphValue={proteinData} />}
+          {design === 40 && <PLabDesignMyProtein />} */}
         </div>
       </section>
     </>

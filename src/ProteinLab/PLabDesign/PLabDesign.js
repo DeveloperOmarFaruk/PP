@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PLabDesign = () => {
-  const ref = useRef();
+  // const ref = useRef();
 
   const classes = useStyles();
   const [classs, setDesignClasss] = useState(0);
@@ -33,149 +33,150 @@ const PLabDesign = () => {
   const [protein, setProtein] = useState(1);
   const [myProtein, setMyProtein] = useState(1);
 
-  const [showProtein, setShowProtein] = useState(false);
+  // const [showProtein, setShowProtein] = useState(false);
 
   // const [graphValue, setGraphValue] = useState({});
-  const [allData, setAllData] = useState({});
-  const [proteinData, setProteinData] = useState({});
+  // const [allData, setAllData] = useState([]);
+  const [singleData, setSingleData] = useState([]);
   const [position, setPosition] = useState("");
-
-  let lowPosition = 1;
-  let highPosition = 100;
+  const [range, setRange] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);
   };
 
   const handleDesignChange = (event) => {
-    if(event.target.value===10){
+    if (event.target.value === 10) {
       setDesignClasss(0);
     }
-    setDesign(event.target.value)
-  }
-
-  const handleAllGraphs = async () => {
-    const data = {
-      region: classs,
-      lowPosition: lowPosition,
-      highPosition: highPosition,
-    };
-
-    const a = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
-      data
-    );
-    const b = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
-      data
-    );
-    const c = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
-      data
-    );
-    const d = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
-      data
-    );
-    const e = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
-      data
-    );
-    await axios
-      .all([a, b, c, d, e])
-      .then(
-        axios.spread((...responses) => {
-          if (data.region === 0) {
-            setAllData({ res: responses });
-            // console.log("tttttttttttttttttfirst", allData.res);
-          }
-        })
-      )
-      .catch((errors) => {
-        console.log("errors----", errors);
-      });
+    setDesign(event.target.value);
   };
 
   useEffect(() => {
-    handleAllGraphs();
+    const getRanges = async () => {
+      try {
+        setIsLoading(true);
+        await axios
+          .get(
+            "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
+          )
+          .then((response) => {
+            setRange(response.data);
+            setIsLoading(false);
+          });
+      } catch (error) {
+        setIsLoading(false);
+        console.log("range error", error);
+      }
+    };
+    getRanges();
+    // console.log("dfataaaaaaaaaaaaaaaaa", allData);
   }, []);
 
   useEffect(() => {
     const data = {
-      region: classs === 0 ? 1 : classs,
-      lowPosition: lowPosition,
-      highPosition: highPosition,
+      // region: classs === 0 ? 1 : classs,
+      region: classs,
+      lowPosition: range?.spike_table?.min,
     };
-    const getProteinData = async () => {
+    const getsingleData = async () => {
       switch (protein) {
         case 1:
+          setIsLoading(true);
           await axios
             .post(
               "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
-              data
+              { ...data, highPosition: range?.spike_table?.max }
             )
             .then((response) => {
-              setProteinData(response);
+              setSingleData(response.data.all_data);
               setPosition(response.data.all_data[0].position);
+              setIsLoading(false);
+              // console.log("singleData: ", response.data.all_data);
             })
-            .catch((error) => console.log("protein error", error));
+            .catch((error) => {
+              console.log("protein error1", error);
+              setIsLoading(false);
+            });
           break;
         case 2:
+          setIsLoading(true);
           await axios
             .post(
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
-              data
+              { ...data, highPosition: range?.table_2?.max }
             )
             .then((response) => {
-              setProteinData(response);
+              setSingleData(response.data.all_data);
               setPosition(response.data.all_data[0].position);
+              setIsLoading(false);
             })
-            .catch((error) => console.log("protein error", error));
+            .catch((error) => {
+              console.log("protein error2", error);
+              setIsLoading(false);
+            });
           break;
         case 3:
+          setIsLoading(true);
           await axios
             .post(
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
-              data
+              { ...data, highPosition: range?.table_3?.max }
             )
             .then((response) => {
-              setProteinData(response);
+              setSingleData(response.data.all_data);
               setPosition(response.data.all_data[0].position);
+              setIsLoading(false);
             })
-            .catch((error) => console.log("protein error", error));
+            .catch((error) => {
+              console.log("protein error3", error);
+              setIsLoading(false);
+            });
           break;
         case 4:
+          setIsLoading(true);
           await axios
             .post(
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
-              data
+              { ...data, highPosition: range?.table_4?.max }
             )
             .then((response) => {
-              setProteinData(response);
+              setSingleData(response.data.all_data);
               setPosition(response.data.all_data[0].position);
+              setIsLoading(false);
             })
-            .catch((error) => console.log("protein error", error));
+            .catch((error) => {
+              console.log("protein error4", error);
+              setIsLoading(false);
+            });
           break;
         case 5:
+          setIsLoading(true);
           await axios
             .post(
               "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
-              data
+              { ...data, highPosition: range?.table_5?.max }
             )
             .then((response) => {
-              setProteinData(response);
+              setSingleData(response.data.all_data);
               setPosition(response.data.all_data[0].position);
+              setIsLoading(false);
             })
-            .catch((error) => console.log("protein error", error));
+            .catch((error) => {
+              console.log("protein error5", error);
+              setIsLoading(false);
+            });
           break;
         default:
           break;
       }
     };
-    getProteinData();
+    // console.log("||rangesss", range);
+    if (range) getsingleData();
     // console.log("444444444444", classs);
-    // console.log("444444444444", proteinData);
-  }, [classs, protein]);
+    // console.log("444444444444", singleData);
+  }, [classs, protein, range]);
 
   return (
     <>
@@ -328,7 +329,7 @@ const PLabDesign = () => {
                 >
                   REGION
                 </InputLabel>
-                {design === 10 ? (
+                {/* {design === 10 ? (
                   <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
@@ -339,63 +340,51 @@ const PLabDesign = () => {
                       All
                     </MenuItem>
                   </Select>
-                ) : (
-                  <Select
-                    labelId="demo-simple-select-filled-label"
-                    id="demo-simple-select-filled"
-                    value={classs}
-                    onChange={(e) => setDesignClasss(e.target.value)}
-                  >
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={6}>6</MenuItem>
-                    <MenuItem value={7}>7</MenuItem>
-                    <MenuItem value={8}>8</MenuItem>
-                    <MenuItem value={9}>9</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={11}>11</MenuItem>
-                    <MenuItem value={12}>12</MenuItem>
-                    <MenuItem value={13}>13</MenuItem>
-                    <MenuItem value={14}>14</MenuItem>
-                    <MenuItem value={15}>15</MenuItem>
-                    <MenuItem value={16}>16</MenuItem>
-                    <MenuItem value={17}>17</MenuItem>
-                    <MenuItem value={18}>18</MenuItem>
-                    <MenuItem value={19}>19</MenuItem>
-                    <MenuItem value={0}>All</MenuItem>
-                  </Select>
-                )}
+                ) : ( */}
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={classs}
+                  onChange={(e) => setDesignClasss(e.target.value)}
+                >
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={6}>6</MenuItem>
+                  <MenuItem value={7}>7</MenuItem>
+                  <MenuItem value={8}>8</MenuItem>
+                  <MenuItem value={9}>9</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={11}>11</MenuItem>
+                  <MenuItem value={12}>12</MenuItem>
+                  <MenuItem value={13}>13</MenuItem>
+                  <MenuItem value={14}>14</MenuItem>
+                  <MenuItem value={15}>15</MenuItem>
+                  <MenuItem value={16}>16</MenuItem>
+                  <MenuItem value={17}>17</MenuItem>
+                  <MenuItem value={18}>18</MenuItem>
+                  <MenuItem value={19}>19</MenuItem>
+                  <MenuItem value={0}>All</MenuItem>
+                </Select>
+                {/* )} */}
               </FormControl>
             </div>
           </nav>
         </div>
 
-        <div>
-          {design === 10 && allData && (
-            // <PLabDesignDraft />
-            <PLabDesignEdit
-              proteinData={classs !== 0 ? proteinData.data.all_data : []}
-              allData={allData.res}
-              proteinNo={protein}
-              region={0}
-              positionValue={position}
-            />
-          )}
-          {design === 20 && allData && (
-            <PLabDesignEdit
-              proteinData={classs !== 0 ? proteinData.data.all_data : []}
-              allData={allData.res}
-              proteinNo={protein}
-              region={classs}
-              positionValue={position}
-            />
-          )}
-          {/* {design === 20 && <PLabDesignReview graphValue={proteinData} />}
-          {design === 40 && <PLabDesignMyProtein />} */}
-        </div>
+        {singleData && (
+          // <PLabDesignDraft />
+          <PLabDesignEdit
+            design={design}
+            singleData={singleData}
+            proteinNo={protein}
+            region={classs}
+            positionValue={position}
+            isLoading={isLoading}
+          />
+        )}
       </section>
     </>
   );

@@ -5,6 +5,7 @@ select {
 
   scrollbar-width: thin;
   scrollbar-color: #a9a9a9 #f2f2f2;
+  cursor: pointer;
 }
 
 select::-webkit-scrollbar {

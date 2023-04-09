@@ -1,18 +1,17 @@
-import { Grid, Typography } from "@material-ui/core";
+import { CircularProgress, Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
 
 const PLabDesignEdit = ({
-  proteinData,
-  allData,
-  proteinNo,
+  design,
+  singleData,
   region,
   positionValue,
+  isLoading,
 }) => {
-  const [allproteinData, setAllProteinData] = useState([]);
-  const [singleProtein, setSingleProtein] = useState([]);
-  const [subProtein, setSubProtein] = useState([]);
+  const [bothLab, setBothLab] = useState([]);
+  const [designLab, setDesignLab] = useState([]);
   const [position, setPosition] = useState("");
   const [auto, setAuto] = useState(0);
   const [menual, setMenual] = useState(0);
@@ -20,31 +19,24 @@ const PLabDesignEdit = ({
   useEffect(() => {
     setPosition(positionValue);
 
-    //collect all data of single protein.
-    const data = allData?.filter((p, index) => index === proteinNo - 1);
-    const allprotein = data && data[0].data.all_data;
-    setAllProteinData(allprotein);
-
     // calculate auto and menual value
     setAuto(0);
     setMenual(0);
-    allprotein?.forEach((p, index) => {
+    singleData?.forEach((p, index) => {
       p.labs === "Both Labs"
         ? setAuto((prev) => prev + 1)
         : setMenual((prev) => prev + 1);
     });
 
-    // collect only sub protein values.
-    setSubProtein([]);
-    allprotein?.forEach((element) => {
-      element.sub_1_ltr &&
-        setSubProtein((prev) => [...prev, element.sub_1_ltr]);
+    // collect amino acid for both labs and design labs.
+    setBothLab([]);
+    setDesignLab([]);
+    singleData?.forEach((element) => {
+      element.labs === "Both Labs"
+        ? setBothLab((prev) => [...prev, element.amino_acid_1_ltr])
+        : setDesignLab((prev) => [...prev, element.amino_acid_1_ltr]);
     });
-  }, [allData, positionValue, proteinNo]);
-
-  useEffect(() => {
-    proteinData ? setSingleProtein(proteinData) : setSingleProtein([]);
-  }, [proteinData]);
+  }, [positionValue, singleData]);
 
   return (
     <>
@@ -76,7 +68,7 @@ const PLabDesignEdit = ({
                 borderRadius: "5px",
               }}
             >
-              {allproteinData?.length}
+              {singleData?.length}
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
@@ -154,33 +146,28 @@ const PLabDesignEdit = ({
         </Grid>
       </Grid>
       <div className="design-edit-section">
-        <div className="design-edit-btns">
-          {allproteinData &&
-            allproteinData?.map((data) => {
-              if (
-                singleProtein &&
-                singleProtein.some((value) => data.id === value.id)
-              ) {
+        {isLoading ? (
+          <div className="d-flex justify-content-center align-items-center h-100">
+            <CircularProgress color="primary" />
+          </div>
+        ) : (
+          <div className="design-edit-btns">
+            {singleData &&
+              singleData.map((data, index) => {
                 return (
                   <PLabDesignEditButton
-                    key={data.id}
+                    key={index}
                     data={data}
-                    color={true}
-                    subProtein={subProtein}
+                    design={design}
+                    bothLab={[...new Set(bothLab)]}
+                    designLab={[...new Set(designLab)]}
                     positionHandler={(posi) => setPosition(posi)}
+                    isLoading={isLoading}
                   />
                 );
-              }
-              return (
-                <PLabDesignEditButton
-                  key={data.id}
-                  data={data}
-                  subProtein={subProtein}
-                  positionHandler={(posi) => setPosition(posi)}
-                />
-              );
-            })}
-        </div>
+              })}
+          </div>
+        )}
       </div>
     </>
   );

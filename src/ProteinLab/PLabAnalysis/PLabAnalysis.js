@@ -44,6 +44,8 @@ const PLabAnalysis = () => {
   const [eMin, setEMin] = useState(0);
   const [eMax, setEMax] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (showProtein && ref.current && !ref.current.contains(e.target)) {
@@ -83,96 +85,26 @@ const PLabAnalysis = () => {
   };
 
   const getInitValue = async () => {
-    await axios
-      .get(
+    try {
+      const response = await axios.get(
         "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
-      )
-      .then((response) => {
-        if (
-          response.data.spike_table.min < 1 ||
-          response.data.spike_table.min > response.data.spike_table.max
-        ) {
-          setAMin(1);
-        } else {
-          setAMin(response.data.spike_table.min);
-        }
-        if (
-          response.data.spike_table.max > 1273 ||
-          response.data.spike_table.min > response.data.spike_table.max
-        ) {
-          setAMax(1273);
-        } else {
-          setAMax(response.data.spike_table.max);
-        }
-        if (
-          response.data.table_2.min < 20 ||
-          response.data.table_2.min > response.data.table_2.max
-        ) {
-          setBMin(20);
-        } else {
-          setBMin(response.data.table_2.min);
-        }
-        if (
-          response.data.table_2.max > 450 ||
-          response.data.table_2.min > response.data.table_2.max
-        ) {
-          setBMax(450);
-        } else {
-          setBMax(response.data.table_2.max);
-        }
-        if (
-          response.data.table_3.min < 90 ||
-          response.data.table_3.min > response.data.table_3.max
-        ) {
-          setCMin(90);
-        } else {
-          setCMin(response.data.table_3.min);
-        }
-        if (
-          response.data.table_3.max > 260 ||
-          response.data.table_3.min > response.data.table_3.max
-        ) {
-          setCMax(260);
-        } else {
-          setCMax(response.data.table_3.max);
-        }
-        if (
-          response.data.table_4.min < 90 ||
-          response.data.table_4.min > response.data.table_4.max
-        ) {
-          setDMin(90);
-        } else {
-          setDMin(response.data.table_4.min);
-        }
-        if (
-          response.data.table_4.max > 260 ||
-          response.data.table_4.min > response.data.table_4.max
-        ) {
-          setDMax(260);
-        } else {
-          setDMax(response.data.table_4.max);
-        }
-        if (
-          response.data.table_5.min < 90 ||
-          response.data.table_5.min > response.data.table_5.max
-        ) {
-          setEMin(90);
-        } else {
-          setEMin(response.data.table_5.min);
-        }
-        if (
-          response.data.table_5.max > 260 ||
-          response.data.table_5.min > response.data.table_5.max
-        ) {
-          setEMax(260);
-        } else {
-          setEMax(response.data.table_5.max);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      );
+      const data = response.data;
+      setAMin(Math.max(data.spike_table.min, 1));
+      setAMax(Math.min(data.spike_table.max, 1273));
+      setBMin(Math.max(data.table_2.min, 20));
+      setBMax(Math.min(data.table_2.max, 450));
+      setCMin(Math.max(data.table_3.min, 90));
+      setCMax(Math.min(data.table_3.max, 260));
+      setDMin(Math.max(data.table_4.min, 90));
+      setDMax(Math.min(data.table_4.max, 260));
+      setEMin(Math.max(data.table_5.min, 90));
+      setEMax(Math.min(data.table_5.max, 260));
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   const handleAllGraphs = async () => {
     if (
       aMin === 0 &&
@@ -187,38 +119,38 @@ const PLabAnalysis = () => {
       eMax === 0
     ) {
       getInitValue();
+      return;
     }
-    const a = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
-      { region: classs, lowPosition: aMin, highPosition: aMax }
-    );
-    const b = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
-      { region: classs, lowPosition: bMin, highPosition: bMax }
-    );
-    const c = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
-      { region: classs, lowPosition: cMin, highPosition: cMax }
-    );
-    const d = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
-      { region: classs, lowPosition: dMin, highPosition: dMax }
-    );
-    const e = await axios.post(
-      "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
-      { region: classs, lowPosition: eMin, highPosition: eMax }
-    );
-    await axios
-      .all([a, b, c, d, e])
-      .then(
-        axios.spread((...responses) => {
-          setGraphValue({ res: responses });
-          console.log("**********responses**********", responses);
-        })
+
+    const positions = [
+      { min: aMin, max: aMax, url: "spike-protein-lab-graph" },
+      { min: bMin, max: bMax, url: "protein-2-lab-graph" },
+      { min: cMin, max: cMax, url: "protein-3-lab-graph" },
+      { min: dMin, max: dMax, url: "protein-4-lab-graph" },
+      { min: eMin, max: eMax, url: "protein-5-lab-graph" },
+    ];
+
+    const requests = positions.map((position) =>
+      axios.post(
+        `https://protein.catkinsofttech-bd.xyz/api/filter/${position.url}`,
+        {
+          region: classs,
+          lowPosition: position.min,
+          highPosition: position.max,
+        }
       )
-      .catch((errors) => {
-        console.log("errors----", errors);
-      });
+    );
+
+    try {
+      setIsLoading(true);
+      const responses = await Promise.all(requests);
+      setGraphValue({ res: responses });
+      // console.log("**********responses**********", responses);
+    } catch (errors) {
+      console.log("errors----", errors);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChangeLab = (event) => {
@@ -397,7 +329,7 @@ const PLabAnalysis = () => {
                         style={{
                           border: "1px solid #808080",
                           borderRadius: "5px",
-                          width: "50px",
+                          width: "60px",
                           margin: "0px 5px",
                           padding: "3px 5px",
                         }}
@@ -412,7 +344,7 @@ const PLabAnalysis = () => {
                         style={{
                           border: `1px solid #808080}`,
                           borderRadius: "5px",
-                          width: "50px",
+                          width: "60px",
                           margin: "0px 5px",
                           padding: "3px 5px",
                         }}
@@ -439,7 +371,7 @@ const PLabAnalysis = () => {
                           style={{
                             border: "1px solid #808080",
                             borderRadius: "5px",
-                            width: "50px",
+                            width: "60px",
                             margin: "0px 5px 0px 30px",
                             padding: "3px 5px",
                           }}
@@ -454,7 +386,7 @@ const PLabAnalysis = () => {
                           style={{
                             border: "1px solid #808080",
                             borderRadius: "5px",
-                            width: "50px",
+                            width: "60px",
                             margin: "0px 5px",
                             padding: "3px 5px",
                           }}
@@ -480,7 +412,7 @@ const PLabAnalysis = () => {
                           style={{
                             border: "1px solid #808080",
                             borderRadius: "5px",
-                            width: "50px",
+                            width: "60px",
                             margin: "0px 5px 0px 30px",
                             padding: "3px 5px",
                           }}
@@ -495,7 +427,7 @@ const PLabAnalysis = () => {
                           style={{
                             border: "1px solid #808080",
                             borderRadius: "5px",
-                            width: "50px",
+                            width: "60px",
                             margin: "0px 5px",
                             padding: "3px 5px",
                           }}
@@ -521,7 +453,7 @@ const PLabAnalysis = () => {
                           style={{
                             border: "1px solid #808080",
                             borderRadius: "5px",
-                            width: "50px",
+                            width: "60px",
                             margin: "0px 5px 0px 30px",
                             padding: "3px 5px",
                           }}
@@ -536,7 +468,7 @@ const PLabAnalysis = () => {
                           style={{
                             border: "1px solid #808080",
                             borderRadius: "5px",
-                            width: "50px",
+                            width: "60px",
                             margin: "0px 5px",
                             padding: "3px 5px",
                           }}
@@ -604,10 +536,12 @@ const PLabAnalysis = () => {
             <div className="graph-chart">
               {classs === 0 ? <p>Regions</p> : <p>Ag</p>}
               <div className="chart">
-                <ApexChart
-                  showProtein={handleSetProtienDetails}
-                  graphValue={graphValue}
-                />
+                {!isLoading && graphValue && (
+                  <ApexChart
+                    showProtein={handleSetProtienDetails}
+                    graphValue={graphValue}
+                  />
+                )}
               </div>
             </div>
             <p className="graph-title">Amino Acid Positions</p>

@@ -1,11 +1,16 @@
 import React, {useState, useRef, useEffect} from 'react'
 import "./PLabAnalysis.css"
+
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PLabTableAnalysis from './PLabTableAnalysis';
+import ApexChart from "./ApexChart"
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -16,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+
+
 
 const InputSection = () => {
   
@@ -100,8 +107,8 @@ const InputSection = () => {
           <div className="flex items-center justify-center mt-6 mb-0 plta-title-container">
             <div className="blue-squer" ></div>
             <h1 className="text-center plta-title">ProteinLab Table Analysis</h1>
-            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis All Regions</h1> */}
-            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Region</h1> */}
+            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis All Classes</h1> */}
+            {/* <h1 className="text-center plta-title">ProteinLab Graph Analysis Single Class</h1> */}
           </div>
           
           
@@ -180,9 +187,13 @@ const InputSection = () => {
                     
           </div> : null
               }
+            
+
+
+
 
       <FormControl variant="filled" className={classes.formControl} style={{border:"1px solid #808080", borderRadius:"5px", width:"170px"}}>
-        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>REGION</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label" style={{color:"#6495ed"}}>CLASS</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"

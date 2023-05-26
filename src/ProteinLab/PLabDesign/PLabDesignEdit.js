@@ -72,7 +72,7 @@ const PLabDesignEdit = ({
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
-            <Typography style={{ fontWeight: "600" }}>REGION &nbsp;</Typography>
+            <Typography style={{ fontWeight: "600" }}>OPTIMIZED LEVEL &nbsp;</Typography>
             <span
               style={{
                 border: "2px solid #6c757d",

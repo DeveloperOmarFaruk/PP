@@ -1,6 +1,7 @@
 {
   "name": "protein-pro",
   "version": "0.1.0",
+  "homepage": "https://proteinwriter.catkinsofttech-bd.xyz/",
   "engines": {
     "node": "16.13.1"
   },
@@ -33,9 +34,12 @@
     "react-credit-card-input": "^1.1.5",
     "react-credit-cards": "^0.8.3",
     "react-dom": "^18.2.0",
+    "react-jquery-plugin": "^1.1.7",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
@@ -62,5 +66,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.16"
   }
 }

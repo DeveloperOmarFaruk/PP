@@ -18,6 +18,24 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  proteinPopupButton: {
+    backgroundColor: "rgba(0, 0, 0, 0.09)",
+    position: "relative",
+    padding: "0 10px 0 13px",
+    border: "1px solid #808080",
+    borderBottom: "2px solid #808080",
+    boxShadow: "0 1px 0px 0px #808080",
+    borderRadius: "5px",
+    width: "170px",
+    height: "58px",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.12)",
+    },
+  },
 }));
 
 const PLabAnalysis = () => {
@@ -25,6 +43,7 @@ const PLabAnalysis = () => {
   const ref = useRef();
   const [lab, setLab] = useState(10);
   const [analysis, setAnalysis] = useState(20);
+  const [matrix, setMatrix] = useState(0);
   const [classs, setClasss] = useState(0);
   const [showProtein, setShowProtein] = useState(false);
   const [protienDetailA, setProtienDetailsA] = useState({});
@@ -134,7 +153,8 @@ const PLabAnalysis = () => {
       axios.post(
         `https://protein.catkinsofttech-bd.xyz/api/filter/${position.url}`,
         {
-          region: classs,
+          matrix: matrix,
+          optimized_label: classs,
           lowPosition: position.min,
           highPosition: position.max,
         }
@@ -145,7 +165,7 @@ const PLabAnalysis = () => {
       setIsLoading(true);
       const responses = await Promise.all(requests);
       setGraphValue({ res: responses });
-      // console.log("**********responses**********", responses);
+      console.log("**********responses**********", responses);
     } catch (errors) {
       console.log("errors----", errors);
     } finally {
@@ -157,7 +177,20 @@ const PLabAnalysis = () => {
     setLab(event.target.value);
   };
   const handleChangeAnalysis = (event) => {
+    if (event.target.value === 20 && matrix === 1) {
+      setClasss(1);
+    } else {
+      setClasss(0);
+    }
     setAnalysis(event.target.value);
+  };
+  const handleChangeMatrix = (event) => {
+    if (event.target.value === 1 && analysis === 20) {
+      setClasss(1);
+    } else {
+      setClasss(0);
+    }
+    setMatrix(event.target.value);
   };
   const handleChangeClasss = (event) => {
     setClasss(event.target.value);
@@ -200,11 +233,11 @@ const PLabAnalysis = () => {
             {analysis === 10 &&
               (classs === 0 ? (
                 <h1 className="text-center plta-title">
-                  ProteinLab Graph Analysis All Regions
+                  ProteinLab Graph Analysis All Optimized Level
                 </h1>
               ) : (
                 <h1 className="text-center plta-title">
-                  ProteinLab Graph Analysis Single Region
+                  ProteinLab Graph Analysis Single Optimized Level
                 </h1>
               ))}
           </div>
@@ -276,208 +309,263 @@ const PLabAnalysis = () => {
                   <MenuItem value={30}>My Analysis</MenuItem>
                 </Select>
               </FormControl>
-
-              <div
+              <FormControl
+                variant="filled"
                 className={classes.formControl}
-                onClick={handleChangeShowProtein}
                 style={{
                   border: "1px solid #808080",
-                  borderBottom: "2px solid #808080",
                   borderRadius: "5px",
                   width: "170px",
-                  height: "58px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  //   backgroundColor: "rgb(100, 149, 237)",
                 }}
               >
-                <button
-                  style={{
-                    color: "#6495ed",
-                    border: "none",
-                    margin: "0px 0px 0px 20px",
-                    fontSize: "17px",
-                  }}
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{ color: "#6495ed" }}
                 >
-                  PROTEIN{" "}
-                </button>
-                <i
-                  class="fa-solid fa-sort-down"
-                  style={{ color: "#808080", margin: "17px 10px 0px 20px" }}
-                ></i>
-              </div>
-              {showProtein ? (
-                <div className="protein-pop-up " ref={ref}>
-                  <div className="testing">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <p style={{ margin: "20px 5px" }}>Spike</p>
-                      <input
-                        type="number"
-                        onChange={handleProteinSpikeMin}
-                        id="low"
-                        name="low"
-                        value={aMin}
-                        placeholder="1"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "60px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                      <input
-                        type="number"
-                        id="high"
-                        name="high"
-                        onChange={handleProteinSpikeMax}
-                        value={aMax}
-                        placeholder="1273"
-                        style={{
-                          border: `1px solid #808080}`,
-                          borderRadius: "5px",
-                          width: "60px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                    </div>
-
-                    <>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          padding: "0px 10px",
-                        }}
-                      >
-                        <p style={{ margin: "20px 5px" }}>M</p>
-                        <input
-                          type="number"
-                          id="low"
-                          name="low"
-                          onChange={handleProteinMMin}
-                          placeholder="20"
-                          value={bMin}
-                          style={{
-                            border: "1px solid #808080",
-                            borderRadius: "5px",
-                            width: "60px",
-                            margin: "0px 5px 0px 30px",
-                            padding: "3px 5px",
-                          }}
-                        />
-                        <input
-                          type="number"
-                          id="high"
-                          name="high"
-                          onChange={handleProteinMMax}
-                          placeholder="450"
-                          value={bMax}
-                          style={{
-                            border: "1px solid #808080",
-                            borderRadius: "5px",
-                            width: "60px",
-                            margin: "0px 5px",
-                            padding: "3px 5px",
-                          }}
-                        />
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          padding: "0px 10px",
-                        }}
-                      >
-                        <p style={{ margin: "20px 5px" }}>N</p>
-                        <input
-                          type="number"
-                          id="low"
-                          name="low"
-                          onChange={handleProteinNMin}
-                          placeholder="90"
-                          value={cMin}
-                          style={{
-                            border: "1px solid #808080",
-                            borderRadius: "5px",
-                            width: "60px",
-                            margin: "0px 5px 0px 30px",
-                            padding: "3px 5px",
-                          }}
-                        />
-                        <input
-                          type="number"
-                          id="high"
-                          name="high"
-                          onChange={handleProteinNMax}
-                          placeholder="260"
-                          value={cMax}
-                          style={{
-                            border: "1px solid #808080",
-                            borderRadius: "5px",
-                            width: "60px",
-                            margin: "0px 5px",
-                            padding: "3px 5px",
-                          }}
-                        />
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          padding: "0px 10px",
-                        }}
-                      >
-                        <p style={{ margin: "20px 5px" }}>P</p>
-                        <input
-                          type="number"
-                          id="low"
-                          name="low"
-                          onChange={handleProteinPMin}
-                          placeholder="90"
-                          value={dMin}
-                          style={{
-                            border: "1px solid #808080",
-                            borderRadius: "5px",
-                            width: "60px",
-                            margin: "0px 5px 0px 30px",
-                            padding: "3px 5px",
-                          }}
-                        />
-                        <input
-                          type="number"
-                          id="high"
-                          name="high"
-                          onChange={handleProteinPMax}
-                          placeholder="260"
-                          value={dMax}
-                          style={{
-                            border: "1px solid #808080",
-                            borderRadius: "5px",
-                            width: "60px",
-                            margin: "0px 5px",
-                            padding: "3px 5px",
-                          }}
-                        />
-                      </div>
-                    </>
-                  </div>
+                  MATRIX
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={matrix}
+                  onChange={handleChangeMatrix}
+                >
+                  <MenuItem value={0}>PM Region</MenuItem>
+                  <MenuItem value={1}>PM Sequence</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="position-relative">
+                <div
+                  className={`${classes.proteinPopupButton} ${classes.formControl}`}
+                  onClick={handleChangeShowProtein}
+                >
+                  <span
+                    style={{
+                      color: "black",
+                      fontSize: "17px",
+                      display: "inline-block",
+                    }}
+                  >
+                    Protein
+                  </span>
+                  <i
+                    class="fa-solid fa-sort-down"
+                    style={{ color: "#808080" }}
+                  ></i>
                 </div>
-              ) : null}
+                {showProtein && (
+                  <div className="protein-pop-up " ref={ref}>
+                    <div className="testing">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          padding: "0px 10px",
+                        }}
+                      >
+                        <p style={{ margin: "20px 5px" }}>Spike</p>
+                        <input
+                          type="number"
+                          onChange={handleProteinSpikeMin}
+                          id="low"
+                          name="low"
+                          value={aMin}
+                          placeholder="1"
+                          style={{
+                            border: "1px solid #808080",
+                            borderRadius: "5px",
+                            width: "60px",
+                            margin: "0px 5px",
+                            padding: "3px 5px",
+                          }}
+                        />
+                        <input
+                          type="number"
+                          id="high"
+                          name="high"
+                          onChange={handleProteinSpikeMax}
+                          value={aMax}
+                          placeholder="1273"
+                          style={{
+                            border: `1px solid #808080}`,
+                            borderRadius: "5px",
+                            width: "60px",
+                            margin: "0px 5px",
+                            padding: "3px 5px",
+                          }}
+                        />
+                      </div>
+                      {analysis !== 20 && (
+                        <>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>M</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinMMin}
+                              placeholder="20"
+                              value={bMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinMMax}
+                              placeholder="450"
+                              value={bMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>N</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinNMin}
+                              placeholder="90"
+                              value={cMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinNMax}
+                              placeholder="260"
+                              value={cMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>E</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinPMin}
+                              placeholder="90"
+                              value={dMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinPMax}
+                              placeholder="260"
+                              value={dMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>D</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinNMin}
+                              placeholder="90"
+                              value={cMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinNMax}
+                              placeholder="260"
+                              value={cMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <FormControl
                 variant="filled"
@@ -492,7 +580,7 @@ const PLabAnalysis = () => {
                   id="demo-simple-select-filled-label"
                   style={{ color: "#6495ed" }}
                 >
-                  REGION
+                  OPTIMIZED LEVEL
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-filled-label"
@@ -519,7 +607,11 @@ const PLabAnalysis = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  <MenuItem value={0}>All</MenuItem>
+                  {analysis === 20 && matrix === 1 ? (
+                    <></>
+                  ) : (
+                    <MenuItem value={0}>All</MenuItem>
+                  )}
                 </Select>
               </FormControl>
             </div>
@@ -528,13 +620,13 @@ const PLabAnalysis = () => {
 
         {analysis === 20 && (
           <div>
-            <PLabTableAnalysis graphValue={graphValue} />
+            <PLabTableAnalysis graphValue={graphValue} matrix={matrix} />
           </div>
         )}
         {analysis === 10 && (
           <div className="graph-container">
             <div className="graph-chart">
-              {classs === 0 ? <p>Regions</p> : <p>Ag</p>}
+              <p>Optimized Levels</p>
               <div className="chart">
                 {!isLoading && graphValue && (
                   <ApexChart
@@ -546,12 +638,16 @@ const PLabAnalysis = () => {
             </div>
             <p className="graph-title">Amino Acid Positions</p>
             <div className="graph-sub-title">
-              {classs === 0 ? (
-                <p>All Regions: &nbsp;</p>
-              ) : (
-                <p>Region {classs} : &nbsp;</p>
+              <p className="m-0">
+                Optimized Level Tracking:&nbsp;{classs === 0 ? "All" : classs}{" "}
+                {matrix === 1 && <span>Amino Acid</span>}
+              </p>
+              {matrix === 0 && (
+                <>
+                  <p className="m-0">Amino Acid (Upper)</p>
+                  <p className="m-0">Substitute Amino Acid (Lower)</p>
+                </>
               )}
-              <p> Amino Acid and Substitute Pair</p>
             </div>
             <div className="protein-info-container">
               <div className="protein-info-details">
@@ -561,19 +657,22 @@ const PLabAnalysis = () => {
                       ? protienDetailA.a.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  <div></div>
-                  <p>{protienDetailA.a ? protienDetailA.a.sub_1_ltr : "--"}</p>
+                  {matrix === 0 && <div></div>}
+                  {matrix === 0 && (
+                    <p>
+                      {protienDetailA.a ? protienDetailA.a.Reg_1_ltr : "--"}
+                    </p>
+                  )}
                 </div>
                 <div className="protein-info-details-info">
                   <p>Spike Protein</p>
                   <p>{protienDetailA.a ? protienDetailA.a.position : "--"}</p>
-                  {classs === 0 ? (
-                    <p>
-                      Region {protienDetailA.a ? protienDetailA.a.region : "--"}
-                    </p>
-                  ) : (
-                    <p>{protienDetailA.a ? protienDetailA.a.ag : "0.0"} Ag</p>
-                  )}
+                  <p>
+                    Level{" "}
+                    {matrix === 1 && protienDetailA?.a
+                      ? protienDetailA?.a?.Seq_AOL
+                      : protienDetailA?.a?.Reg_SOL}
+                  </p>
                 </div>
               </div>
 
@@ -584,19 +683,22 @@ const PLabAnalysis = () => {
                       ? protienDetailB.b.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  <div></div>
-                  <p>{protienDetailB.b ? protienDetailB.b.sub_1_ltr : "--"}</p>
+                  {matrix === 0 && <div></div>}
+                  {matrix === 0 && (
+                    <p>
+                      {protienDetailB.b ? protienDetailB.b.sub_1_ltr : "--"}
+                    </p>
+                  )}
                 </div>
                 <div className="protein-info-details-info">
                   <p>Protein 2</p>
                   <p>{protienDetailB.b ? protienDetailB.b.position : "--"}</p>
-                  {classs === 0 ? (
-                    <p>
-                      Region {protienDetailB.b ? protienDetailB.b.region : "--"}
-                    </p>
-                  ) : (
-                    <p>{protienDetailB.b ? protienDetailB.b.ag : "0.0"} Ag</p>
-                  )}
+                  <p>
+                    Level{" "}
+                    {matrix === 1 && protienDetailB?.b
+                      ? protienDetailB?.b?.Seq_AOL
+                      : protienDetailB?.b?.Reg_SOL}
+                  </p>
                 </div>
               </div>
 
@@ -607,19 +709,22 @@ const PLabAnalysis = () => {
                       ? protienDetailC.c.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  <div></div>
-                  <p>{protienDetailC.c ? protienDetailC.c.sub_1_ltr : "--"}</p>
+                  {matrix === 0 && <div></div>}
+                  {matrix === 0 && (
+                    <p>
+                      {protienDetailC.c ? protienDetailC.c.sub_1_ltr : "--"}
+                    </p>
+                  )}
                 </div>
                 <div className="protein-info-details-info">
                   <p>Protein 3</p>
                   <p>{protienDetailC.c ? protienDetailC.c.position : "--"}</p>
-                  {classs === 0 ? (
-                    <p>
-                      Region {protienDetailC.c ? protienDetailC.c.region : "--"}
-                    </p>
-                  ) : (
-                    <p>{protienDetailC.c ? protienDetailC.c.ag : "0.0"} Ag</p>
-                  )}
+                  <p>
+                    Level{" "}
+                    {matrix === 1 && protienDetailC?.c
+                      ? protienDetailC?.c?.Seq_AOL
+                      : protienDetailC?.c?.Reg_SOL}
+                  </p>
                 </div>
               </div>
 
@@ -630,19 +735,22 @@ const PLabAnalysis = () => {
                       ? protienDetailD.d.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  <div></div>
-                  <p>{protienDetailD.d ? protienDetailD.d.sub_1_ltr : "--"}</p>
+                  {matrix === 0 && <div></div>}
+                  {matrix === 0 && (
+                    <p>
+                      {protienDetailD.d ? protienDetailD.d.sub_1_ltr : "--"}
+                    </p>
+                  )}
                 </div>
                 <div className="protein-info-details-info">
                   <p>Protein 4</p>
                   <p>{protienDetailD.d ? protienDetailD.d.position : "--"}</p>
-                  {classs === 0 ? (
-                    <p>
-                      Region {protienDetailD.d ? protienDetailD.d.region : "--"}
-                    </p>
-                  ) : (
-                    <p>{protienDetailD.d ? protienDetailD.d.ag : "0.0"} Ag</p>
-                  )}
+                  <p>
+                    Level{" "}
+                    {matrix === 1 && protienDetailD?.d
+                      ? protienDetailD?.d?.Seq_AOL
+                      : protienDetailD?.d?.Reg_SOL}
+                  </p>
                 </div>
               </div>
 
@@ -653,19 +761,22 @@ const PLabAnalysis = () => {
                       ? protienDetailE.e.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  <div></div>
-                  <p>{protienDetailE.e ? protienDetailE.e.sub_1_ltr : "--"}</p>
+                  {matrix === 0 && <div></div>}
+                  {matrix === 0 && (
+                    <p>
+                      {protienDetailE.e ? protienDetailE.e.sub_1_ltr : "--"}
+                    </p>
+                  )}
                 </div>
                 <div className="protein-info-details-info">
                   <p>Protein 5</p>
                   <p>{protienDetailE.e ? protienDetailE.e.position : "--"}</p>
-                  {classs === 0 ? (
-                    <p>
-                      Region {protienDetailE.e ? protienDetailE.e.region : "--"}
-                    </p>
-                  ) : (
-                    <p>{protienDetailE.e ? protienDetailE.e.ag : "0.0"} Ag</p>
-                  )}
+                  <p>
+                    Level{" "}
+                    {matrix === 1 && protienDetailE?.e
+                      ? protienDetailE?.e?.Seq_AOL
+                      : protienDetailE?.e?.Reg_SOL}
+                  </p>
                 </div>
               </div>
             </div>

@@ -1,178 +1,161 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
 
-.work-section{
-    margin: 120px auto 50px auto;
-    padding: 0px 5px;
-    display: block;
-    width: 80%;
+.work-section {
+  margin: 120px auto 50px auto;
+  padding: 0px 5px;
+  display: block;
+  width: 80%;
 }
 
-.work-container-title{
-    padding: 30px 0px;
+.work-container-title {
+  padding: 30px 0px;
+  text-align: center;
 }
 
-.work-container-title h5{
-    font-size: 25px;
-    font-weight: 500;
-    color: #254b58;
+.work-container-title h5 {
+  font-size: 25px;
+  color: #254b58;
+  font-weight: 500;
 }
 
-.work-container-title p{
-    font-size: 18px;
-    font-weight: 400;
-    color: #002A3A;
-    width: 38%;
-    font-family: 'Montserrat', sans-serif;
+.work-container-info-row {
+  margin: 4rem auto;
 }
 
-
-.order-choose-row-background{
-    background-color: #ccc;
-    width: 50%;
+.work-container-info-col img {
+  width: 100%;
+  height: 500px;
+  margin: auto;
+  display: block;
 }
 
-.normal-click-hover{
-    background-color: #ffffff;
-    color: #fd3f6d;
-    border: 1px solid #fd3f6d;
+.work-container-info-col {
+  padding: 50px;
 }
 
-.work-contact-share{
-    width: 12%;
-    background-color: #03A9F4; 
-    padding: 20px 10px;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid #03A9F4;
-    color: #ffffff;
-    text-transform: uppercase;
+.work-container-info-col h3 {
+  font-size: 105px;
+  font-family: "Playfair Display", serif;
+  margin: 1rem auto;
 }
 
-.work-contact-share-btn{
-    color: #ffffff;
-    text-decoration: none;
-
+.work-container-info-col h5 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 1rem auto 2rem auto;
 }
 
-.work-contact-share-btn:hover{
-    color: #ffffff;
+.work-container-info-col p {
+  font-size: 17px;
+  font-weight: 400;
+  text-align: justify;
+  width: 80%;
+  max-width: 100%;
 }
 
-
-
-
-
-        /* ================ */
-  /* Responsive Area */
-  /* ================ */
-
-  
-  @media (max-width: 768px){
-    .work-container-title p{
-        width: 100%;
-    }
-
-    .work-contact-share{
-        width: 50%;
-    }
-
-    .order-choose-row-background{
-        width: 100%;
-    }
+/* .work-container-info-col-second-row-left {
+  float: right;
 }
 
+.work-container-info-col-second-row-right {
+  float: left;
+} */
 
-
-
-
-@media (width: 375px){
-
+.work-container-div-btn {
+  text-align: center;
+  margin: 2rem auto;
 }
 
-
-
-@media (width: 414px){
- 
+.work-container-div-btn button span {
+  font-style: italic;
 }
 
-
-
-@media (width: 390px){
-  
+.work-container-div-btn button:nth-child(1) {
+  color: #fd3f6d;
+  background-color: #ffffff;
+  border: 2px solid #fd3f6d;
+  padding: 5px 15px;
+  width: 200px;
+  margin: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 3em;
+  white-space: nowrap;
 }
 
-
-
-@media (width: 393px){
-
+.work-container-div-btn button:hover:nth-child(1) {
+  color: #ffffff;
+  background-color: #fd3f6d;
 }
 
-
-@media (width: 360px){
-
+.work-container-div-btn button:nth-child(2) {
+  color: #ffffff;
+  background-color: #fd3f6d;
+  border: 2px solid #fd3f6d;
+  padding: 5px 15px;
+  width: 200px;
+  margin: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 3em;
+  white-space: nowrap;
 }
 
-
-
-@media (width: 412px){
- 
+.work-container-div-btn button:hover:nth-child(2) {
+  color: #fd3f6d;
+  background-color: #ffffff;
 }
 
+/* ================ */
+/* Responsive Area */
+/* ================ */
 
+@media (max-width: 768px) {
+  .work-container-info-col {
+    padding: 0px;
+  }
 
-@media (width: 820px){
-    .work-container-title p{
-        width: 60%;
-    }
-    .work-contact-share{
-        width: 25%;
-    }
+  .work-container-info-col-second-row {
+    float: right !important;
+  }
 }
 
-
-
-@media (width: 768px){
-    .work-container-title p{
-        width: 60%;
-    }
-    .work-contact-share{
-        width: 25%;
-    }
+@media (width: 375px) {
 }
 
-
-
-@media (width: 912px){
-    .work-container-title p{
-        width: 60%;
-    }
-    .work-contact-share{
-        width: 20%;
-    }
+@media (width: 414px) {
 }
 
-
-@media (width: 540px){
- 
+@media (width: 390px) {
 }
 
-
-
-@media (width: 280px){
-
+@media (width: 393px) {
 }
 
-
-
-@media (width: 1024px){
-    .work-contact-share{
-        width: 20%;
-    }
+@media (width: 360px) {
 }
 
+@media (width: 412px) {
+}
 
-@media (width: 1280px){
-    .work-contact-share{
-        width: 15%;
-    }
+@media (width: 820px) {
+}
+
+@media (width: 768px) {
+}
+
+@media (width: 912px) {
+}
+
+@media (width: 540px) {
+}
+
+@media (width: 280px) {
+}
+
+@media (width: 1024px) {
+}
+
+@media (width: 1280px) {
 }

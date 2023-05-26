@@ -1,8 +1,11 @@
 import React from "react";
 import "./PLabAnalysis.css";
+import { FormControl } from "react-bootstrap";
+import { InputLabel, MenuItem, Select } from "@material-ui/core";
+import { useState } from "react";
 
-const PLabTableAnalysis = (props) => {
-  const graphValue = props.graphValue;
+const PLabTableAnalysis = ({ graphValue, matrix }) => {
+  const [acidType, setAcidType] = useState("amino_acid");
 
   const spike = graphValue.res ? graphValue.res[0].data.all_data : null;
   const p2 = graphValue.res ? graphValue.res[1].data.all_data : null;
@@ -13,14 +16,52 @@ const PLabTableAnalysis = (props) => {
   return (
     <>
       <div className="plta-table-container">
-        <h3>Covid-19 spike protein</h3>
+        <div className="mb-2 d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
+          <h3>Covid-19 spike protein</h3>
+          <select
+            className="form-select custom-select"
+            aria-label="Default select example"
+            value={acidType}
+            onChange={(e) => setAcidType(e.target.value)}
+          >
+            <option value="amino_acid">AMINO ACID</option>
+            <option value="amino_acid_3_ltr">3-LETTER</option>
+            <option value="amino_acid_1_ltr">1-LETTER</option>
+          </select>
+          {/* <FormControl
+            variant="filled"
+            // className={}
+            style={{
+              border: "1px solid #808080",
+              borderRadius: "5px",
+              width: "170px",
+            }}
+          >
+            <InputLabel
+              id="demo-simple-select-filled-label"
+              style={{ color: "#6495ed" }}
+            >
+              ANALYSIS
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={acidType}
+              onChange={(e) => setAcidType(e.target.value)}
+            >
+              <MenuItem value={10}>AMINO ACID</MenuItem>
+              <MenuItem value={20}>3-LETTER</MenuItem>
+              <MenuItem value={30}>1-LETTER</MenuItem>
+            </Select>
+          </FormControl> */}
+        </div>
         <table class="table">
           <thead className="plta-table">
             <th scope="col">Positions</th>
             <th scope="col">Amino Acid</th>
             <th scope="col">Substitute</th>
             <th scope="col">Ag</th>
-            <th scope="col">Region</th>
+            <th scope="col">Optimized level</th>
           </thead>
 
           <tbody>
@@ -30,10 +71,16 @@ const PLabTableAnalysis = (props) => {
                   <td scope="row" data-label="Positions">
                     {spike.position}
                   </td>
-                  <td data-label="Amino Acid">{spike.amino_acid}</td>
-                  <td data-label="Substitute">{spike.sub}</td>
-                  <td data-label="Ag">{spike.ag}</td>
-                  <td data-label="Region">{spike.region}</td>
+                  <td data-label="Amino Acid">{spike[acidType]}</td>
+                  <td data-label="Substitute">
+                    {matrix ? spike.Seq_Sub : spike.Reg_Sub}
+                  </td>
+                  <td data-label="Ag">
+                    {matrix ? spike.Seq_AG : spike.Reg_AG}
+                  </td>
+                  <td data-label="Region">
+                    {matrix ? spike.Seq_AOL : spike.Reg_SOL}
+                  </td>
                 </tr>
               ))
             ) : (
@@ -45,10 +92,14 @@ const PLabTableAnalysis = (props) => {
                   <td scope="row" data-label="Positions">
                     {p2.position}
                   </td>
-                  <td data-label="Amino Acid">{p2.amino_acid}</td>
-                  <td data-label="Substitute">{p2.sub}</td>
-                  <td data-label="Ag">{p2.ag}</td>
-                  <td data-label="Region">{p2.region}</td>
+                  <td data-label="Amino Acid">{p2[acidType]}</td>
+                  <td data-label="Substitute">
+                    {matrix ? p2.Seq_Sub : p2.Reg_Sub}
+                  </td>
+                  <td data-label="Ag">{matrix ? p2.Seq_AG : p2.Reg_AG}</td>
+                  <td data-label="Region">
+                    {matrix ? p2.Seq_AOL : p2.Reg_SOL}
+                  </td>
                 </tr>
               ))
             ) : (
@@ -60,10 +111,14 @@ const PLabTableAnalysis = (props) => {
                   <td scope="row" data-label="Positions">
                     {p3.position}
                   </td>
-                  <td data-label="Amino Acid">{p3.amino_acid}</td>
-                  <td data-label="Substitute">{p3.sub}</td>
-                  <td data-label="Ag">{p3.ag}</td>
-                  <td data-label="Region">{p3.region}</td>
+                  <td data-label="Amino Acid">{p3[acidType]}</td>
+                  <td data-label="Substitute">
+                    {matrix ? p3.Seq_Sub : p3.Reg_Sub}
+                  </td>
+                  <td data-label="Ag">{matrix ? p3.Seq_AG : p3.Reg_AG}</td>
+                  <td data-label="Region">
+                    {matrix ? p3.Seq_AOL : p3.Reg_SOL}
+                  </td>
                 </tr>
               ))
             ) : (
@@ -75,10 +130,14 @@ const PLabTableAnalysis = (props) => {
                   <td scope="row" data-label="Positions">
                     {p4.position}
                   </td>
-                  <td data-label="Amino Acid">{p4.amino_acid}</td>
-                  <td data-label="Substitute">{p4.sub}</td>
-                  <td data-label="Ag">{p4.ag}</td>
-                  <td data-label="Region">{p4.region}</td>
+                  <td data-label="Amino Acid">{p4[acidType]}</td>
+                  <td data-label="Substitute">
+                    {matrix ? p4.Seq_Sub : p4.Reg_Sub}
+                  </td>
+                  <td data-label="Ag">{matrix ? p4.Seq_AG : p4.Reg_AG}</td>
+                  <td data-label="Region">
+                    {matrix ? p4.Seq_AOL : p4.Reg_SOL}
+                  </td>
                 </tr>
               ))
             ) : (
@@ -90,10 +149,14 @@ const PLabTableAnalysis = (props) => {
                   <td scope="row" data-label="Positions">
                     {p5.position}
                   </td>
-                  <td data-label="Amino Acid">{p5.amino_acid}</td>
-                  <td data-label="Substitute">{p5.sub}</td>
-                  <td data-label="Ag">{p5.ag}</td>
-                  <td data-label="Region">{p5.region}</td>
+                  <td data-label="Amino Acid">{p5[acidType]}</td>
+                  <td data-label="Substitute">
+                    {matrix ? p5.Seq_Sub : p5.Reg_Sub}
+                  </td>
+                  <td data-label="Ag">{matrix ? p5.Seq_AG : p5.Reg_AG}</td>
+                  <td data-label="Region">
+                    {matrix ? p5.Seq_AOL : p5.Reg_SOL}
+                  </td>
                 </tr>
               ))
             ) : (

@@ -1,170 +1,141 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
 
-.faq-section{
-    margin: 150px auto 50px auto;
-    display: block;
-    width: 80%;
-    font-family: 'Montserrat', sans-serif;
+.faq-section {
+  margin: 150px auto 50px auto;
+  display: block;
+  width: 80%;
+  font-family: "Montserrat", sans-serif;
 }
 
-.faq-container{
-
+.faq-container {
+  margin: 1rem auto 5rem auto;
 }
 
-.faq-header{
-    text-align: center;
-    padding: 5px 0px 20px 0px;
+.faq-header {
+  text-align: center;
+  margin: 1rem auto 5rem auto;
 }
 
-.faq-header h4{
-  font-size: 36px;
+.faq-header h4 {
+  font-size: 30px;
   font-weight: bolder;
   color: #002a3a;
   letter-spacing: 0.9px;
   line-height: 40px;
 }
 
-
-.faq-header p{
-    color: #374151;
-    line-height: 28px;
-    font-size: 18px;
-    width: 50%;
-    margin: auto;
+.faq-body-container-col {
+  padding: 0px 40px;
 }
 
-.faq-body-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+.faq-body-container-info-question-div:focus {
+  border: 1px solid #fd3f6d;
 }
 
-.faq-col-6{
-    width: 48%;
+.faq-body-container-info-question {
+  font-family: "Barlow", sans-serif;
+  color: #0e111d;
+  font-size: 21px !important;
+  font-weight: 500;
 }
 
-.faq-body-info{
-    margin: 50px 0px;
+.faq-body-container-info-answer {
+  color: #454545;
+  font-size: 17px !important;
+  text-align: justify;
+  font-weight: 400;
 }
 
-.faq-body-info h5{
-    font-size: 20px;
-    font-weight: bolder;
-    color: #002a3a;
-    line-height: 28px;
+.faq-question-answer-div-btn {
+  text-align: center;
+  margin: 10rem auto;
 }
 
-
-.faq-body-info p{
-    color: #374151;
-    line-height: 24px;
-    font-size: 16px;
-    width: 93%;
-    padding: 10px 0px;
+.faq-question-answer-div-btn button span {
+  font-style: italic;
 }
 
-
-
-        /* ================ */
-  /* Responsive Area */
-  /* ================ */
-
-  
-  @media (max-width: 768px){
-
-    .faq-header p{
-        width: 100%;
-    }
- 
-    .faq-body-container{
-        display: inline-block;
-    }
-
-    .faq-col-6{
-        width: 100%;
-    }
-
-    .faq-body-info p{
-        width: 100%;
-    }
-    
+.faq-question-answer-div-btn button:nth-child(1) {
+  color: #fd3f6d;
+  background-color: #ffffff;
+  border: 2px solid #fd3f6d;
+  padding: 5px 15px;
+  width: 200px;
+  margin: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 3em;
+  white-space: nowrap;
 }
 
-
-
-
-
-@media (width: 375px){
-
+.faq-question-answer-div-btn button:hover:nth-child(1) {
+  color: #ffffff;
+  background-color: #fd3f6d;
 }
 
-
-
-@media (width: 414px){
- 
+.faq-question-answer-div-btn button:nth-child(2) {
+  color: #ffffff;
+  background-color: #fd3f6d;
+  border: 2px solid #fd3f6d;
+  padding: 5px 15px;
+  width: 200px;
+  margin: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 3em;
+  white-space: nowrap;
 }
 
+.faq-question-answer-div-btn button:hover:nth-child(2) {
+  color: #fd3f6d;
+  background-color: #ffffff;
+}
+/* ================ */
+/* Responsive Area */
+/* ================ */
 
-
-@media (width: 390px){
-  
+@media (max-width: 768px) {
+  .faq-header p {
+    width: 100%;
+  }
 }
 
-
-
-@media (width: 393px){
-
+@media (width: 375px) {
 }
 
-
-@media (width: 360px){
-
+@media (width: 414px) {
 }
 
-
-
-@media (width: 412px){
- 
+@media (width: 390px) {
 }
 
-
-
-@media (width: 820px){
-
+@media (width: 393px) {
 }
 
-
-
-@media (width: 768px){
- 
+@media (width: 360px) {
 }
 
-
-
-@media (width: 912px){
-
+@media (width: 412px) {
 }
 
-
-@media (width: 540px){
- 
+@media (width: 820px) {
 }
 
-
-
-@media (width: 280px){
-
+@media (width: 768px) {
 }
 
-
-
-@media (width: 1024px){
-  
+@media (width: 912px) {
 }
 
-
-@media (width: 1280px){
- 
+@media (width: 540px) {
 }
 
+@media (width: 280px) {
+}
 
+@media (width: 1024px) {
+}
+
+@media (width: 1280px) {
+}

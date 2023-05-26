@@ -12,7 +12,7 @@ export const getHeader = () => {
         }
     }
     if (token) {
-        config.headers['Authorization'] = `JWT ${token}`
+        config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
 }

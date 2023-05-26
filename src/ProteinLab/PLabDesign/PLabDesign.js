@@ -32,6 +32,7 @@ const PLabDesign = () => {
   const [design, setDesign] = useState(10);
   const [protein, setProtein] = useState(1);
   const [myProtein, setMyProtein] = useState(1);
+  const [matrix, setMatrix] = useState(0);
 
   // const [showProtein, setShowProtein] = useState(false);
 
@@ -51,6 +52,15 @@ const PLabDesign = () => {
       setDesignClasss(0);
     }
     setDesign(event.target.value);
+  };
+
+  const handleChangeMatrix = (event) => {
+    if (event.target.value === 1) {
+      setDesignClasss(1);
+    } else {
+      setDesignClasss(0);
+    }
+    setMatrix(event.target.value);
   };
 
   useEffect(() => {
@@ -76,8 +86,8 @@ const PLabDesign = () => {
 
   useEffect(() => {
     const data = {
-      // region: classs === 0 ? 1 : classs,
-      region: classs,
+      matrix: matrix,
+      optimized_label: classs,
       lowPosition: range?.spike_table?.min,
     };
     const getsingleData = async () => {
@@ -327,7 +337,32 @@ const PLabDesign = () => {
                   id="demo-simple-select-filled-label"
                   style={{ color: "#6495ed" }}
                 >
-                  REGION
+                  MATRIX
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={matrix}
+                  onChange={handleChangeMatrix}
+                >
+                  <MenuItem value={0}>PM Region</MenuItem>
+                  <MenuItem value={1}>PM Sequence</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl
+                variant="filled"
+                className={classes.formControl}
+                style={{
+                  border: "1px solid #808080",
+                  borderRadius: "5px",
+                  width: "170px",
+                }}
+              >
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{ color: "#6495ed" }}
+                >
+                  OPTIMIZED LEVEL
                 </InputLabel>
                 {/* {design === 10 ? (
                   <Select
@@ -366,7 +401,7 @@ const PLabDesign = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  <MenuItem value={0}>All</MenuItem>
+                  {matrix === 1 ? <></> : <MenuItem value={0}>All</MenuItem>}
                 </Select>
                 {/* )} */}
               </FormControl>

@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useReducer} from 'react'
-import {authInitialState} from './initialState'
-import {auth} from './reducers'
+import {authInitialState, cartSize} from './initialState'
+import {auth, cart} from './reducers'
 import axios from "axios";
 import {getHeader} from "./action/auth";
 
@@ -8,23 +8,31 @@ export const GlobalContext = createContext({})
 
 const GlobalProvider = ({children}) => {
     const [authState, authDispatch] = useReducer(auth, authInitialState)
+    const [cartState, cartDispatch] = useReducer(cart, cartSize)
 
     useEffect(() => {
-        console.log(window.location.host)
         authDispatch({
             type: "LOADING_ON",
         })
         axios
-            .get(`https://${window.location.host}/api/auth/me/`, getHeader())
+            .get(`https://protein.catkinsofttech-bd.xyz/api/user/login-user`, getHeader())
             .then(res => {
-                console.log(res)
-                authDispatch({
-                    type: "USER_LOADED",
-                    payload: res.data
-                })
-                authDispatch({
-                    type: "LOADING_OFF",
-                })
+                if(res.data.success != 0){
+                    authDispatch({
+                        type: "USER_LOADED",
+                        payload: res.data.result
+                    })
+                    authDispatch({
+                        type: "LOADING_OFF",
+                    })
+                } else {
+                    authDispatch({
+                        type: "LOG_OUT",
+                    })
+                    authDispatch({
+                        type: "LOADING_OFF",
+                    })
+                }
             }).catch(error => {
             authDispatch({
                 type: "LOG_OUT",
@@ -36,9 +44,19 @@ const GlobalProvider = ({children}) => {
     }, [])
     //console.log(authState)
 
+    useEffect(() => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        
+        cartDispatch({
+            type: "ADD_PRODUCT",
+            payload: cart.length,
+          });
+    }, [])
+    
+
     return (<>
             <GlobalContext.Provider value={{
-                authState, authDispatch
+                authState, authDispatch, cartState, cartDispatch
             }}>
                 {children}
             </GlobalContext.Provider></>

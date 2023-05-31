@@ -62,6 +62,8 @@ const PLabAnalysis = () => {
   const [dMax, setDMax] = useState(0);
   const [eMin, setEMin] = useState(0);
   const [eMax, setEMax] = useState(0);
+  // const [dMin, setDMin] = useState(0);
+  // const [dMax, setDMax] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -109,6 +111,7 @@ const PLabAnalysis = () => {
         "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
       );
       const data = response.data;
+      console.log("size of data: ", data);
       setAMin(Math.max(data.spike_table.min, 1));
       setAMax(Math.min(data.spike_table.max, 1273));
       setBMin(Math.max(data.table_2.min, 20));
@@ -195,10 +198,10 @@ const PLabAnalysis = () => {
   const handleChangeClasss = (event) => {
     setClasss(event.target.value);
   };
-  const handleProteinSpikeMin = (event) => {
+  const handleProteinSpikMin = (event) => {
     setAMin(event.target.value);
   };
-  const handleProteinSpikeMax = (event) => {
+  const handleProteinSpikMax = (event) => {
     setAMax(event.target.value);
   };
   const handleProteinMMin = (event) => {
@@ -218,6 +221,12 @@ const PLabAnalysis = () => {
   };
   const handleProteinPMax = (event) => {
     setDMax(event.target.value);
+  };
+  const handleProteinDMax = (event) => {
+    setEMax(event.target.value);
+  };
+  const handleProteinDMin = (event) => {
+    setEMax(event.target.value);
   };
   return (
     <>
@@ -367,7 +376,7 @@ const PLabAnalysis = () => {
                         <p style={{ margin: "20px 5px" }}>Spike</p>
                         <input
                           type="number"
-                          onChange={handleProteinSpikeMin}
+                          onChange={handleProteinSpikMin}
                           id="low"
                           name="low"
                           value={aMin}
@@ -384,13 +393,13 @@ const PLabAnalysis = () => {
                           type="number"
                           id="high"
                           name="high"
-                          onChange={handleProteinSpikeMax}
+                          onChange={handleProteinSpikMax}
                           value={aMax}
                           placeholder="1273"
                           style={{
                             border: `1px solid #808080}`,
                             borderRadius: "5px",
-                            width: "60px",
+                            width: "70px",
                             margin: "0px 5px",
                             padding: "3px 5px",
                           }}
@@ -432,7 +441,7 @@ const PLabAnalysis = () => {
                               style={{
                                 border: "1px solid #808080",
                                 borderRadius: "5px",
-                                width: "60px",
+                                width: "70px",
                                 margin: "0px 5px",
                                 padding: "3px 5px",
                               }}
@@ -473,7 +482,7 @@ const PLabAnalysis = () => {
                               style={{
                                 border: "1px solid #808080",
                                 borderRadius: "5px",
-                                width: "60px",
+                                width: "70px",
                                 margin: "0px 5px",
                                 padding: "3px 5px",
                               }}
@@ -514,7 +523,7 @@ const PLabAnalysis = () => {
                               style={{
                                 border: "1px solid #808080",
                                 borderRadius: "5px",
-                                width: "60px",
+                                width: "70px",
                                 margin: "0px 5px",
                                 padding: "3px 5px",
                               }}
@@ -533,9 +542,9 @@ const PLabAnalysis = () => {
                               type="number"
                               id="low"
                               name="low"
-                              onChange={handleProteinNMin}
+                              onChange={handleProteinDMin}
                               placeholder="90"
-                              value={cMin}
+                              value={eMin}
                               style={{
                                 border: "1px solid #808080",
                                 borderRadius: "5px",
@@ -548,13 +557,13 @@ const PLabAnalysis = () => {
                               type="number"
                               id="high"
                               name="high"
-                              onChange={handleProteinNMax}
+                              onChange={handleProteinDMax}
                               placeholder="260"
-                              value={cMax}
+                              value={eMax}
                               style={{
                                 border: "1px solid #808080",
                                 borderRadius: "5px",
-                                width: "60px",
+                                width: "70px",
                                 margin: "0px 5px",
                                 padding: "3px 5px",
                               }}
@@ -607,6 +616,7 @@ const PLabAnalysis = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
+                  {console.log("checkkkkkk", analysis, matrix)}
                   {analysis === 20 && matrix === 1 ? (
                     <></>
                   ) : (

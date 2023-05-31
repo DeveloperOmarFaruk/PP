@@ -29,7 +29,7 @@ const PLabDesign = () => {
   const classes = useStyles();
   const [classs, setDesignClasss] = useState(0);
   const [dlab, setDLab] = useState(10);
-  const [design, setDesign] = useState(10);
+  // const [design, setDesign] = useState(10);
   const [protein, setProtein] = useState(1);
   const [myProtein, setMyProtein] = useState(1);
   const [matrix, setMatrix] = useState(0);
@@ -47,12 +47,12 @@ const PLabDesign = () => {
     setDLab(event.target.value);
   };
 
-  const handleDesignChange = (event) => {
-    if (event.target.value === 10) {
-      setDesignClasss(0);
-    }
-    setDesign(event.target.value);
-  };
+  // const handleDesignChange = (event) => {
+  //   if (event.target.value === 10) {
+  //     setDesignClasss(0);
+  //   }
+  //   setDesign(event.target.value);
+  // };
 
   const handleChangeMatrix = (event) => {
     if (event.target.value === 1) {
@@ -242,7 +242,7 @@ const PLabDesign = () => {
                 </Select>
               </FormControl>
 
-              <FormControl
+              {/* <FormControl
                 variant="filled"
                 className={classes.formControl}
                 style={{
@@ -266,7 +266,7 @@ const PLabDesign = () => {
                   <MenuItem value={10}>Auto</MenuItem>
                   <MenuItem value={20}>Manual</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
 
               <FormControl
                 variant="filled"
@@ -412,7 +412,7 @@ const PLabDesign = () => {
         {singleData && (
           // <PLabDesignDraft />
           <PLabDesignEdit
-            design={design}
+            matrix={matrix}
             singleData={singleData}
             proteinNo={protein}
             region={classs}

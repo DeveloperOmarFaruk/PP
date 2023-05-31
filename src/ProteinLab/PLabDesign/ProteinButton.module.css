@@ -40,15 +40,20 @@ select:focus {
   border: 3px solid #a9a9a9;
   color: black;
 }
-.bg_red {
+.bg_red_br_gray {
   background-color: red;
   color: whitesmoke;
   border: 3px solid #a9a9a9;
 }
-.bg_green {
+.bg_green_br_gray {
   background-color: green;
   color: whitesmoke;
   border: 3px solid #a9a9a9 !important;
+}
+.bg_green_br_red {
+  background-color: green;
+  color: whitesmoke;
+  border: 3px solid red !important;
 }
 .br_green {
   border: 3px solid green;

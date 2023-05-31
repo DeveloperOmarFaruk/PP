@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
 .drft-section {
   margin: 10rem 0rem;
 }
@@ -87,34 +89,37 @@
 
 .design-edit-section {
   background-color: #d1d0ce;
-  padding: 10px 0px;
+  padding: 10px 0 10px 10px;
   display: block;
   margin: 0px auto 50px auto;
   /* width: 1068px; */
-  max-width: 1070px;
-  height: 615px;
-  max-height: 615px;
+  max-width: 1010px;
+  height: 361px;
+  max-height: 361px;
   overflow-y: scroll;
 }
 
 .design-edit-btns {
   display: flex;
   justify-content: flex-start;
-  justify-items: center;
   align-items: center;
-
   flex-flow: row wrap;
+  margin: 0;
+  padding: 0;
 }
 
 .design-edit-btns select,
 .design-edit-btns button {
-  width: 50px;
+  width: 34px;
+  height: 30px;
   max-width: 100%;
-  padding: 0px 12px 0 12px;
-  margin: 10px;
-  border-radius: 5px;
+  /* padding: 0px 12px 0 12px; */
+  margin: 0 5px 5px 0;
+  /* border-radius: 5px; */
   text-align: center;
-  font-size: 23px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
   text-transform: uppercase;
 }
 ::-moz-scrollbar-thumb {

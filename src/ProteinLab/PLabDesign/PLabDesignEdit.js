@@ -1,41 +1,99 @@
-import { CircularProgress, Grid, Typography } from "@material-ui/core";
+import {
+  CircularProgress,
+  Grid,
+  Switch,
+  Typography,
+  styled,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
+import { Stack } from "react-bootstrap";
+
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 0,
+  display: "flex",
+  "&:active": {
+    "& .MuiSwitch-thumb": {
+      width: 15,
+    },
+    "& .MuiSwitch-switchBase.Mui-checked": {
+      transform: "translateX(9px)",
+    },
+  },
+  "& .MuiSwitch-switchBase": {
+    padding: 2,
+    "&.Mui-checked": {
+      transform: "translateX(12px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        opacity: 1,
+        backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
+      },
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    transition: theme.transitions.create(["width"], {
+      duration: 200,
+    }),
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255,255,255,.35)"
+        : "rgba(0,0,0,.25)",
+    boxSizing: "border-box",
+  },
+}));
 
 const PLabDesignEdit = ({
-  design,
+  matrix,
   singleData,
   region,
   positionValue,
   isLoading,
 }) => {
-  const [bothLab, setBothLab] = useState([]);
-  const [designLab, setDesignLab] = useState([]);
-  const [position, setPosition] = useState("");
-  const [auto, setAuto] = useState(0);
-  const [menual, setMenual] = useState(0);
+  const [seq_sub, setSeq_sub] = useState([]);
+  const [reg_sub, setReg_sub] = useState([]);
+  const [position, setPosition] = useState(positionValue);
+  const [auto, setAuto] = useState(true);
 
   useEffect(() => {
     setPosition(positionValue);
 
-    // calculate auto and menual value
-    setAuto(0);
-    setMenual(0);
-    singleData?.forEach((p, index) => {
-      p.labs === "Both Labs"
-        ? setAuto((prev) => prev + 1)
-        : setMenual((prev) => prev + 1);
-    });
-
-    // collect amino acid for both labs and design labs.
-    setBothLab([]);
-    setDesignLab([]);
+    // collect sub amino acid for sequence.
+    setSeq_sub([]);
     singleData?.forEach((element) => {
-      element.labs === "Both Labs"
-        ? setBothLab((prev) => [...prev, element.amino_acid_1_ltr])
-        : setDesignLab((prev) => [...prev, element.amino_acid_1_ltr]);
+      setSeq_sub((prev) => [
+        ...prev,
+        { ag: element.Seq_AG, sub: element.Seq_1_ltr },
+      ]);
     });
+    // sorting sequence substitutes by descending order
+    setSeq_sub((prev) =>
+      prev.sort((a, b) => parseFloat(b.ag) - parseFloat(a.ag))
+    );
+
+    // collect sub amino acid for regions.
+    setReg_sub([]);
+    singleData?.forEach((element) =>
+      setReg_sub((prev) => [
+        ...prev,
+        element.Reg_1_ltr!=="" && { ag: element.Reg_AG, sub: element.Reg_1_ltr },
+      ])
+    );
+    // sorting region substitutes by descending order
+    setReg_sub((prev) =>
+      prev.sort((a, b) => parseFloat(b.ag) - parseFloat(a.ag))
+    );
   }, [positionValue, singleData]);
 
   return (
@@ -43,27 +101,27 @@ const PLabDesignEdit = ({
       <Grid
         Container
         style={{
-          width: "100%",
+          maxWidth: "1010px",
           margin: "100px auto 0px auto",
-          fontWeight: "600",
         }}
+        className="d-flex flex-row gap-5 justify-content-between align-items-center"
       >
         <Grid
-          container
+          item
           spacing={2}
-          className="mb-2 text-secondary d-flex justify-content-center align-items-center"
+          className="mb-1 gap-3 text-secondary d-flex justify-content-center align-items-center"
         >
           <Grid item className="d-flex align-items-center flex-row">
-            <Typography style={{ fontWeight: "600" }}>
+            <Typography style={{ fontWeight: "700", fontSize: "13px" }}>
               AMINO ACIDS &nbsp;
             </Typography>
             <span
               style={{
                 border: "2px solid #6c757d",
                 display: "inline",
-                width: "60px",
-                height: "35px",
-                lineHeight: "32px",
+                width: "45px",
+                height: "28px",
+                lineHeight: "28px",
                 textAlign: "center",
                 borderRadius: "5px",
               }}
@@ -72,14 +130,16 @@ const PLabDesignEdit = ({
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
-            <Typography style={{ fontWeight: "600" }}>OPTIMIZED LEVEL &nbsp;</Typography>
+            <Typography style={{ fontWeight: "700", fontSize: "13px" }}>
+              OPTIMIZED LEVEL &nbsp;
+            </Typography>
             <span
               style={{
                 border: "2px solid #6c757d",
-                height: "35px",
-                lineHeight: "32px",
+                height: "28px",
+                lineHeight: "28px",
                 display: "inline",
-                width: "60px",
+                width: "45px",
                 textAlign: "center",
                 borderRadius: "5px",
               }}
@@ -88,16 +148,16 @@ const PLabDesignEdit = ({
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
-            <Typography style={{ fontWeight: "600" }}>
+            <Typography style={{ fontWeight: "700", fontSize: "13px" }}>
               POSITION &nbsp;
             </Typography>
             <span
               style={{
                 border: "2px solid #6c757d",
-                height: "35px",
-                lineHeight: "32px",
+                height: "28px",
+                lineHeight: "28px",
                 display: "inline",
-                width: "60px",
+                width: "45px",
                 textAlign: "center",
                 borderRadius: "5px",
               }}
@@ -106,43 +166,49 @@ const PLabDesignEdit = ({
             </span>
           </Grid>
           <Grid item className="d-flex align-items-center flex-row">
-            <Typography style={{ fontWeight: "600" }}>
+            <Typography style={{ fontWeight: "700", fontSize: "13px" }}>
               SUBSTITUTIONS:&nbsp;
             </Typography>
-            <Grid item className="d-flex align-items-center flex-row">
-              <Typography>AUTO&nbsp;</Typography>
-              <span
-                style={{
-                  border: "2px solid #6c757d",
-                  height: "35px",
-                  lineHeight: "32px",
-                  display: "inline",
-                  marginRight: "5px",
-                  width: "60px",
-                  textAlign: "center",
-                  borderRadius: "5px",
-                }}
-              >
-                {auto}
-              </span>
-            </Grid>
-            <Grid item className="d-flex align-items-center flex-row">
-              <Typography>MENUAL&nbsp;</Typography>
-              <span
-                style={{
-                  border: "2px solid #6c757d",
-                  height: "35px",
-                  lineHeight: "32px",
-                  display: "inline",
-                  width: "60px",
-                  textAlign: "center",
-                  borderRadius: "5px",
-                }}
-              >
-                {auto + menual}
-              </span>
-            </Grid>
+            <span
+              style={{
+                border: "2px solid #6c757d",
+                height: "28px",
+                lineHeight: "28px",
+                display: "inline",
+                width: "45px",
+                textAlign: "center",
+                borderRadius: "5px",
+              }}
+            >
+              {position}
+            </span>
           </Grid>
+        </Grid>
+        <Grid
+          item
+          className="d-flex flex-row gap-3 justify-content-center align-items-center"
+        >
+          <Typography style={{ fontWeight: "700", fontSize: "13px" }}>
+            AUTO
+          </Typography>
+          <Stack
+            className="text-secondary d-flex flex-row gap-2 align-items-center justify-content-center"
+            alignItems="center"
+          >
+            <Typography style={{ fontWeight: "600", fontSize: "13px" }}>
+              Off
+            </Typography>
+            <AntSwitch
+              value={auto}
+              onChange={(e) => setAuto(e.target.checked)}
+              defaultChecked
+              inputProps={{ "aria-label": "ant design" }}
+            />
+            <Typography style={{ fontWeight: "600", fontSize: "13px" }}>
+              On
+            </Typography>
+          </Stack>
+          {/* </FormGroup> */}
         </Grid>
       </Grid>
       <div className="design-edit-section">
@@ -158,9 +224,10 @@ const PLabDesignEdit = ({
                   <PLabDesignEditButton
                     key={index}
                     data={data}
-                    design={design}
-                    bothLab={[...new Set(bothLab)]}
-                    designLab={[...new Set(designLab)]}
+                    auto={auto}
+                    matrix={matrix}
+                    seq_sub={seq_sub}
+                    reg_sub={reg_sub}
                     positionHandler={(posi) => setPosition(posi)}
                     isLoading={isLoading}
                   />

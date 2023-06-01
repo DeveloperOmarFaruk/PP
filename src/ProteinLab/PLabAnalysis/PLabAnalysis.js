@@ -226,7 +226,7 @@ const PLabAnalysis = () => {
     setEMax(event.target.value);
   };
   const handleProteinDMin = (event) => {
-    setEMax(event.target.value);
+    setEMin(event.target.value);
   };
   return (
     <>
@@ -315,7 +315,7 @@ const PLabAnalysis = () => {
                 >
                   <MenuItem value={10}>Graph</MenuItem>
                   <MenuItem value={20}>Table</MenuItem>
-                  <MenuItem value={30}>My Analysis</MenuItem>
+                  {/* <MenuItem value={30}>My Analysis</MenuItem> */}
                 </Select>
               </FormControl>
               <FormControl
@@ -696,7 +696,7 @@ const PLabAnalysis = () => {
                   {matrix === 0 && <div></div>}
                   {matrix === 0 && (
                     <p>
-                      {protienDetailB.b ? protienDetailB.b.sub_1_ltr : "--"}
+                      {protienDetailB.b ? protienDetailB.b.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -722,7 +722,7 @@ const PLabAnalysis = () => {
                   {matrix === 0 && <div></div>}
                   {matrix === 0 && (
                     <p>
-                      {protienDetailC.c ? protienDetailC.c.sub_1_ltr : "--"}
+                      {protienDetailC.c ? protienDetailC.c.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -748,7 +748,7 @@ const PLabAnalysis = () => {
                   {matrix === 0 && <div></div>}
                   {matrix === 0 && (
                     <p>
-                      {protienDetailD.d ? protienDetailD.d.sub_1_ltr : "--"}
+                      {protienDetailD.d ? protienDetailD.d.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -774,7 +774,7 @@ const PLabAnalysis = () => {
                   {matrix === 0 && <div></div>}
                   {matrix === 0 && (
                     <p>
-                      {protienDetailE.e ? protienDetailE.e.sub_1_ltr : "--"}
+                      {protienDetailE.e ? protienDetailE.e.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>

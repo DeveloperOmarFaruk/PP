@@ -32,7 +32,7 @@ const PLabDesign = () => {
   // const [design, setDesign] = useState(10);
   const [protein, setProtein] = useState(1);
   const [myProtein, setMyProtein] = useState(1);
-  const [matrix, setMatrix] = useState(0);
+  const [matrix, setMatrix] = useState(1);
 
   // const [showProtein, setShowProtein] = useState(false);
 
@@ -55,7 +55,7 @@ const PLabDesign = () => {
   // };
 
   const handleChangeMatrix = (event) => {
-    if (event.target.value === 1) {
+    if (event.target.value === 0) {
       setDesignClasss(1);
     } else {
       setDesignClasss(0);
@@ -345,8 +345,8 @@ const PLabDesign = () => {
                   value={matrix}
                   onChange={handleChangeMatrix}
                 >
-                  <MenuItem value={0}>PM Region</MenuItem>
-                  <MenuItem value={1}>PM Sequence</MenuItem>
+                  <MenuItem value={1}>PM Region</MenuItem>
+                  <MenuItem value={0}>PM Sequence</MenuItem>
                 </Select>
               </FormControl>
               <FormControl
@@ -401,7 +401,7 @@ const PLabDesign = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  {matrix === 1 ? <></> : <MenuItem value={0}>All</MenuItem>}
+                  {matrix === 0 ? <></> : <MenuItem value={0}>All</MenuItem>}
                 </Select>
                 {/* )} */}
               </FormControl>

@@ -247,8 +247,8 @@ const PLabDesignEdit = ({
                     data={data}
                     auto={auto}
                     matrix={matrix}
-                    seq_sub={seq_sub}
-                    reg_sub={reg_sub}
+                    seq_sub={seq_sub.slice(0, maxLength)}
+                    reg_sub={reg_sub.slice(0, maxLength)}
                     positionHandler={(posi) => setPosition(posi)}
                     isLoading={isLoading}
                   />

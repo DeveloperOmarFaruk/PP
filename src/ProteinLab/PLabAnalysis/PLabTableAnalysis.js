@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import "./PLabAnalysis.css";
-import { FormControl } from "react-bootstrap";
-import { InputLabel, MenuItem, Select } from "@material-ui/core";
 import { useState } from "react";
 
 const PLabTableAnalysis = ({ graphValue, matrix }) => {
@@ -39,32 +37,6 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
             <option value="amino_acid_3_ltr">3-LETTER</option>
             <option value="amino_acid_1_ltr">1-LETTER</option>
           </select>
-          {/* <FormControl
-            variant="filled"
-            // className={}
-            style={{
-              border: "1px solid #808080",
-              borderRadius: "5px",
-              width: "170px",
-            }}
-          >
-            <InputLabel
-              id="demo-simple-select-filled-label"
-              style={{ color: "#6495ed" }}
-            >
-              ANALYSIS
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={acidType}
-              onChange={(e) => setAcidType(e.target.value)}
-            >
-              <MenuItem value={10}>AMINO ACID</MenuItem>
-              <MenuItem value={20}>3-LETTER</MenuItem>
-              <MenuItem value={30}>1-LETTER</MenuItem>
-            </Select>
-          </FormControl> */}
         </div>
         <table class="table">
           <thead className="plta-table">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PLabAnalysis.css";
 import { FormControl } from "react-bootstrap";
 import { InputLabel, MenuItem, Select } from "@material-ui/core";
@@ -6,12 +6,23 @@ import { useState } from "react";
 
 const PLabTableAnalysis = ({ graphValue, matrix }) => {
   const [acidType, setAcidType] = useState("amino_acid");
+  const [subAcidType, setSubAcidType] = useState("");
 
   const spike = graphValue.res ? graphValue.res[0].data.all_data : null;
   const p2 = graphValue.res ? graphValue.res[1].data.all_data : null;
   const p3 = graphValue.res ? graphValue.res[2].data.all_data : null;
   const p4 = graphValue.res ? graphValue.res[3].data.all_data : null;
   const p5 = graphValue.res ? graphValue.res[4].data.all_data : null;
+
+  useEffect(() => {
+    if (acidType === "amino_acid") {
+      matrix ? setSubAcidType("Reg_Sub") : setSubAcidType("Seq_Sub");
+    } else if (acidType === "amino_acid_3_ltr") {
+      matrix ? setSubAcidType("Reg_3_ltr") : setSubAcidType("Seq_3_ltr");
+    } else if (acidType === "amino_acid_1_ltr") {
+      matrix ? setSubAcidType("Reg_1_ltr") : setSubAcidType("Seq_1_ltr");
+    }
+  }, [acidType, matrix]);
 
   return (
     <>
@@ -72,14 +83,12 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
                     {spike.position}
                   </td>
                   <td data-label="Amino Acid">{spike[acidType]}</td>
-                  <td data-label="Substitute">
-                    {matrix ? spike.Seq_Sub : spike.Reg_Sub}
-                  </td>
+                  <td data-label="Substitute">{spike[subAcidType]}</td>
                   <td data-label="Ag">
-                    {matrix ? spike.Seq_AG : spike.Reg_AG}
+                    {matrix === 0 ? spike.Seq_AG : spike.Reg_AG}
                   </td>
                   <td data-label="Region">
-                    {matrix ? spike.Seq_AOL : spike.Reg_SOL}
+                    {matrix === 0 ? spike.Seq_AOL : spike.Reg_SOL}
                   </td>
                 </tr>
               ))
@@ -93,12 +102,12 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
                     {p2.position}
                   </td>
                   <td data-label="Amino Acid">{p2[acidType]}</td>
-                  <td data-label="Substitute">
-                    {matrix ? p2.Seq_Sub : p2.Reg_Sub}
+                  <td data-label="Substitute">{p2[subAcidType]}</td>
+                  <td data-label="Ag">
+                    {matrix === 0 ? p2.Seq_AG : p2.Reg_AG}
                   </td>
-                  <td data-label="Ag">{matrix ? p2.Seq_AG : p2.Reg_AG}</td>
                   <td data-label="Region">
-                    {matrix ? p2.Seq_AOL : p2.Reg_SOL}
+                    {matrix === 0 ? p2.Seq_AOL : p2.Reg_SOL}
                   </td>
                 </tr>
               ))
@@ -112,12 +121,12 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
                     {p3.position}
                   </td>
                   <td data-label="Amino Acid">{p3[acidType]}</td>
-                  <td data-label="Substitute">
-                    {matrix ? p3.Seq_Sub : p3.Reg_Sub}
+                  <td data-label="Substitute">{p3[subAcidType]}</td>
+                  <td data-label="Ag">
+                    {matrix === 0 ? p3.Seq_AG : p3.Reg_AG}
                   </td>
-                  <td data-label="Ag">{matrix ? p3.Seq_AG : p3.Reg_AG}</td>
                   <td data-label="Region">
-                    {matrix ? p3.Seq_AOL : p3.Reg_SOL}
+                    {matrix === 0 ? p3.Seq_AOL : p3.Reg_SOL}
                   </td>
                 </tr>
               ))
@@ -131,12 +140,12 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
                     {p4.position}
                   </td>
                   <td data-label="Amino Acid">{p4[acidType]}</td>
-                  <td data-label="Substitute">
-                    {matrix ? p4.Seq_Sub : p4.Reg_Sub}
+                  <td data-label="Substitute">{p4[subAcidType]}</td>
+                  <td data-label="Ag">
+                    {matrix === 0 ? p4.Seq_AG : p4.Reg_AG}
                   </td>
-                  <td data-label="Ag">{matrix ? p4.Seq_AG : p4.Reg_AG}</td>
                   <td data-label="Region">
-                    {matrix ? p4.Seq_AOL : p4.Reg_SOL}
+                    {matrix === 0 ? p4.Seq_AOL : p4.Reg_SOL}
                   </td>
                 </tr>
               ))
@@ -150,12 +159,12 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
                     {p5.position}
                   </td>
                   <td data-label="Amino Acid">{p5[acidType]}</td>
-                  <td data-label="Substitute">
-                    {matrix ? p5.Seq_Sub : p5.Reg_Sub}
+                  <td data-label="Substitute">{p5[subAcidType]}</td>
+                  <td data-label="Ag">
+                    {matrix === 0 ? p5.Seq_AG : p5.Reg_AG}
                   </td>
-                  <td data-label="Ag">{matrix ? p5.Seq_AG : p5.Reg_AG}</td>
                   <td data-label="Region">
-                    {matrix ? p5.Seq_AOL : p5.Reg_SOL}
+                    {matrix === 0 ? p5.Seq_AOL : p5.Reg_SOL}
                   </td>
                 </tr>
               ))

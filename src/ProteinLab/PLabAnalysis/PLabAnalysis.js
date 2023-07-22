@@ -111,7 +111,7 @@ const PLabAnalysis = () => {
         "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
       );
       const data = response.data;
-      console.log("size of data: ", data);
+      // console.log("size of data: ", data);
       setAMin(Math.max(data.spike_table.min, 1));
       setAMax(Math.min(data.spike_table.max, 1273));
       setBMin(Math.max(data.table_2.min, 20));
@@ -168,7 +168,7 @@ const PLabAnalysis = () => {
       setIsLoading(true);
       const responses = await Promise.all(requests);
       setGraphValue({ res: responses });
-      console.log("**********responses**********", responses);
+      // console.log("**********responses now**********", responses);
     } catch (errors) {
       console.log("errors----", errors);
     } finally {
@@ -616,7 +616,7 @@ const PLabAnalysis = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  {console.log("checkkkkkk", analysis, matrix)}
+                  {/* {console.log("checkkkkkk", analysis, matrix)} */}
                   {analysis === 20 && matrix === 1 ? (
                     <></>
                   ) : (

@@ -34,6 +34,7 @@
     "react-credit-card-input": "^1.1.5",
     "react-credit-cards": "^0.8.3",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
     "react-jquery-plugin": "^1.1.7",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",

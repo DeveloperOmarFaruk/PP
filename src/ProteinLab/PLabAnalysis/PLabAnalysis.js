@@ -43,7 +43,7 @@ const PLabAnalysis = () => {
   const ref = useRef();
   const [lab, setLab] = useState(10);
   const [analysis, setAnalysis] = useState(20);
-  const [matrix, setMatrix] = useState(0);
+  const [matrix, setMatrix] = useState(1);
   const [classs, setClasss] = useState(0);
   const [showProtein, setShowProtein] = useState(false);
   const [protienDetailA, setProtienDetailsA] = useState({});
@@ -180,7 +180,7 @@ const PLabAnalysis = () => {
     setLab(event.target.value);
   };
   const handleChangeAnalysis = (event) => {
-    if (event.target.value === 20 && matrix === 1) {
+    if (event.target.value === 20 && matrix === 0) {
       setClasss(1);
     } else {
       setClasss(0);
@@ -188,7 +188,7 @@ const PLabAnalysis = () => {
     setAnalysis(event.target.value);
   };
   const handleChangeMatrix = (event) => {
-    if (event.target.value === 1 && analysis === 20) {
+    if (event.target.value === 0 && analysis === 20) {
       setClasss(1);
     } else {
       setClasss(0);
@@ -226,7 +226,7 @@ const PLabAnalysis = () => {
     setEMax(event.target.value);
   };
   const handleProteinDMin = (event) => {
-    setEMax(event.target.value);
+    setEMin(event.target.value);
   };
   return (
     <>
@@ -315,7 +315,7 @@ const PLabAnalysis = () => {
                 >
                   <MenuItem value={10}>Graph</MenuItem>
                   <MenuItem value={20}>Table</MenuItem>
-                  <MenuItem value={30}>My Analysis</MenuItem>
+                  {/* <MenuItem value={30}>My Analysis</MenuItem> */}
                 </Select>
               </FormControl>
               <FormControl
@@ -339,8 +339,8 @@ const PLabAnalysis = () => {
                   value={matrix}
                   onChange={handleChangeMatrix}
                 >
-                  <MenuItem value={0}>PM Region</MenuItem>
-                  <MenuItem value={1}>PM Sequence</MenuItem>
+                  <MenuItem value={1}>PM Region</MenuItem>
+                  <MenuItem value={0}>PM Sequence</MenuItem>
                 </Select>
               </FormControl>
               <div className="position-relative">
@@ -650,9 +650,9 @@ const PLabAnalysis = () => {
             <div className="graph-sub-title">
               <p className="m-0">
                 Optimized Level Tracking:&nbsp;{classs === 0 ? "All" : classs}{" "}
-                {matrix === 1 && <span>Amino Acid</span>}
+                {matrix === 0 && <span>Amino Acid</span>}
               </p>
-              {matrix === 0 && (
+              {matrix === 1 && (
                 <>
                   <p className="m-0">Amino Acid (Upper)</p>
                   <p className="m-0">Substitute Amino Acid (Lower)</p>
@@ -667,8 +667,8 @@ const PLabAnalysis = () => {
                       ? protienDetailA.a.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  {matrix === 0 && <div></div>}
-                  {matrix === 0 && (
+                  {matrix === 1 && <div></div>}
+                  {matrix === 1 && (
                     <p>
                       {protienDetailA.a ? protienDetailA.a.Reg_1_ltr : "--"}
                     </p>
@@ -679,7 +679,7 @@ const PLabAnalysis = () => {
                   <p>{protienDetailA.a ? protienDetailA.a.position : "--"}</p>
                   <p>
                     Level{" "}
-                    {matrix === 1 && protienDetailA?.a
+                    {matrix === 0 && protienDetailA?.a
                       ? protienDetailA?.a?.Seq_AOL
                       : protienDetailA?.a?.Reg_SOL}
                   </p>
@@ -693,10 +693,10 @@ const PLabAnalysis = () => {
                       ? protienDetailB.b.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  {matrix === 0 && <div></div>}
-                  {matrix === 0 && (
+                  {matrix === 1 && <div></div>}
+                  {matrix === 1 && (
                     <p>
-                      {protienDetailB.b ? protienDetailB.b.sub_1_ltr : "--"}
+                      {protienDetailB.b ? protienDetailB.b.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -705,7 +705,7 @@ const PLabAnalysis = () => {
                   <p>{protienDetailB.b ? protienDetailB.b.position : "--"}</p>
                   <p>
                     Level{" "}
-                    {matrix === 1 && protienDetailB?.b
+                    {matrix === 0 && protienDetailB?.b
                       ? protienDetailB?.b?.Seq_AOL
                       : protienDetailB?.b?.Reg_SOL}
                   </p>
@@ -719,10 +719,10 @@ const PLabAnalysis = () => {
                       ? protienDetailC.c.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  {matrix === 0 && <div></div>}
-                  {matrix === 0 && (
+                  {matrix === 1 && <div></div>}
+                  {matrix === 1 && (
                     <p>
-                      {protienDetailC.c ? protienDetailC.c.sub_1_ltr : "--"}
+                      {protienDetailC.c ? protienDetailC.c.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -731,7 +731,7 @@ const PLabAnalysis = () => {
                   <p>{protienDetailC.c ? protienDetailC.c.position : "--"}</p>
                   <p>
                     Level{" "}
-                    {matrix === 1 && protienDetailC?.c
+                    {matrix === 0 && protienDetailC?.c
                       ? protienDetailC?.c?.Seq_AOL
                       : protienDetailC?.c?.Reg_SOL}
                   </p>
@@ -745,10 +745,10 @@ const PLabAnalysis = () => {
                       ? protienDetailD.d.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  {matrix === 0 && <div></div>}
-                  {matrix === 0 && (
+                  {matrix === 1 && <div></div>}
+                  {matrix === 1 && (
                     <p>
-                      {protienDetailD.d ? protienDetailD.d.sub_1_ltr : "--"}
+                      {protienDetailD.d ? protienDetailD.d.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -757,7 +757,7 @@ const PLabAnalysis = () => {
                   <p>{protienDetailD.d ? protienDetailD.d.position : "--"}</p>
                   <p>
                     Level{" "}
-                    {matrix === 1 && protienDetailD?.d
+                    {matrix === 0 && protienDetailD?.d
                       ? protienDetailD?.d?.Seq_AOL
                       : protienDetailD?.d?.Reg_SOL}
                   </p>
@@ -771,10 +771,10 @@ const PLabAnalysis = () => {
                       ? protienDetailE.e.amino_acid_1_ltr
                       : "--"}
                   </p>
-                  {matrix === 0 && <div></div>}
-                  {matrix === 0 && (
+                  {matrix === 1 && <div></div>}
+                  {matrix === 1 && (
                     <p>
-                      {protienDetailE.e ? protienDetailE.e.sub_1_ltr : "--"}
+                      {protienDetailE.e ? protienDetailE.e.Reg_1_ltr : "--"}
                     </p>
                   )}
                 </div>
@@ -783,7 +783,7 @@ const PLabAnalysis = () => {
                   <p>{protienDetailE.e ? protienDetailE.e.position : "--"}</p>
                   <p>
                     Level{" "}
-                    {matrix === 1 && protienDetailE?.e
+                    {matrix === 0 && protienDetailE?.e
                       ? protienDetailE?.e?.Seq_AOL
                       : protienDetailE?.e?.Reg_SOL}
                   </p>

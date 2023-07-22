@@ -8,77 +8,86 @@ const PLabDesignEditButton = ({
   seq_sub,
   reg_sub,
   positionHandler,
-  isLoading
+  isLoading,
 }) => {
   const { amino_acid_1_ltr, Seq_1_ltr, Reg_1_ltr, position } = data;
 
-  const [brGreen, setBrGreen] = useState(true);
   const [protein, setProtein] = useState(amino_acid_1_ltr);
   const [flag, setFlag] = useState(true);
-  const [ClassName, setClassName] = useState(classes.bg_default);
-  // console.log("dataaaa:", data)
-  // useEffect(() => {
-  //   switch (flag) {
-  //     case 1:
-  //       setProtein(amino_acid_1_ltr);
-  //       setClassName(classes.bg_default);
-  //       break;
-  //     case 2:
-  //       if (!brGreen) {
-  //         setClassName(classes.bg_red);
-  //         setFlag(3);
-  //       } else {
-  //         setProtein(sub_1_ltr);
-  //         setClassName(classes.bg_green);
-  //       }
-  //       break;
-  //     case 3:
-  //       setClassName(classes.bg_red);
-  //       break;
-  //     default:
-  //       setFlag(1);
-  //       break;
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [flag]);
+  const [ClassName, setClassName] = useState(null);
 
-  // useEffect(() => {
-  //   setProtein(amino_acid_1_ltr);
-  //   if (labs === "Both Labs") {
-  //     setBrGreen(true);
-  //   }
-  // }, [amino_acid_1_ltr, labs]);
+
+  useEffect(() => {
+    matrix === 1 && Reg_1_ltr === ""
+      ? setClassName(classes.bg_default)
+      : auto
+      ? setClassName(classes.br_green)
+      : setClassName(classes.br_b_green);
+    matrix === 0 && setClassName(classes.bg_default);
+  }, [Reg_1_ltr, auto, matrix]);
 
   const autoProteinChangeHandler = () => {
+    positionHandler(position);
+
     if (flag) {
-      matrix ? setProtein(Seq_1_ltr) : setProtein(Reg_1_ltr);
-      setClassName(classes.bg_green_br_red);
+      if (matrix === 0) {
+        setProtein(Seq_1_ltr);
+        setClassName(classes.bg_green_br_red);
+      } else if (Reg_1_ltr !== "") {
+        setProtein(Reg_1_ltr);
+        setClassName(classes.bg_green_br_gray);
+      } else {
+        setClassName(classes.bg_red_br_gray);
+      }
       setFlag(false);
     } else {
       setProtein(amino_acid_1_ltr);
-      setClassName(classes.bg_default);
+      if (matrix === 0) {
+        setClassName(classes.bg_default);
+      } else if (Reg_1_ltr !== "") {
+        setClassName(classes.br_green);
+      }
       setFlag(true);
     }
   };
+
   const menualProteinChangeHandler = (e) => {
-    if (e.target.value === amino_acid_1_ltr) {
-      setProtein(e.target.value);
-      setClassName(classes.bg_default);
+    const selectedOption = e.target.selectedOptions[0];
+    const proteinValue = selectedOption.getAttribute("data");
+    const { posi } = JSON.parse(proteinValue);
+    positionHandler(posi);
+
+    const sub = e.target.value;
+    const isAminoAcid1 = sub === amino_acid_1_ltr;
+    const isMatrixZero = matrix === 0;
+    const isReg1NotEmpty = Reg_1_ltr !== "";
+
+    if (isAminoAcid1) {
+      setProtein(sub);
+      setClassName(
+        isMatrixZero
+          ? classes.bg_default
+          : isReg1NotEmpty
+          ? classes.br_b_green
+          : ""
+      );
       setFlag(true);
     } else {
-      setProtein(e.target.value);
-      setClassName(classes.bg_green_br_red);
+      setProtein(sub);
+      if (isMatrixZero) {
+        setClassName(classes.bg_green_br_red);
+      } else if (isReg1NotEmpty) {
+        setClassName(classes.bg_green_br_gray);
+      } else {
+        setClassName(classes.bg_red_br_gray);
+      }
       setFlag(false);
     }
   };
-  // useEffect(() => {
-  //   console.log("seq_sub: ", seq_sub);
-  //   console.log("reg_sub: ", reg_sub);
-  //   console.log("amino", amino_acid_1_ltr, protein);
-  // }, [auto]);
+
 
   return (
-    <div onClick={() => positionHandler(position)}>
+    <div>
       {auto ? (
         <button
           value={protein}
@@ -91,16 +100,17 @@ const PLabDesignEditButton = ({
       ) : (
         <select
           value={protein}
-          onChange={(e) => menualProteinChangeHandler(e)}
+          onChange={menualProteinChangeHandler}
           className={ClassName}
         >
-          {matrix
+          {matrix === 0
             ? seq_sub &&
               seq_sub.map((p, index) => {
                 return (
                   <option
                     key={index}
                     value={p.sub}
+                    data={JSON.stringify(p)}
                     className={classes.bg_default}
                   >
                     {p.sub}
@@ -113,6 +123,7 @@ const PLabDesignEditButton = ({
                   <option
                     key={index}
                     value={p.sub}
+                    data={JSON.stringify(p)}
                     className={classes.bg_default}
                   >
                     {p.sub}

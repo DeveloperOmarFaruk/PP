@@ -46,8 +46,8 @@ select:focus {
   border: 3px solid #a9a9a9;
 }
 .bg_green_br_gray {
-  background-color: green;
-  color: whitesmoke;
+  background-color: green !important;
+  color: whitesmoke !important;
   border: 3px solid #a9a9a9 !important;
 }
 .bg_green_br_red {
@@ -57,4 +57,14 @@ select:focus {
 }
 .br_green {
   border: 3px solid green;
+  background-color: white;
+  color: black;
+}
+.br_b_green {
+  border-top: 3px solid #a9a9a9;
+  border-left: 3px solid #a9a9a9;
+  border-right: 3px solid #a9a9a9;
+  border-bottom: 3px solid green;
+  background-color: white;
+  color: black;
 }

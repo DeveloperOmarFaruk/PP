@@ -63,18 +63,33 @@ const PLabDesignEdit = ({
 }) => {
   const [seq_sub, setSeq_sub] = useState([]);
   const [reg_sub, setReg_sub] = useState([]);
+  const [seqLength, setSeqLength] = useState(0);
+  const [regLength, setRegLength] = useState(0);
   const [position, setPosition] = useState(positionValue);
   const [auto, setAuto] = useState(true);
+  const [maxLength] = useState(20);
 
   useEffect(() => {
     setPosition(positionValue);
+
+    // counting sequence substitutes
+    setSeqLength(0);
+    singleData?.forEach((p) => {
+      p.Seq_Sub && setSeqLength((prev) => prev + 1);
+    });
+
+    // counting region substitutes
+    setRegLength(0);
+    singleData?.forEach((p) => {
+      p.Reg_Sub && setRegLength((prev) => prev + 1);
+    });
 
     // collect sub amino acid for sequence.
     setSeq_sub([]);
     singleData?.forEach((element) => {
       setSeq_sub((prev) => [
         ...prev,
-        { ag: element.Seq_AG, sub: element.Seq_1_ltr },
+        { ag: element.Seq_AG, sub: element.Seq_1_ltr, posi: element.position },
       ]);
     });
     // sorting sequence substitutes by descending order
@@ -84,11 +99,17 @@ const PLabDesignEdit = ({
 
     // collect sub amino acid for regions.
     setReg_sub([]);
-    singleData?.forEach((element) =>
-      setReg_sub((prev) => [
-        ...prev,
-        element.Reg_1_ltr!=="" && { ag: element.Reg_AG, sub: element.Reg_1_ltr },
-      ])
+    singleData?.forEach(
+      (element) =>
+        element.Reg_1_ltr !== "" &&
+        setReg_sub((prev) => [
+          ...prev,
+          {
+            ag: element.Reg_AG,
+            sub: element.Reg_1_ltr,
+            posi: element.position,
+          },
+        ])
     );
     // sorting region substitutes by descending order
     setReg_sub((prev) =>
@@ -180,7 +201,7 @@ const PLabDesignEdit = ({
                 borderRadius: "5px",
               }}
             >
-              {position}
+              {matrix ? regLength : seqLength}
             </span>
           </Grid>
         </Grid>
@@ -226,8 +247,8 @@ const PLabDesignEdit = ({
                     data={data}
                     auto={auto}
                     matrix={matrix}
-                    seq_sub={seq_sub}
-                    reg_sub={reg_sub}
+                    seq_sub={seq_sub.slice(0, maxLength)}
+                    reg_sub={reg_sub.slice(0, maxLength)}
                     positionHandler={(posi) => setPosition(posi)}
                     isLoading={isLoading}
                   />

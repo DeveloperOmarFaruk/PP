@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PLabAnalysis.css";
 import { useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";

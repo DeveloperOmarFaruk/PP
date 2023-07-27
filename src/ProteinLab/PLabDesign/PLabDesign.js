@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./PLabDesign.css";
 import "../PLabAnalysis/PLabAnalysis.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,12 +6,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import PLabDesignDraft from "./PLabDesignDraft";
-import PLabDesignMyProtein from "./PLabDesignMyProtein";
 import PLabDesignEdit from "./PLabDesignEdit";
-import PLabDesignReview from "./PLabDesignReview";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
+import useFetchRanges from "./custom/useFetchRanges";
+import { useDispatch, useSelector } from "react-redux";
+import { addProteinData } from "../PLabReducers/proteinDataSlice";
+import { proteinRangeEndpoints } from "./constant/apiConstant";
+import { sendRequest } from "./api/ApiConfig";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,35 +25,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PLabDesign = () => {
-  // const ref = useRef();
-
   const classes = useStyles();
+  const { range, loading } = useFetchRanges();
   const [classs, setDesignClasss] = useState(0);
   const [dlab, setDLab] = useState(10);
-  // const [design, setDesign] = useState(10);
   const [protein, setProtein] = useState(1);
   const [myProtein, setMyProtein] = useState(1);
   const [matrix, setMatrix] = useState(1);
-
-  // const [showProtein, setShowProtein] = useState(false);
-
-  // const [graphValue, setGraphValue] = useState({});
-  // const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
   const [position, setPosition] = useState("");
-  const [range, setRange] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(loading || false);
+  const dispatch = useDispatch();
+  const proteinData = useSelector((state) => state.proteinData);
 
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);
   };
-
-  // const handleDesignChange = (event) => {
-  //   if (event.target.value === 10) {
-  //     setDesignClasss(0);
-  //   }
-  //   setDesign(event.target.value);
-  // };
 
   const handleChangeMatrix = (event) => {
     if (event.target.value === 0) {
@@ -64,128 +52,36 @@ const PLabDesign = () => {
   };
 
   useEffect(() => {
-    const getRanges = async () => {
-      try {
-        setIsLoading(true);
-        await axios
-          .get(
-            "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
-          )
-          .then((response) => {
-            setRange(response.data);
-            setIsLoading(false);
-          });
-      } catch (error) {
-        setIsLoading(false);
-        console.log("range error", error);
-      }
-    };
-    getRanges();
-    // console.log("dfataaaaaaaaaaaaaaaaa", allData);
-  }, []);
+    if (!range) return;
 
-  useEffect(() => {
+    const tableName = proteinRangeEndpoints[protein];
+    const { min, max } = range[tableName];
+
     const data = {
       matrix: matrix,
       optimized_label: classs,
-      lowPosition: range?.spike_table?.min,
+      lowPosition: min,
+      highPosition: max,
     };
-    const getsingleData = async () => {
-      switch (protein) {
-        case 1:
-          setIsLoading(true);
-          await axios
-            .post(
-              "https://protein.catkinsofttech-bd.xyz/api/filter/spike-protein-lab-graph",
-              { ...data, highPosition: range?.spike_table?.max }
-            )
-            .then((response) => {
-              setSingleData(response.data.all_data);
-              setPosition(response.data.all_data[0].position);
-              setIsLoading(false);
-              // console.log("singleData: ", response.data.all_data);
-            })
-            .catch((error) => {
-              console.log("protein error1", error);
-              setIsLoading(false);
-            });
-          break;
-        case 2:
-          setIsLoading(true);
-          await axios
-            .post(
-              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-2-lab-graph",
-              { ...data, highPosition: range?.table_2?.max }
-            )
-            .then((response) => {
-              setSingleData(response.data.all_data);
-              setPosition(response.data.all_data[0].position);
-              setIsLoading(false);
-            })
-            .catch((error) => {
-              console.log("protein error2", error);
-              setIsLoading(false);
-            });
-          break;
-        case 3:
-          setIsLoading(true);
-          await axios
-            .post(
-              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-3-lab-graph",
-              { ...data, highPosition: range?.table_3?.max }
-            )
-            .then((response) => {
-              setSingleData(response.data.all_data);
-              setPosition(response.data.all_data[0].position);
-              setIsLoading(false);
-            })
-            .catch((error) => {
-              console.log("protein error3", error);
-              setIsLoading(false);
-            });
-          break;
-        case 4:
-          setIsLoading(true);
-          await axios
-            .post(
-              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-4-lab-graph",
-              { ...data, highPosition: range?.table_4?.max }
-            )
-            .then((response) => {
-              setSingleData(response.data.all_data);
-              setPosition(response.data.all_data[0].position);
-              setIsLoading(false);
-            })
-            .catch((error) => {
-              console.log("protein error4", error);
-              setIsLoading(false);
-            });
-          break;
-        case 5:
-          setIsLoading(true);
-          await axios
-            .post(
-              "https://protein.catkinsofttech-bd.xyz/api/filter/protein-5-lab-graph",
-              { ...data, highPosition: range?.table_5?.max }
-            )
-            .then((response) => {
-              setSingleData(response.data.all_data);
-              setPosition(response.data.all_data[0].position);
-              setIsLoading(false);
-            })
-            .catch((error) => {
-              console.log("protein error5", error);
-              setIsLoading(false);
-            });
-          break;
-        default:
-          break;
-      }
-    };
-    // console.log("||rangesss", range);
-    if (range) getsingleData();
-    // console.log("444444444444", classs);
-    // console.log("444444444444", singleData);
+
+    setIsLoading(true);
+    sendRequest(protein, data)
+      .then((response) => {
+        if (response && response.all_data && response.all_data.length > 0) {
+          setSingleData(response.all_data);
+          setPosition(response.all_data[0].position);
+          if (classs === 0 && proteinData.table.name !== tableName) {
+            dispatch(
+              addProteinData({ name: tableName, data: response.all_data })
+            );
+          }
+        } else {
+          console.log("No data found for the protein.");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [classs, protein, range]);
 
   return (
@@ -241,33 +137,6 @@ const PLabDesign = () => {
                   </MenuItem>
                 </Select>
               </FormControl>
-
-              {/* <FormControl
-                variant="filled"
-                className={classes.formControl}
-                style={{
-                  border: "1px solid #808080",
-                  borderRadius: "5px",
-                  width: "170px",
-                }}
-              >
-                <InputLabel
-                  id="demo-simple-select-filled-label"
-                  style={{ color: "#6495ed" }}
-                >
-                  DESIGN
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-filled-label"
-                  id="demo-simple-select-filled"
-                  value={design}
-                  onChange={(event) => handleDesignChange(event)}
-                >
-                  <MenuItem value={10}>Auto</MenuItem>
-                  <MenuItem value={20}>Manual</MenuItem>
-                </Select>
-              </FormControl> */}
-
               <FormControl
                 variant="filled"
                 className={classes.formControl}
@@ -364,18 +233,6 @@ const PLabDesign = () => {
                 >
                   OPTIMIZED LEVEL
                 </InputLabel>
-                {/* {design === 10 ? (
-                  <Select
-                    labelId="demo-simple-select-filled-label"
-                    id="demo-simple-select-filled"
-                    value={classs}
-                    onChange={(e) => setDesignClasss(e.target.value)}
-                  >
-                    <MenuItem selected value={0}>
-                      All
-                    </MenuItem>
-                  </Select>
-                ) : ( */}
                 <Select
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"

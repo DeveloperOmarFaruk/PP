@@ -61,7 +61,6 @@ const PLabDesignEdit = ({
   positionValue,
   isLoading,
 }) => {
-  const [seq_sub, setSeq_sub] = useState([]);
   const [reg_sub, setReg_sub] = useState([]);
   const [seqLength, setSeqLength] = useState(0);
   const [regLength, setRegLength] = useState(0);
@@ -84,29 +83,16 @@ const PLabDesignEdit = ({
       p.Reg_Sub && setRegLength((prev) => prev + 1);
     });
 
-    // collect sub amino acid for sequence.
-    setSeq_sub([]);
-    singleData?.forEach((element) => {
-      setSeq_sub((prev) => [
-        ...prev,
-        { ag: element.Seq_AG, sub: element.Seq_1_ltr, posi: element.position },
-      ]);
-    });
-    // sorting sequence substitutes by descending order
-    setSeq_sub((prev) =>
-      prev.sort((a, b) => parseFloat(b.ag) - parseFloat(a.ag))
-    );
-
     // collect sub amino acid for regions.
     setReg_sub([]);
     singleData?.forEach(
       (element) =>
-        element.Reg_1_ltr !== "" &&
+        element.Reg_Sub_Table_1_ltr !== "" &&
         setReg_sub((prev) => [
           ...prev,
           {
-            ag: element.Reg_AG,
-            sub: element.Reg_1_ltr,
+            ag: element.Reg_Sub_Table_AG,
+            sub: element.Reg_Sub_Table_1_ltr,
             posi: element.position,
           },
         ])
@@ -247,10 +233,9 @@ const PLabDesignEdit = ({
                     data={data}
                     auto={auto}
                     matrix={matrix}
-                    seq_sub={seq_sub.slice(0, maxLength)}
+                    region={region}
                     reg_sub={reg_sub.slice(0, maxLength)}
                     positionHandler={(posi) => setPosition(posi)}
-                    isLoading={isLoading}
                   />
                 );
               })}

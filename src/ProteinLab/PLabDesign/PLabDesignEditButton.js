@@ -1,30 +1,44 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ProteinButton.module.css";
+import { useSelector } from "react-redux";
+import { staticTable } from "./constant/staticTable";
 
 const PLabDesignEditButton = ({
   data,
   auto,
   matrix,
-  seq_sub,
+  region,
   reg_sub,
   positionHandler,
-  isLoading,
 }) => {
-  const { amino_acid_1_ltr, Seq_1_ltr, Reg_1_ltr, position } = data;
-
+  const {
+    amino_acid_1_ltr,
+    Seq_1_ltr,
+    Reg_1_ltr,
+    position,
+    Reg_Sub_Table_1_ltr,
+  } = data;
   const [protein, setProtein] = useState(amino_acid_1_ltr);
+  const [seq_sub, setSeq_sub] = useState([]);
   const [flag, setFlag] = useState(true);
   const [ClassName, setClassName] = useState(null);
-
+  const proteinData = useSelector((state) => state.proteinData);
 
   useEffect(() => {
-    matrix === 1 && Reg_1_ltr === ""
-      ? setClassName(classes.bg_default)
-      : auto
-      ? setClassName(classes.br_green)
-      : setClassName(classes.br_b_green);
-    matrix === 0 && setClassName(classes.bg_default);
-  }, [Reg_1_ltr, auto, matrix]);
+    if (matrix) {
+      if (auto) {
+        Reg_1_ltr === ""
+          ? setClassName(classes.bg_default)
+          : setClassName(classes.br_b_green);
+      } else {
+        Reg_Sub_Table_1_ltr === ""
+          ? setClassName(classes.bg_default)
+          : setClassName(classes.br_green);
+      }
+    } else {
+      setClassName(classes.bg_default);
+    }
+  }, [Reg_1_ltr, Reg_Sub_Table_1_ltr, auto, matrix]);
 
   const autoProteinChangeHandler = () => {
     positionHandler(position);
@@ -45,7 +59,7 @@ const PLabDesignEditButton = ({
       if (matrix === 0) {
         setClassName(classes.bg_default);
       } else if (Reg_1_ltr !== "") {
-        setClassName(classes.br_green);
+        setClassName(classes.br_b_green);
       }
       setFlag(true);
     }
@@ -54,13 +68,13 @@ const PLabDesignEditButton = ({
   const menualProteinChangeHandler = (e) => {
     const selectedOption = e.target.selectedOptions[0];
     const proteinValue = selectedOption.getAttribute("data");
-    const { posi } = JSON.parse(proteinValue);
-    positionHandler(posi);
+    const { position } = JSON.parse(proteinValue);
+    positionHandler(position);
 
     const sub = e.target.value;
     const isAminoAcid1 = sub === amino_acid_1_ltr;
     const isMatrixZero = matrix === 0;
-    const isReg1NotEmpty = Reg_1_ltr !== "";
+    const isReg1NotEmpty = Reg_Sub_Table_1_ltr !== "";
 
     if (isAminoAcid1) {
       setProtein(sub);
@@ -68,7 +82,7 @@ const PLabDesignEditButton = ({
         isMatrixZero
           ? classes.bg_default
           : isReg1NotEmpty
-          ? classes.br_b_green
+          ? classes.br_green
           : ""
       );
       setFlag(true);
@@ -85,14 +99,19 @@ const PLabDesignEditButton = ({
     }
   };
 
+  useEffect(() => {
+    const filteredData = proteinData.table.data.filter(
+      (data) => data.Seq_Sub_Table_position === position
+    );
+    setSeq_sub(filteredData);
+  }, [position, proteinData]);
 
   return (
     <div>
       {auto ? (
         <button
           value={protein}
-          onClick={autoProteinChangeHandler}
-          // onClick={() => setFlag((pre) => pre + 1)}
+          onClick={region && autoProteinChangeHandler}
           className={ClassName}
         >
           {protein}
@@ -109,15 +128,16 @@ const PLabDesignEditButton = ({
                 return (
                   <option
                     key={index}
-                    value={p.sub}
+                    value={p.Seq_Sub_Table_1_ltr}
                     data={JSON.stringify(p)}
                     className={classes.bg_default}
                   >
-                    {p.sub}
+                    {p.Seq_Sub_Table_1_ltr}
                   </option>
                 );
               })
-            : reg_sub &&
+            : Reg_Sub_Table_1_ltr !== ""
+            ? reg_sub &&
               reg_sub.map((p, index) => {
                 return (
                   <option
@@ -127,6 +147,19 @@ const PLabDesignEditButton = ({
                     className={classes.bg_default}
                   >
                     {p.sub}
+                  </option>
+                );
+              })
+            : staticTable &&
+              staticTable.map((p, index) => {
+                return (
+                  <option
+                    key={index}
+                    value={p}
+                    data={JSON.stringify(p)}
+                    className={classes.bg_default}
+                  >
+                    {p}
                   </option>
                 );
               })}

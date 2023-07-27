@@ -616,8 +616,8 @@ const PLabAnalysis = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  {/* {console.log("checkkkkkk", analysis, matrix)} */}
-                  {analysis === 20 && matrix === 1 ? (
+                  {console.log("checkkkkkk", analysis, matrix)}
+                  {analysis === 20 && matrix === 0 ? (
                     <></>
                   ) : (
                     <MenuItem value={0}>All</MenuItem>

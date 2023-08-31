@@ -108,7 +108,7 @@ const PLabAnalysis = () => {
   const getInitValue = async () => {
     try {
       const response = await axios.get(
-        "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
+        "https://protien.catkinsofttech-bd.com/api/filter/protien-position-range"
       );
       const data = response.data;
       // console.log("size of data: ", data);
@@ -154,7 +154,7 @@ const PLabAnalysis = () => {
 
     const requests = positions.map((position) =>
       axios.post(
-        `https://protein.catkinsofttech-bd.xyz/api/filter/${position.url}`,
+        `https://protien.catkinsofttech-bd.com/api/filter/${position.url}`,
         {
           matrix: matrix,
           optimized_label: classs,

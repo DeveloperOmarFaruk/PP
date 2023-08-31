@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL, proteinEndpoints } from "../constant/apiConstant";
+import { BASE_URL, proteinEndpoints, proteinEndpoints_2 } from "../constant/apiConstant";
 
 export const getProteinRanges = async () => {
   try {
@@ -19,7 +19,21 @@ export const sendRequest = async (protein, data) => {
 
   try {
     const response = await axios.post(url, data);
-    console.log("response: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Protein error:", error);
+    return null;
+  }
+};
+
+export const getSeqSubTable = async (protein, data) => {
+  const proteinEndpoint = proteinEndpoints_2[protein];
+  if (!proteinEndpoint) return;
+
+  const url = `${BASE_URL}/${proteinEndpoint}`;
+
+  try {
+    const response = await axios.get(url, data);
     return response.data;
   } catch (error) {
     console.log("Protein error:", error);

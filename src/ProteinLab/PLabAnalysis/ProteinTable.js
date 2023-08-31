@@ -1,7 +1,7 @@
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
 
-const ProteinTable = ({ data, acidType, matrix, order }) => {
+const ProteinTable = ({ data, acidType, subAcidType, matrix, order }) => {
   const newData = data?.filter((item) => {
     if (matrix) {
       return item.Seq_AG.trim() !== ""; // Remove items with empty Seq_AG
@@ -26,17 +26,20 @@ const ProteinTable = ({ data, acidType, matrix, order }) => {
     });
 
   const renderRows = (rowData) => {
-    return rowData.map((row, index) => (
-      <tr key={index}>
-        <td scope="row" data-label="Positions">
-          {row.position}
-        </td>
-        <td data-label="Amino Acid">{row[acidType]}</td>
-        <td data-label="Substitute">{matrix ? row.Seq_Sub : row.Reg_Sub}</td>
-        <td data-label="Ag">{matrix ? row.Seq_AG : row.Reg_AG}</td>
-        <td data-label="Region">{matrix ? row.Seq_AOL : row.Reg_SOL}</td>
-      </tr>
-    ));
+    return rowData.map(
+      (row, index) =>
+        row[subAcidType] && (
+          <tr key={index}>
+            <td scope="row" data-label="Positions">
+              {row.position}
+            </td>
+            <td data-label="Amino Acid">{row[acidType]}</td>
+            <td data-label="Substitute">{row[subAcidType]}</td>
+            <td data-label="Ag">{matrix ? row.Seq_AG : row.Reg_AG}</td>
+            <td data-label="Region">{matrix ? row.Seq_AOL : row.Reg_SOL}</td>
+          </tr>
+        )
+    );
   };
 
   return (

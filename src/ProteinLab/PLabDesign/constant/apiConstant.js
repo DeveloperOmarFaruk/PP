@@ -1,4 +1,4 @@
-export const BASE_URL = "https://protein.catkinsofttech-bd.xyz/api/filter";
+export const BASE_URL = "https://protien.catkinsofttech-bd.com/api/filter";
 
 export const proteinEndpoints = {
   1: "spike-protein-lab-graph",
@@ -6,6 +6,14 @@ export const proteinEndpoints = {
   3: "protein-3-lab-graph",
   4: "protein-4-lab-graph",
   5: "protein-5-lab-graph",
+};
+
+export const proteinEndpoints_2 = {
+  1: "spike-table-all",
+  2: "protein-2-table-all",
+  3: "protein-3-table-all",
+  4: "protein-4-table-all",
+  5: "protein-5-table-all",
 };
 
 export const proteinRangeEndpoints = {

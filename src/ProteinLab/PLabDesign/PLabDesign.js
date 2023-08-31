@@ -34,9 +34,10 @@ const PLabDesign = () => {
   const [matrix, setMatrix] = useState(1);
   const [singleData, setSingleData] = useState([]);
   const [position, setPosition] = useState("");
+  const [auto, setAuto] = useState(true);
   const [isLoading, setIsLoading] = useState(loading || false);
   const dispatch = useDispatch();
-  const proteinData = useSelector((state) => state.proteinData);
+  const { table } = useSelector((state) => state.proteinData);
 
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);
@@ -52,36 +53,45 @@ const PLabDesign = () => {
   };
 
   useEffect(() => {
-    if (!range) return;
+    const fetchData = async () => {
+      const tableName = proteinRangeEndpoints[protein];
+      const { min, max } = range[tableName];
 
-    const tableName = proteinRangeEndpoints[protein];
-    const { min, max } = range[tableName];
+      const data = {
+        matrix: matrix,
+        optimized_label: classs,
+        lowPosition: min,
+        highPosition: max,
+        auto: matrix ? auto : undefined,
+      };
 
-    const data = {
-      matrix: matrix,
-      optimized_label: classs,
-      lowPosition: min,
-      highPosition: max,
-    };
+      setIsLoading(true);
 
-    setIsLoading(true);
-    sendRequest(protein, data)
-      .then((response) => {
+      try {
+        const response = await sendRequest(protein, data);
+
         if (response && response.all_data && response.all_data.length > 0) {
           setSingleData(response.all_data);
           setPosition(response.all_data[0].position);
-          if (classs === 0 && proteinData.table.name !== tableName) {
-            dispatch(
-              addProteinData({ name: tableName, data: response.all_data })
-            );
-          }
+
+          // if (classs === 0 && table.name !== tableName) {
+          //   dispatch(
+          //     addProteinData({ name: tableName, data: response.all_data })
+          //   );
+          // }
         } else {
           console.log("No data found for the protein.");
         }
-      })
-      .finally(() => {
+      } catch (error) {
+        console.error("An error occurred while fetching data:", error);
+      } finally {
         setIsLoading(false);
-      });
+      }
+    };
+
+    if (range) {
+      fetchData();
+    }
   }, [classs, protein, range]);
 
   return (
@@ -275,6 +285,10 @@ const PLabDesign = () => {
             region={classs}
             positionValue={position}
             isLoading={isLoading}
+            protein={protein}
+            range={range}
+            auto={auto}
+            autoHandler={(flag) => setAuto(flag)}
           />
         )}
       </section>

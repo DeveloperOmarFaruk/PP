@@ -73,7 +73,6 @@ const PLabDesign = () => {
         if (response && response.all_data && response.all_data.length > 0) {
           setSingleData(response.all_data);
           setPosition(response.all_data[0].position);
-
           // if (classs === 0 && table.name !== tableName) {
           //   dispatch(
           //     addProteinData({ name: tableName, data: response.all_data })
@@ -92,7 +91,7 @@ const PLabDesign = () => {
     if (range) {
       fetchData();
     }
-  }, [classs, protein, range]);
+  }, [classs, protein, range, auto]);
 
   return (
     <>

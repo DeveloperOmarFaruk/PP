@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ProteinButton.module.css";
 import { useSelector } from "react-redux";
-import { staticTable } from "./constant/staticTable";
+import { staticTable } from "../constant/staticTable";
 
 const PLabDesignEditButton = ({
   data,
+  isLoading,
   auto,
   matrix,
   region,
+  seq_sub,
   reg_sub,
   positionHandler,
 }) => {
@@ -19,16 +21,20 @@ const PLabDesignEditButton = ({
     Reg_Sub_Table_1_ltr,
   } = data;
   const [protein, setProtein] = useState(amino_acid_1_ltr);
-  const [seq_sub, setSeq_sub] = useState([]);
+  const [filteredSeq_sub, setFilteredSeq_sub] = useState([]);
   const [flag, setFlag] = useState(true);
   const [ClassName, setClassName] = useState(null);
-  const proteinData = useSelector((state) => state.proteinData);
 
   useEffect(() => {
     if (matrix) {
       if (auto) {
         Reg_1_ltr === ""
           ? setClassName(classes.bg_default)
+          : region
+          ? auto
+            ? // ? setClassName(classes.br_b_green)
+              setClassName(classes.br_green)
+            : setClassName(classes.br_green)
           : setClassName(classes.br_b_green);
       } else {
         Reg_Sub_Table_1_ltr === ""
@@ -59,7 +65,9 @@ const PLabDesignEditButton = ({
       if (matrix === 0) {
         setClassName(classes.bg_default);
       } else if (Reg_1_ltr !== "") {
-        setClassName(classes.br_b_green);
+        auto
+          ? setClassName(classes.br_b_green)
+          : setClassName(classes.br_green);
       }
       setFlag(true);
     }
@@ -68,8 +76,10 @@ const PLabDesignEditButton = ({
   const menualProteinChangeHandler = (e) => {
     const selectedOption = e.target.selectedOptions[0];
     const proteinValue = selectedOption.getAttribute("data");
-    const { position } = JSON.parse(proteinValue);
-    positionHandler(position);
+    const { Seq_Sub_Table_position } = JSON.parse(proteinValue);
+    matrix
+      ? positionHandler(position)
+      : positionHandler(Seq_Sub_Table_position);
 
     const sub = e.target.value;
     const isAminoAcid1 = sub === amino_acid_1_ltr;
@@ -99,12 +109,15 @@ const PLabDesignEditButton = ({
     }
   };
 
+  // Filter seq_sub data when isLoading is false and the dependencies change
   useEffect(() => {
-    const filteredData = proteinData.table.data.filter(
-      (data) => data.Seq_Sub_Table_position === position
-    );
-    setSeq_sub(filteredData);
-  }, [position, proteinData]);
+    if (!isLoading && seq_sub && position) {
+      const filteredData = seq_sub.filter(
+        (p) => p.Seq_Sub_Table_position === position
+      );
+      setFilteredSeq_sub(filteredData);
+    }
+  }, [isLoading, seq_sub, position]);
 
   return (
     <div>
@@ -123,8 +136,8 @@ const PLabDesignEditButton = ({
           className={ClassName}
         >
           {matrix === 0
-            ? seq_sub &&
-              seq_sub.map((p, index) => {
+            ? filteredSeq_sub.length &&
+              filteredSeq_sub.map((p, index) => {
                 return (
                   <option
                     key={index}
@@ -133,20 +146,6 @@ const PLabDesignEditButton = ({
                     className={classes.bg_default}
                   >
                     {p.Seq_Sub_Table_1_ltr}
-                  </option>
-                );
-              })
-            : Reg_Sub_Table_1_ltr !== ""
-            ? reg_sub &&
-              reg_sub.map((p, index) => {
-                return (
-                  <option
-                    key={index}
-                    value={p.sub}
-                    data={JSON.stringify(p)}
-                    className={classes.bg_default}
-                  >
-                    {p.sub}
                   </option>
                 );
               })

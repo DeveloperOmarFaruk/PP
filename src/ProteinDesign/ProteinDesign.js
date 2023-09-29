@@ -14,7 +14,7 @@ const ProteinDesign = () => {
     if (type.get("type") !== "virus") {
       axios
         .get(
-          `https://protein.catkinsofttech-bd.xyz/api/product/by_type?product_type=bacteria`
+          `https://protien.catkinsofttech-bd.com/api/product/by_type?product_type=bacteria`
         )
         .then((res) => {
           setBactaria(res.data);
@@ -29,7 +29,7 @@ const ProteinDesign = () => {
     if (type.get("type") !== "bacteria") {
       axios
         .get(
-          `https://protein.catkinsofttech-bd.xyz/api/product/by_type?product_type=virus`
+          `https://protien.catkinsofttech-bd.com/api/product/by_type?product_type=virus`
         )
         .then((res) => {
           setVirus(res.data);

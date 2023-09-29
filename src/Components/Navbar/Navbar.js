@@ -4,6 +4,7 @@ import logo from "../../Images/logo-update.png";
 import { NavLink } from "react-router-dom";
 import Cart from "../../Cart/Cart";
 import { GlobalContext } from "../../context/Provider";
+import AdminPrivateRoute from "../../context/adminRoute";
 
 const Navbar = () => {
   const [totalItem, setTotalItem] = useState(0);
@@ -207,11 +208,11 @@ const Navbar = () => {
                       ProteinLab Design
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink to="#" className="menu-link menu-link-respons">
                       Protein Design Basics
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
 
@@ -228,6 +229,31 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               )}
+
+              {authState.is_authenticated && !authState.is_admin ? (
+                <>
+                  <li>
+                    <NavLink to="/user-account" className="nav-user">
+                      <i class="fa-solid fa-user"></i>
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                ""
+              )}
+
+              {authState.is_admin ? (
+                <AdminPrivateRoute>
+                  <li>
+                    <NavLink to="/dashboard" className="nav-user">
+                      <i class="fa-solid fa-chart-line"></i>
+                    </NavLink>
+                  </li>
+                </AdminPrivateRoute>
+              ) : (
+                ""
+              )}
+
               <NavLink to="/cart" className="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span className="cart-amount">{totalItem}</span>

@@ -23,7 +23,7 @@ const Order = () => {
 
   useEffect(() => {
     axios
-      .get(`https://protein.catkinsofttech-bd.xyz/api/product/${id}`)
+      .get(`https://protien.catkinsofttech-bd.com/api/product/${id}`)
       .then((res) => {
         setProduct(res.data);
         setVariant(res.data.variants);
@@ -45,11 +45,14 @@ const Order = () => {
   const addToCart = () => {
     setIsAddCart(true);
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     let newItem = {
       id: product.id,
       title: product.protein_name,
       variant: changeActive,
-      image: `https://protein.catkinsofttech-bd.xyz/${product.checkout_image_path}`,
+      stripe_pro_id: product.stripe_pro_id,
+      quantity: 1,
+      image: `https://protien.catkinsofttech-bd.com/${product.image_path}`,
     };
     cart.push(newItem);
     cartDispatch({
@@ -88,8 +91,8 @@ const Order = () => {
             <Slider {...settings}>
               {/* <div className="order-section-col">
                 <img
-                  src={`https://protein.catkinsofttech-bd.xyz/${product.checkout_image_path}`}
-                  alt={`https://protein.catkinsofttech-bd.xyz/${product.checkout_image_path}`}
+                  src={`https://protien.catkinsofttech-bd.com/${product.checkout_image_path}`}
+                  alt={`https://protien.catkinsofttech-bd.com/${product.checkout_image_path}`}
                 />
 
                 <div className="order-section-col-id">
@@ -100,13 +103,13 @@ const Order = () => {
 
               <div className="order-section-col">
                 <img
-                  src={`https://protein.catkinsofttech-bd.xyz/${product.image_path}`}
-                  alt={`https://protein.catkinsofttech-bd.xyz/${product.image_path}`}
+                  src={`https://protien.catkinsofttech-bd.com/${product.image_path}`}
+                  alt={`https://protien.catkinsofttech-bd.com/${product.image_path}`}
                 />
 
                 <div className="order-section-col-id">
-                  <p>NCBI ID: 1212121212121212</p>
-                  <p>UniProt ID: 787878787878</p>
+                  <p>NCBI ID: {product.ncbi_id}</p>
+                  <p>UniProt ID: {product.uniport_id}</p>
                 </div>
               </div>
             </Slider>
@@ -134,7 +137,7 @@ const Order = () => {
                 <div className="row order-choose-row">
                   {variant.map((v, k) => (
                     <>
-                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 package-col-xl">
                         <div
                           onClick={() => {
                             setChangeActive(v);
@@ -159,36 +162,43 @@ const Order = () => {
                               }`}
                             ></div>
 
-                            {v.variant_type === "starter" && (
+                            {v.variant_type === "researcher" && (
                               <h5>Researcher</h5>
                             )}
 
-                            {v.variant_type === "researcher" && (
-                              <h5>Designer</h5>
-                            )}
+                            {v.variant_type === "designer" && <h5>Designer</h5>}
 
-                            {v.variant_type === "designer" && <h5>Leader</h5>}
+                            {v.variant_type === "leader" && <h5>Leader</h5>}
                           </div>
 
                           {/* <p>${v.rate}/Region Positions</p> */}
-                          {v.variant_type === "starter" && (
-                            <>
-                              <p>pm Region Matrix</p>
-                              <p style={{ margin: "10px auto" }}></p>
-                            </>
-                          )}
-
                           {v.variant_type === "researcher" && (
                             <>
-                              <p>pm sequence matrix</p>
-                              <p style={{ margin: "10px auto" }}></p>
+                              <p>
+                                pm Region Matrix <br />{" "}
+                                <span style={{ visibility: "hidden" }}>
+                                  eee
+                                </span>
+                              </p>
                             </>
                           )}
 
                           {v.variant_type === "designer" && (
                             <>
-                              <p>pm sequence matrix</p>
-                              <p>pm Region Matrix</p>
+                              <p>
+                                pm sequence matrix <br />{" "}
+                                <span style={{ visibility: "hidden" }}>
+                                  eee
+                                </span>
+                              </p>
+                            </>
+                          )}
+
+                          {v.variant_type === "leader" && (
+                            <>
+                              <p style={{ padding: "0px", margin: "0px" }}>
+                                pm sequence matrix <br /> pm Region Matrix
+                              </p>
                             </>
                           )}
                         </div>
@@ -219,15 +229,13 @@ const Order = () => {
                     )} */}
 
                     <div className="order-confirm-best-col-platform-name">
-                      {changeActive.variant_type === "starter" && (
+                      {changeActive.variant_type === "researcher" && (
                         <p>Researcher</p>
                       )}
-                      {changeActive.variant_type === "researcher" && (
+                      {changeActive.variant_type === "designer" && (
                         <p>Designer</p>
                       )}
-                      {changeActive.variant_type === "designer" && (
-                        <p>Leader</p>
-                      )}
+                      {changeActive.variant_type === "leader" && <p>Leader</p>}
                     </div>
 
                     <div className="order-confirm-best-row">
@@ -276,40 +284,20 @@ const Order = () => {
                           </span>
                         </p> */}
 
-                        {changeActive.variant_type === "starter" && (
+                        {changeActive.variant_type === "researcher" && (
                           <>
                             <p>
                               <span>
                                 <i class="fa-solid fa-diamond"></i> Position
                                 match region matrix <br />
                                 <spacecustom className="spacecustom"></spacecustom>{" "}
-                                75 optimized positions
+                                {product.pms_tables} optimized positions
                               </span>
                             </p>
 
                             <p>
                               <span>
                                 <i class="fa-solid fa-diamond"></i> region
-                                matrix graph analysis
-                              </span>
-                            </p>
-                          </>
-                        )}
-
-                        {changeActive.variant_type === "researcher" && (
-                          <>
-                            <p>
-                              <span>
-                                <i class="fa-solid fa-diamond"></i> Position
-                                match sequence matrix <br />
-                                <spacecustom className="spacecustom"></spacecustom>{" "}
-                                325 optimized amino acid tables
-                              </span>
-                            </p>
-
-                            <p>
-                              <span>
-                                <i class="fa-solid fa-diamond"></i> sequence
                                 matrix graph analysis
                               </span>
                             </p>
@@ -323,7 +311,28 @@ const Order = () => {
                                 <i class="fa-solid fa-diamond"></i> Position
                                 match sequence matrix <br />
                                 <spacecustom className="spacecustom"></spacecustom>{" "}
-                                325 optimized amino acid tables
+                                {product.pmr_positions} optimized amino acid
+                                tables
+                              </span>
+                            </p>
+
+                            <p>
+                              <span>
+                                <i class="fa-solid fa-diamond"></i> sequence
+                                matrix graph analysis
+                              </span>
+                            </p>
+                          </>
+                        )}
+
+                        {changeActive.variant_type === "leader" && (
+                          <>
+                            <p>
+                              <span>
+                                <i class="fa-solid fa-diamond"></i> Position
+                                match sequence matrix <br />
+                                <spacecustom className="spacecustom"></spacecustom>{" "}
+                                {product.pms_tables} optimized amino acid tables
                               </span>
                             </p>
 
@@ -332,7 +341,7 @@ const Order = () => {
                                 <i class="fa-solid fa-diamond"></i> Position
                                 match region matrix <br />
                                 <spacecustom className="spacecustom"></spacecustom>{" "}
-                                75 optimized positions
+                                {product.pmr_positions} optimized positions
                               </span>
                             </p>
 

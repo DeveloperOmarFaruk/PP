@@ -9,11 +9,12 @@ import { NavLink } from "react-router-dom";
 import { ProductData } from "./ProductData";
 import { MenuItemData } from "./ProductData";
 import "./Checkout.css";
+import axios from "axios";
 import { GlobalContext } from "../context/Provider";
 // import PaymentForm from './PaymentForm';
 
 const Checkout = () => {
-  const { cartDispatch } = useContext(GlobalContext);
+  const { cartDispatch, authState } = useContext(GlobalContext);
   const [shipping, setShipping] = useState(true);
   const [payment, setPayment] = useState(true);
 
@@ -37,14 +38,14 @@ const Checkout = () => {
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
     let total = 0;
-    cartItems.map((p) => (total += parseInt(p.variant.price)));
+    cartItems.map((p) => (total += parseFloat(p.variant.price)));
+
     setTotal(total);
     setTotalItem(cartItems.length);
     setProductData(cartItems);
   }, []);
-
+  console.log(productData);
   const handleState = (event) => {
     setState(event.target.value);
     setShippingData((prevState) => ({
@@ -67,14 +68,35 @@ const Checkout = () => {
       [event.target.name]: event.target.value,
     }));
   };
-  
+
   const handelShipping = () => {
     setShipping(true);
     setPayment(false);
   };
 
   const handelPayment = () => {
-    setPayment(true);
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    let newCart = cartItems.map((p) => {
+      let x = {
+        userId: authState.id,
+        user_email: shippingData.email,
+        quantity: 1,
+        stripe_pro_id: p.stripe_pro_id,
+        stripe_price_id: p.variant.stripe_price_id,
+        variant_id: p.variant.id,
+        product_id: p.id,
+      };
+      return x;
+    });
+
+    axios
+      .post(`https://protien.catkinsofttech-bd.com/api/order/create`, newCart)
+      .then((res) => {
+        setPayment(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setShipping(false);
   };
 
@@ -112,7 +134,7 @@ const Checkout = () => {
 
   const eraaseCartItem = () => {
     localStorage.setItem("cart", JSON.stringify([]));
-  }
+  };
 
   return (
     <>
@@ -134,10 +156,10 @@ const Checkout = () => {
                 1. Shipping Address
               </button>
               <button
-                onClick={() => {
-                  setBtnActive("payment");
-                  handelPayment();
-                }}
+                // onClick={() => {
+                //   setBtnActive("payment");
+                //   handelPayment();
+                // }}
                 className={` ${
                   btnActive === "payment"
                     ? "checkout-left-btn-button checkout-active-choose"
@@ -466,11 +488,14 @@ const Checkout = () => {
                     <>
                       <form
                         // action="http://localhost:8000/api/order/create-checkout-session"
-                        action="https://protein.catkinsofttech-bd.xyz/api/order/create-checkout-session"
+                        action="https://protien.catkinsofttech-bd.com/api/order/create-checkout-session"
                         method="POST"
                       >
                         <input hidden name="data" value={formData} />
-                        <button className="payment-submit-btn" onClick={eraaseCartItem}>
+                        <button
+                          className="payment-submit-btn"
+                          onClick={eraaseCartItem}
+                        >
                           <i className="fa-brands fa-cc-visa paypal-icon"></i>
                           <p>Checkout</p>
                         </button>
@@ -496,7 +521,7 @@ const Checkout = () => {
                 Cart Summary ({totalItem}){" "}
                 <i className="fa-solid fa-angle-down cart-arrow"></i>
               </p>
-              <p>${total}</p>
+              <p>$ {total}</p>
             </div>
 
             {cartShow ? (
@@ -513,7 +538,7 @@ const Checkout = () => {
                       </div>
 
                       <div className="cart-col-4 cart-prouct-amount">
-                        <p>{product.price}</p>
+                        <p>$ {product.variant.price}</p>
                         <button onClick={() => removeCartItem(product.id)}>
                           Remove
                         </button>
@@ -523,11 +548,11 @@ const Checkout = () => {
                   <br />
                   <div className="cart-amount-tex">
                     <p>Sales Tex</p>
-                    <p>$0.00</p>
+                    <p>$ 0.00</p>
                   </div>
                   <div className="cart-amount-tex">
                     <p>Total Amount</p>
-                    <p>${total}</p>
+                    <p>$ {total}</p>
                   </div>
                 </div>
               </>

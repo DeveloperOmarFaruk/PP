@@ -36,7 +36,7 @@ const Product = ({
   const handleEditShow = (id) => {
     setProductId(id);
     axios
-      .get(`https://protein.catkinsofttech-bd.xyz/api/product/${id}`)
+      .get(`https://protien.catkinsofttech-bd.com/api/product/${id}`)
       .then((res) => {
         setTitle(res.data.title);
         setType(res.data.product_type);
@@ -64,7 +64,8 @@ const Product = ({
     const { name, value } = e.target;
     const list = [...serviceList];
     list[index][name] = value;
-    let variant_type = index === 0 ? "researcher" : "designer";
+    let variant_type =
+      index === 0 ? "researcher" : index === 1 ? "designer" : "leader";
     list[index]["variant_type"] = variant_type;
     setServiceList(list);
     setEditableData((prevState) => ({ ...prevState, variants: list }));
@@ -107,6 +108,13 @@ const Product = ({
       ...prevState,
       [event.target.name]: event.target.checked,
     }));
+
+    if (event.target.checked && serviceList.length == 3) {
+      let newList = [...serviceList];
+      newList[2].price = 0.5;
+      setServiceList(newList);
+      // setServiceList(prevState => ([...prevState, prevState[2].price = 0]))
+    }
   };
 
   const handleEditComplimentary = (event) => {
@@ -114,10 +122,13 @@ const Product = ({
       ...prevState,
       [event.target.name]: event.target.checked,
     }));
-  };
 
-  const handleChange = (event) => {
-    setType(event.target.value);
+    if (event.target.checked && serviceList.length == 3) {
+      let newList = [...serviceList];
+      newList[2].price = 0.5;
+      setServiceList(newList);
+      // setServiceList(prevState => ([...prevState, prevState[2].price = 0]))
+    }
   };
 
   const handleServiceAdd = () => {
@@ -140,47 +151,46 @@ const Product = ({
     body.append("protein-img", productPhoto);
 
     axios
-      .post("https://protein.catkinsofttech-bd.xyz/protien-image-upload", body)
+      .post("https://protien.catkinsofttech-bd.com/protien-image-upload", body)
       .then((res) => {
         data["image_path"] = res.data;
         setProductPhoto(null);
-        let body1 = new FormData();
-        body1.append("protein-img", orderPagePhoto);
+        // let body1 = new FormData();
+        // body1.append("protein-img", orderPagePhoto);
+        // axios
+        //   .post(
+        //     "https://protein.catkinsofttech-bd.com/protien-image-upload",
+        //     body1
+        //   )
+        //   .then((res) => {
+        //     data["checkout_image_path"] = res.data;
+        //     setOrderPagePhoto(null);
+
         axios
           .post(
-            "https://protein.catkinsofttech-bd.xyz/protien-image-upload",
-            body1
+            `https://protien.catkinsofttech-bd.com/api/product/create`,
+            data
           )
           .then((res) => {
-            data["checkout_image_path"] = res.data;
-            setOrderPagePhoto(null);
-
-            axios
-              .post(
-                `https://protein.catkinsofttech-bd.xyz/api/product/create`,
-                data
-              )
-              .then((res) => {
-                console.log("saved");
-                handleAddClose();
-                // let z = res.data;
-                // let new_vr = {};
-                // z.variants.map((vt) => {
-                //   new_vr[vt.variant_type] = vt;
-                // })
-                // z.variants = new_vr;
-                // console.log(z)
-                updateProductList(res.data);
-                setProductData({ complimentary: false });
-              })
-              .catch((err) => {
-                console.log(err.message);
-              });
+            handleAddClose();
+            // let z = res.data;
+            // let new_vr = {};
+            // z.variants.map((vt) => {
+            //   new_vr[vt.variant_type] = vt;
+            // })
+            // z.variants = new_vr;
+            // console.log(z)
+            updateProductList(res.data);
+            setProductData({ complimentary: false });
           })
           .catch((err) => {
-            alert("No Image provided");
-            console.log("Failed to save image");
+            console.log(err.message);
           });
+        // })
+        // .catch((err) => {
+        //   alert("No Image provided");
+        //   console.log("Failed to save image");
+        // });
       })
       .catch((err) => {
         alert("No Image provided");
@@ -193,11 +203,10 @@ const Product = ({
     newData = { ...editableData, ...updateImages };
     axios
       .patch(
-        `https://protein.catkinsofttech-bd.xyz/api/product/update`,
+        `https://protien.catkinsofttech-bd.com/api/product/update`,
         newData
       )
       .then((res) => {
-        console.log("updated", res);
         editProducList(newData);
         handleEditClose();
       })
@@ -215,7 +224,7 @@ const Product = ({
 
       axios
         .post(
-          "https://protein.catkinsofttech-bd.xyz/protien-image-upload",
+          "https://protien.catkinsofttech-bd.com/protien-image-upload",
           body
         )
         .then((res) => {
@@ -226,7 +235,7 @@ const Product = ({
 
             axios
               .post(
-                "https://protein.catkinsofttech-bd.xyz/protien-image-upload",
+                "https://protien.catkinsofttech-bd.com/protien-image-upload",
                 body1
               )
               .then((res) => {
@@ -247,7 +256,7 @@ const Product = ({
 
       axios
         .post(
-          "https://protein.catkinsofttech-bd.xyz/protien-image-upload",
+          "https://protien.catkinsofttech-bd.com/protien-image-upload",
           body1
         )
         .then((res) => {
@@ -258,7 +267,7 @@ const Product = ({
 
             axios
               .post(
-                "https://protein.catkinsofttech-bd.xyz/protien-image-upload",
+                "https://protien.catkinsofttech-bd.com/protien-image-upload",
                 body
               )
               .then((res) => {
@@ -281,18 +290,15 @@ const Product = ({
       id: id,
     };
     axios
-      .delete(`https://protein.catkinsofttech-bd.xyz/api/product/delete`, {
-        data: data,
-      })
+      .delete(`https://protien.catkinsofttech-bd.com/api/product/delete/${id}`)
       .then((res) => {
-        console.log("deleted");
         deleteFromProductList(id);
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-
+  console.log(productData);
   return (
     <>
       <div className="product-container">
@@ -353,14 +359,14 @@ const Product = ({
                     </td>
                     <td data-label="Protein">{item.protein_name}</td>
                     <td data-label="Amino Acids">{item.amino_acids}</td>
-                    <td data-label="PMS Tables">-</td>
-                    <td data-label="PMR Tables">-</td>
-                    <td data-label="PMR Positions">-</td>
+                    <td data-label="PMS Tables">{item.pms_tables}</td>
+                    <td data-label="PMR Tables">{item.pmr_tables}</td>
+                    <td data-label="PMR Positions">{item.pmr_positions}</td>
 
                     {item.variants[0] !== undefined &&
-                    item.variants[0].variant_type === "starter" ? (
+                    item.variants[0].variant_type === "researcher" ? (
                       <>
-                        <td data-label="Pkg">PMR</td>
+                        <td data-label="Pkg">{item.variants[0].pckage_pkg}</td>
                         <td data-label="Price" className="td-overflow-scroll">
                           {item.variants[0].price}
                         </td>
@@ -375,9 +381,9 @@ const Product = ({
                     )}
 
                     {item.variants[1] !== undefined &&
-                    item.variants[1].variant_type === "researcher" ? (
+                    item.variants[1].variant_type === "designer" ? (
                       <>
-                        <td data-label="Pkg">PMS</td>
+                        <td data-label="Pkg">{item.variants[1].pckage_pkg}</td>
                         <td data-label="Price" className="td-overflow-scroll">
                           {item.variants[1].price}
                         </td>
@@ -392,9 +398,9 @@ const Product = ({
                     )}
 
                     {item.variants[2] !== undefined &&
-                    item.variants[2].variant_type === "designer" ? (
+                    item.variants[2].variant_type === "leader" ? (
                       <>
-                        <td data-label="Pkg">PMS, PMR</td>
+                        <td data-label="Pkg">{item.variants[2].pckage_pkg}</td>
                         <td data-label="Price" className="td-overflow-scroll">
                           {item.variants[2].price}
                         </td>
@@ -408,24 +414,28 @@ const Product = ({
                       </>
                     )}
 
-                    <td data-label="NCBI ID">-</td>
-                    <td data-label="UniProt ID">-</td>
+                    <td data-label="NCBI ID">{item.ncbi_id}</td>
+                    <td data-label="UniProt ID">{item.uniport_id}</td>
 
                     <td data-label="Complimentary">
-                      <input type="checkbox" name="complimentary" value="" />
+                      <input
+                        type="checkbox"
+                        name="complimentary"
+                        checked={item.complimentary}
+                      />
                     </td>
 
                     <td data-label="Product Photo">
                       <img
                         className="pro-ord-img"
-                        src={`https://protein.catkinsofttech-bd.xyz/${item.image_path}`}
+                        src={`https://protien.catkinsofttech-bd.com/${item.image_path}`}
                         alt={bacteria}
                       />
                     </td>
                     {/* <td data-label="Order Photo">
                       <img
                         className="pro-ord-img-order"
-                        src={`https://protein.catkinsofttech-bd.xyz/${item.checkout_image_path}`}
+                        src={`https://protein.catkinsofttech-bd.com/${item.checkout_image_path}`}
                         alt={bacteria}
                       />
                     </td> */}
@@ -571,11 +581,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.pms_matrix_tables}
+                        value={productData.pms_tables}
                         onChange={handleProductData}
                         fullWidth
                         label="PMS Matrix Tables"
-                        name="pms_matrix_tables"
+                        name="pms_tables"
                         id="fullWidth"
                         type="number"
                       />
@@ -589,11 +599,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.pmr_matrix_tables}
+                        value={productData.pmr_tables}
                         onChange={handleProductData}
                         fullWidth
                         label="PMR Matrix Tables"
-                        name="pmr_matrix_tables"
+                        name="pmr_tables"
                         id="fullWidth"
                         type="number"
                       />
@@ -607,11 +617,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.pmr_matrix_positions}
+                        value={productData.pmr_positions}
                         onChange={handleProductData}
                         fullWidth
                         label="PMR Matrix Positions"
-                        name="pmr_matrix_positions"
+                        name="pmr_positions"
                         id="fullWidth"
                         type="number"
                       />
@@ -625,11 +635,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.protein_id_ncbi}
+                        value={productData.ncbi_id}
                         onChange={handleProductData}
                         fullWidth
                         label="Protein ID NCBI"
-                        name="protein_id_ncbi"
+                        name="ncbi_id"
                         id="fullWidth"
                         type="number"
                       />
@@ -643,11 +653,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.protein_id_uniprot}
+                        value={productData.uniport_id}
                         onChange={handleProductData}
                         fullWidth
                         label="Protein ID UniProt"
-                        name="protein_id_uniprot"
+                        name="uniport_id"
                         id="fullWidth"
                         type="number"
                       />
@@ -713,11 +723,11 @@ const Product = ({
                                 <Select
                                   labelId="demo-simple-select-autowidth-label"
                                   id="demo-simple-select-autowidth"
-                                  value={singleService.Pkg}
+                                  value={singleService.pckage_pkg}
                                   onChange={(e) => handleVPriceChange(e, index)}
                                   autoWidth
                                   label="Pkg"
-                                  name="Pkg"
+                                  name="pckage_pkg"
                                 >
                                   <MenuItem
                                     value={"pmr"}
@@ -759,6 +769,9 @@ const Product = ({
                                 fullWidth
                                 label="Price $"
                                 id="fullWidth"
+                                disabled={
+                                  index === 2 && productData.complimentary
+                                }
                                 type="number"
                                 value={singleService.price}
                                 onChange={(e) => handleVPriceChange(e, index)}
@@ -929,11 +942,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.pms_matrix_tables}
-                        onChange={handleProductData}
+                        value={editableData && editableData.pms_tables}
+                        onChange={handleProductEdit}
                         fullWidth
                         label="PMS Matrix Tables"
-                        name="pms_matrix_tables"
+                        name="pms_tables"
                         id="fullWidth"
                         type="number"
                       />
@@ -947,11 +960,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.pmr_matrix_tables}
-                        onChange={handleProductData}
+                        value={editableData && editableData.pmr_tables}
+                        onChange={handleProductEdit}
                         fullWidth
                         label="PMR Matrix Tables"
-                        name="pmr_matrix_tables"
+                        name="pmr_tables"
                         id="fullWidth"
                         type="number"
                       />
@@ -965,11 +978,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.pmr_matrix_positions}
-                        onChange={handleProductData}
+                        value={editableData && editableData.pmr_positions}
+                        onChange={handleProductEdit}
                         fullWidth
                         label="PMR Matrix Positions"
-                        name="pmr_matrix_positions"
+                        name="pmr_positions"
                         id="fullWidth"
                         type="number"
                       />
@@ -983,11 +996,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.protein_id_ncbi}
-                        onChange={handleProductData}
+                        value={editableData && editableData.ncbi_id}
+                        onChange={handleProductEdit}
                         fullWidth
                         label="Protein ID NCBI"
-                        name="protein_id_ncbi"
+                        name="ncbi_id"
                         id="fullWidth"
                         type="number"
                       />
@@ -1001,11 +1014,11 @@ const Product = ({
                       }}
                     >
                       <TextField
-                        value={productData.protein_id_uniprot}
-                        onChange={handleProductData}
+                        value={editableData && editableData.uniport_id}
+                        onChange={handleProductEdit}
                         fullWidth
                         label="Protein ID UniProt"
-                        name="protein_id_uniprot"
+                        name="uniport_id"
                         id="fullWidth"
                         type="number"
                       />
@@ -1078,13 +1091,13 @@ const Product = ({
                                   <Select
                                     labelId="demo-simple-select-autowidth-label"
                                     id="demo-simple-select-autowidth"
-                                    value={singleService.Pkg}
+                                    value={singleService.pckage_pkg}
                                     onChange={(e) =>
                                       handleVPriceChange(e, index)
                                     }
                                     autoWidth
                                     label="Pkg"
-                                    name="Pkg"
+                                    name="pckage_pkg"
                                   >
                                     <MenuItem
                                       value={"pmr"}
@@ -1129,6 +1142,9 @@ const Product = ({
                                   type="number"
                                   value={singleService.price}
                                   onChange={(e) => handleVPriceChange(e, index)}
+                                  disabled={
+                                    index === 2 && editableData.complimentary
+                                  }
                                 />
 
                                 {serviceList.length - 1 === index &&

@@ -7,7 +7,7 @@ const ContactDetails = () => {
 
   useEffect(() => {
     axios
-      .get("https://protein.catkinsofttech-bd.xyz/api/share-sucess-story/")
+      .get("https://protien.catkinsofttech-bd.com/api/share-sucess-story/")
       .then((res) => {
         setContactData(res.data);
       })

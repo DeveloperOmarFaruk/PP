@@ -10,16 +10,16 @@ const Dashboard = () => {
   const [dashBtnActive, setDashBtnActive] = useState("dash-choose1");
   const [user, setUser] = useState(true);
   const [product, setProduct] = useState(false);
-  const [dataUpload, setDataUpload] = useState(false)
+  const [dataUpload, setDataUpload] = useState(false);
 
   const [userList, setUserList] = useState([]);
   const [products, setProducts] = useState([]);
-  const [contactDetails, setContactDetails] = useState(false)
+  const [contactDetails, setContactDetails] = useState(false);
 
   useEffect(() => {
     if (user) {
       axios
-        .get(`https://protein.catkinsofttech-bd.xyz/api/user/list`)
+        .get(`https://protien.catkinsofttech-bd.com/api/user/list`)
         .then((res) => {
           setUserList(res.data);
         })
@@ -28,11 +28,10 @@ const Dashboard = () => {
         });
     } else {
       axios
-        .get(`https://protein.catkinsofttech-bd.xyz/api/product/list`)
+        .get(`https://protien.catkinsofttech-bd.com/api/product/list`)
         .then((res) => {
-            console.log(res.data)
+          console.log(res.data);
           setProducts(res.data);
-
         })
         .catch((err) => {
           console.log(err.message);
@@ -83,8 +82,8 @@ const Dashboard = () => {
                   setDashBtnActive("dash-choose1");
                   setUser(true);
                   setProduct(false);
-                  setContactDetails(false)
-                  setDataUpload(false)
+                  setContactDetails(false);
+                  setDataUpload(false);
                 }}
                 className={` ${
                   dashBtnActive === "dash-choose1"
@@ -99,8 +98,8 @@ const Dashboard = () => {
                   setDashBtnActive("dash-choose2");
                   setUser(false);
                   setProduct(true);
-                  setContactDetails(false)
-                  setDataUpload(false)
+                  setContactDetails(false);
+                  setDataUpload(false);
                 }}
                 className={` ${
                   dashBtnActive === "dash-choose2"
@@ -115,8 +114,8 @@ const Dashboard = () => {
                   setDashBtnActive("dash-choose3");
                   setUser(false);
                   setProduct(false);
-                  setContactDetails(true)
-                  setDataUpload(false)
+                  setContactDetails(true);
+                  setDataUpload(false);
                 }}
                 className={` ${
                   dashBtnActive === "dash-choose3"
@@ -131,8 +130,8 @@ const Dashboard = () => {
                   setDashBtnActive("dash-choose4");
                   setUser(false);
                   setProduct(false);
-                  setContactDetails(false)
-                  setDataUpload(true)
+                  setContactDetails(false);
+                  setDataUpload(true);
                 }}
                 className={` ${
                   dashBtnActive === "dash-choose4"
@@ -146,23 +145,24 @@ const Dashboard = () => {
           </div>
 
           <div className="dashboard-container-col-9">
-            {user &&
+            {user && (
               <Users
                 userList={userList}
                 updateUserList={updateUserList}
                 deleteFromUserList={deleteFromUserList}
                 editUserList={editUserList}
               />
-            } {product &&
+            )}{" "}
+            {product && (
               <Product
                 all_product={products}
                 updateProductList={updateProductList}
                 deleteFromProductList={deleteFromProductList}
                 editProducList={editProducList}
               />
-            }
-            {contactDetails && <ContactDetails /> }
-            {dataUpload && <DataUpload /> }
+            )}
+            {contactDetails && <ContactDetails />}
+            {dataUpload && <DataUpload />}
           </div>
         </div>
       </div>

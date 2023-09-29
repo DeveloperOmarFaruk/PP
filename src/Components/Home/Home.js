@@ -7,17 +7,6 @@ import image3 from "../../Images/protein-image.png";
 
 const Home = () => {
   const navigate = useNavigate();
-  const signin = (e) => {
-    navigate("/signin", { replace: true });
-  };
-
-  const proteinDesigngnin = (e) => {
-    navigate("/protein-design", { replace: true });
-  };
-
-  const howItWorks = (e) => {
-    navigate("/how-it-works", { replace: true });
-  };
 
   return (
     <>
@@ -27,7 +16,7 @@ const Home = () => {
             Leap frog to a new vaccine with organism-specific amino acid
             substitution.
           </h2>
-          <p className="home-header-link" onClick={signin}>
+          <p className="home-header-link" onClick={() => navigate("/signin")}>
             Sign up now and get over 400 Dynamic and Universal tables - a $50
             value absolutely free!{" "}
             <i className="fa-solid fa-arrow-right-long"></i>
@@ -43,7 +32,7 @@ const Home = () => {
             <div className="home-col-info">
               <h3>Dynamic Tables</h3>
               <p>Beat your competition to prized therapeutics</p>
-              <p onClick={proteinDesigngnin}>
+              <p onClick={() => navigate("/protein-design")}>
                 Shop now <i className="fa-solid fa-arrow-right-long"></i>
               </p>
             </div>
@@ -59,7 +48,7 @@ const Home = () => {
               <p>
                 Get a powerful and compact guide for substituting amino acids
               </p>
-              <p onClick={proteinDesigngnin}>
+              <p onClick={() => navigate("/protein-design")}>
                 Shop now <i className="fa-solid fa-arrow-right-long"></i>
               </p>
             </div>
@@ -112,8 +101,10 @@ const Home = () => {
           </div>
 
           <div className="why-proteinwriter-div-btn">
-            <button onClick={howItWorks}>How it works</button>
-            <button onClick={proteinDesigngnin}>
+            <button onClick={() => navigate("/how-it-works")}>
+              How it works
+            </button>
+            <button onClick={() => navigate("/signin")}>
               Start designing <span>free!</span>
             </button>
           </div>

@@ -45,7 +45,7 @@
 .pdesign-card-multi-btn {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
@@ -58,24 +58,51 @@
   border: 1px solid #ccc;
 }
 
-.pdesign-card-multi-btn-circle:nth-last-child(4) {
+/* .pdesign-card-multi-btn-circle:nth-last-child(4) {
   background-color: #e799a3;
-}
+} */
 
-.pdesign-card-multi-btn-circle:nth-last-child(3) {
+.pdesign-card-multi-btn-circle:nth-child(1) {
   background-color: #03a9f4;
 }
-.pdesign-card-multi-btn-circle:nth-last-child(2) {
+.pdesign-card-multi-btn-circle:nth-child(2) {
   background-color: #cc6600;
 }
-.pdesign-card-multi-btn-circle:nth-last-child(1) {
+.pdesign-card-multi-btn-circle:nth-child(3) {
   background-color: #454545;
 }
 
-.pdesign-card-multi-btn-circle:nth-last-child(1):hover,
-.pdesign-card-multi-btn-circle:nth-last-child(2):hover,
-.pdesign-card-multi-btn-circle:nth-last-child(3):hover,
-.pdesign-card-multi-btn-circle:nth-last-child(4):hover {
+.pdesign-card-multi-btn-circle-researcher {
+  background-color: #03a9f4;
+  padding: 5px 5px;
+  margin: 10px;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #ccc;
+}
+.pdesign-card-multi-btn-circle-designer {
+  background-color: #cc6600;
+  padding: 5px 5px;
+  margin: 10px;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #ccc;
+}
+.pdesign-card-multi-btn-circle-leader {
+  background-color: #454545;
+  padding: 5px 5px;
+  margin: 10px;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #ccc;
+}
+
+.pdesign-card-multi-btn-circle-researcher:hover,
+.pdesign-card-multi-btn-circle-designer:hover,
+.pdesign-card-multi-btn-circle-leader:hover {
   border: 1px solid black;
 }
 
@@ -97,15 +124,19 @@
 .pdesign-card-added {
   margin: 0px auto;
   display: block;
-  width: 27%;
+  width: 30%;
 }
 
 .pdesign-card-added p {
   text-align: center;
   background-color: #fd3f6d;
   color: #ffffff;
-  padding: 5px 10px;
+  padding: 5px 20px;
   position: absolute;
+}
+
+.pdesign-card-added P span {
+  text-transform: uppercase;
 }
 
 .pdesign-card img {
@@ -175,7 +206,7 @@
 }
 
 .pdesign-card-chart-btn {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .pdesign-card-info p span {

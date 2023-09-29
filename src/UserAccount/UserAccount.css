@@ -1,0 +1,27 @@
+.user-account-section {
+  margin: 120px auto 50px auto;
+  padding: 0px 5px;
+  display: block;
+  width: 80%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.user-account-container {
+  width: 50%;
+  margin: auto;
+}
+.cart-sumary-title-user p {
+  font-size: 20px;
+}
+
+.user-cart-title p {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .user-account-container {
+    width: 100%;
+    margin: auto;
+  }
+}

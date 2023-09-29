@@ -27,6 +27,8 @@
 
 .faq-body-container-col {
   padding: 0px 40px;
+  width: 70%;
+  margin: auto;
 }
 
 .faq-body-container-info-question-div:focus {
@@ -36,8 +38,11 @@
 .faq-body-container-info-question {
   font-family: "Barlow", sans-serif;
   color: #0e111d;
-  font-size: 21px !important;
+  font-size: 20px !important;
   font-weight: 500;
+  width: 100%;
+  margin: 1rem 0rem !important;
+  padding: 0px !important;
 }
 
 .faq-body-container-info-answer {
@@ -91,12 +96,22 @@
   color: #fd3f6d;
   background-color: #ffffff;
 }
+
+.web-category-healine-icon-btn {
+  margin: 0rem auto;
+}
+
 /* ================ */
 /* Responsive Area */
 /* ================ */
 
 @media (max-width: 768px) {
   .faq-header p {
+    width: 100%;
+  }
+
+  .faq-body-container-col {
+    padding: 0px 10px;
     width: 100%;
   }
 }

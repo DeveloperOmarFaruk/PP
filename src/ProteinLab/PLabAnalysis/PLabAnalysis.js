@@ -9,6 +9,9 @@ import PLabTableAnalysis from "./PLabTableAnalysis";
 import ApexChart from "./ApexChart";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
+import useFetchRanges from "../custom/useFetchRanges";
+import { sendRequest } from "../api/ApiConfig";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const DEFAULT_RANGES = {
+  A: { min: 1, max: 1273 },
+  B: { min: 20, max: 450 },
+  C: { min: 90, max: 260 },
+  D: { min: 90, max: 260 },
+  E: { min: 90, max: 260 },
+};
+
 const PLabAnalysis = () => {
   const classes = useStyles();
   const ref = useRef();
@@ -62,9 +73,8 @@ const PLabAnalysis = () => {
   const [dMax, setDMax] = useState(0);
   const [eMin, setEMin] = useState(0);
   const [eMax, setEMax] = useState(0);
-  // const [dMin, setDMin] = useState(0);
-  // const [dMax, setDMax] = useState(0);
-
+  const { range, loading } = useFetchRanges();
+  console.log("rangeeeeeeeee", range);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -80,10 +90,24 @@ const PLabAnalysis = () => {
   }, [showProtein]);
 
   useEffect(() => {
+    console.log("repeatingggggggggggg");
     setGraphValue({});
     handleAllGraphs();
     handleSetProtienDetails(null);
-  }, [classs, aMin, aMax, bMin, bMax, cMin, cMax, dMin, dMax, eMin, eMax]);
+  }, [
+    classs,
+    matrix,
+    aMin,
+    aMax,
+    bMin,
+    bMax,
+    cMin,
+    cMax,
+    dMin,
+    dMax,
+    eMin,
+    eMax,
+  ]);
 
   const handleChangeShowProtein = () => {
     setShowProtein(true);
@@ -108,42 +132,47 @@ const PLabAnalysis = () => {
   const getInitValue = async () => {
     try {
       const response = await axios.get(
-        "https://protein.catkinsofttech-bd.xyz/api/filter/protien-position-range"
+        "https://protien.catkinsofttech-bd.com/api/filter/protien-position-range"
       );
       const data = response.data;
-      // console.log("size of data: ", data);
-      setAMin(Math.max(data.spike_table.min, 1));
-      setAMax(Math.min(data.spike_table.max, 1273));
-      setBMin(Math.max(data.table_2.min, 20));
-      setBMax(Math.min(data.table_2.max, 450));
-      setCMin(Math.max(data.table_3.min, 90));
-      setCMax(Math.min(data.table_3.max, 260));
-      setDMin(Math.max(data.table_4.min, 90));
-      setDMax(Math.min(data.table_4.max, 260));
-      setEMin(Math.max(data.table_5.min, 90));
-      setEMax(Math.min(data.table_5.max, 260));
+      console.log("size of data: ", data);
+
+      // Set default values or values from the response data
+      // setAMin(Math.max(range?.spike_table.min, DEFAULT_RANGES.A.min));
+      // setAMax(Math.min(range?.spike_table.max, DEFAULT_RANGES.A.max));
+      // setBMin(Math.max(range?.table_2.min, DEFAULT_RANGES.B.min));
+      // setBMax(Math.min(range?.table_2.max, DEFAULT_RANGES.B.max));
+      // setCMin(Math.max(range?.table_3.min, DEFAULT_RANGES.C.min));
+      // setCMax(Math.min(range?.table_3.max, DEFAULT_RANGES.C.max));
+      // setDMin(Math.max(range?.table_4.min, DEFAULT_RANGES.D.min));
+      // setDMax(Math.min(range?.table_4.max, DEFAULT_RANGES.D.max));
+      // setEMin(Math.max(range?.table_5.min, DEFAULT_RANGES.E.min));
+      // setEMax(Math.min(range?.table_5.max, DEFAULT_RANGES.E.max));
+
+      setAMin(Math.max(data.spike_table.min, DEFAULT_RANGES.A.min));
+      setAMax(Math.min(data.spike_table.max, DEFAULT_RANGES.A.max));
+      setBMin(Math.max(data.table_2.min, DEFAULT_RANGES.B.min));
+      setBMax(Math.min(data.table_2.max, DEFAULT_RANGES.B.max));
+      setCMin(Math.max(data.table_3.min, DEFAULT_RANGES.C.min));
+      setCMax(Math.min(data.table_3.max, DEFAULT_RANGES.C.max));
+      setDMin(Math.max(data.table_4.min, DEFAULT_RANGES.D.min));
+      setDMax(Math.min(data.table_4.max, DEFAULT_RANGES.D.max));
+      setEMin(Math.max(data.table_5.min, DEFAULT_RANGES.E.min));
+      setEMax(Math.min(data.table_5.max, DEFAULT_RANGES.E.max));
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleAllGraphs = async () => {
-    if (
-      aMin === 0 &&
-      aMax === 0 &&
-      bMin === 0 &&
-      bMax === 0 &&
-      cMin === 0 &&
-      cMax === 0 &&
-      dMin === 0 &&
-      dMax === 0 &&
-      eMin === 0 &&
-      eMax === 0
-    ) {
-      getInitValue();
-      return;
-    }
-
+    // Define an array of positions with associated URLs
+    // const positions = [
+    //   { name: "spike-protein", min: aMin, max: aMax },
+    //   { name: "protein-2", min: bMin, max: bMax },
+    //   { name: "protein-3", min: cMin, max: cMax },
+    //   { name: "protein-4", min: dMin, max: dMax },
+    //   { name: "protein-5", min: eMin, max: eMax },
+    // ];
     const positions = [
       { min: aMin, max: aMax, url: "spike-protein-lab-graph" },
       { min: bMin, max: bMax, url: "protein-2-lab-graph" },
@@ -152,25 +181,57 @@ const PLabAnalysis = () => {
       { min: eMin, max: eMax, url: "protein-5-lab-graph" },
     ];
 
-    const requests = positions.map((position) =>
-      axios.post(
-        `https://protein.catkinsofttech-bd.xyz/api/filter/${position.url}`,
-        {
-          matrix: matrix,
-          optimized_label: classs,
-          lowPosition: position.min,
-          highPosition: position.max,
-        }
-      )
+    // Check if all min and max values are 0
+    const allZeros = positions.every(
+      (position) => position.min === 0 && position.max === 0
     );
+
+    if (allZeros) {
+      getInitValue();
+      return;
+    }
+
+    // Create an array of requests
+
+    // const positions = [
+    //   { min: aMin, max: aMax },
+    //   { min: bMin, max: bMax },
+    //   { min: cMin, max: cMax },
+    //   { min: dMin, max: dMax },
+    //   { min: eMin, max: eMax },
+    // ];
+
+    const requests = positions.map(
+      async (position, index) =>
+        // {
+        //   const data = {
+        //     matrix: matrix,
+        //     optimized_label: classs,
+        //     lowPosition: position.min,
+        //     highPosition: position.max,
+        //   };
+        //   console.log("indexxxxxxxxxxxx", index);
+        //   return sendRequest(index + 1, data);
+        // }
+        await axios.post(
+          `https://protien.catkinsofttech-bd.com/api/filter/${position.url}`,
+          {
+            matrix: matrix,
+            optimized_label: classs,
+            lowPosition: position.min,
+            highPosition: position.max,
+          }
+        )
+    );
+    console.log("requests:", requests);
 
     try {
       setIsLoading(true);
       const responses = await Promise.all(requests);
       setGraphValue({ res: responses });
-      // console.log("**********responses now**********", responses);
+      console.log("Responses:", responses);
     } catch (errors) {
-      console.log("errors----", errors);
+      console.error("Errors:", errors);
     } finally {
       setIsLoading(false);
     }
@@ -616,7 +677,8 @@ const PLabAnalysis = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  {console.log("checkkkkkk", analysis, matrix)}
+                  <MenuItem value={20}>20</MenuItem>
+                  {/* {console.log("checkkkkkk", analysis, matrix)} */}
                   {analysis === 20 && matrix === 0 ? (
                     <></>
                   ) : (
@@ -638,11 +700,18 @@ const PLabAnalysis = () => {
             <div className="graph-chart">
               <p>Optimized Levels</p>
               <div className="chart">
-                {!isLoading && graphValue && (
-                  <ApexChart
-                    showProtein={handleSetProtienDetails}
-                    graphValue={graphValue}
+                {isLoading ? (
+                  <CircularProgress
+                    color="primary"
+                    style={{ textAlign: "center" }}
                   />
+                ) : (
+                  graphValue && (
+                    <ApexChart
+                      showProtein={handleSetProtienDetails}
+                      graphValue={graphValue}
+                    />
+                  )
                 )}
               </div>
             </div>
@@ -659,137 +728,139 @@ const PLabAnalysis = () => {
                 </>
               )}
             </div>
-            <div className="protein-info-container">
-              <div className="protein-info-details">
-                <div className="protein-info-logo">
-                  <p>
-                    {protienDetailA.a
-                      ? protienDetailA.a.amino_acid_1_ltr
-                      : "--"}
-                  </p>
-                  {matrix === 1 && <div></div>}
-                  {matrix === 1 && (
+            {protienDetailA && (
+              <div className="protein-info-container">
+                <div className="protein-info-details">
+                  <div className="protein-info-logo">
                     <p>
-                      {protienDetailA.a ? protienDetailA.a.Reg_1_ltr : "--"}
+                      {protienDetailA.a
+                        ? protienDetailA.a.amino_acid_1_ltr
+                        : "--"}
                     </p>
-                  )}
+                    {matrix === 1 && <div></div>}
+                    {matrix === 1 && (
+                      <p>
+                        {protienDetailA.a ? protienDetailA.a.Reg_1_ltr : "--"}
+                      </p>
+                    )}
+                  </div>
+                  <div className="protein-info-details-info">
+                    <p>Spike Protein</p>
+                    <p>{protienDetailA.a ? protienDetailA.a.position : "--"}</p>
+                    <p>
+                      Level{" "}
+                      {matrix === 0 && protienDetailA?.a
+                        ? protienDetailA?.a?.Seq_AOL
+                        : protienDetailA?.a?.Reg_SOL}
+                    </p>
+                  </div>
                 </div>
-                <div className="protein-info-details-info">
-                  <p>Spike Protein</p>
-                  <p>{protienDetailA.a ? protienDetailA.a.position : "--"}</p>
-                  <p>
-                    Level{" "}
-                    {matrix === 0 && protienDetailA?.a
-                      ? protienDetailA?.a?.Seq_AOL
-                      : protienDetailA?.a?.Reg_SOL}
-                  </p>
-                </div>
-              </div>
 
-              <div className="protein-info-details  protein-2">
-                <div className="protein-info-logo protein-2-logo">
-                  <p>
-                    {protienDetailB.b
-                      ? protienDetailB.b.amino_acid_1_ltr
-                      : "--"}
-                  </p>
-                  {matrix === 1 && <div></div>}
-                  {matrix === 1 && (
+                <div className="protein-info-details  protein-2">
+                  <div className="protein-info-logo protein-2-logo">
                     <p>
-                      {protienDetailB.b ? protienDetailB.b.Reg_1_ltr : "--"}
+                      {protienDetailB.b
+                        ? protienDetailB.b.amino_acid_1_ltr
+                        : "--"}
                     </p>
-                  )}
+                    {matrix === 1 && <div></div>}
+                    {matrix === 1 && (
+                      <p>
+                        {protienDetailB.b ? protienDetailB.b.Reg_1_ltr : "--"}
+                      </p>
+                    )}
+                  </div>
+                  <div className="protein-info-details-info">
+                    <p>Protein 2</p>
+                    <p>{protienDetailB.b ? protienDetailB.b.position : "--"}</p>
+                    <p>
+                      Level{" "}
+                      {matrix === 0 && protienDetailB?.b
+                        ? protienDetailB?.b?.Seq_AOL
+                        : protienDetailB?.b?.Reg_SOL}
+                    </p>
+                  </div>
                 </div>
-                <div className="protein-info-details-info">
-                  <p>Protein 2</p>
-                  <p>{protienDetailB.b ? protienDetailB.b.position : "--"}</p>
-                  <p>
-                    Level{" "}
-                    {matrix === 0 && protienDetailB?.b
-                      ? protienDetailB?.b?.Seq_AOL
-                      : protienDetailB?.b?.Reg_SOL}
-                  </p>
-                </div>
-              </div>
 
-              <div className="protein-info-details  protein-3">
-                <div className="protein-info-logo protein-3-logo">
-                  <p>
-                    {protienDetailC.c
-                      ? protienDetailC.c.amino_acid_1_ltr
-                      : "--"}
-                  </p>
-                  {matrix === 1 && <div></div>}
-                  {matrix === 1 && (
+                <div className="protein-info-details  protein-3">
+                  <div className="protein-info-logo protein-3-logo">
                     <p>
-                      {protienDetailC.c ? protienDetailC.c.Reg_1_ltr : "--"}
+                      {protienDetailC.c
+                        ? protienDetailC.c.amino_acid_1_ltr
+                        : "--"}
                     </p>
-                  )}
+                    {matrix === 1 && <div></div>}
+                    {matrix === 1 && (
+                      <p>
+                        {protienDetailC.c ? protienDetailC.c.Reg_1_ltr : "--"}
+                      </p>
+                    )}
+                  </div>
+                  <div className="protein-info-details-info">
+                    <p>Protein 3</p>
+                    <p>{protienDetailC.c ? protienDetailC.c.position : "--"}</p>
+                    <p>
+                      Level{" "}
+                      {matrix === 0 && protienDetailC?.c
+                        ? protienDetailC?.c?.Seq_AOL
+                        : protienDetailC?.c?.Reg_SOL}
+                    </p>
+                  </div>
                 </div>
-                <div className="protein-info-details-info">
-                  <p>Protein 3</p>
-                  <p>{protienDetailC.c ? protienDetailC.c.position : "--"}</p>
-                  <p>
-                    Level{" "}
-                    {matrix === 0 && protienDetailC?.c
-                      ? protienDetailC?.c?.Seq_AOL
-                      : protienDetailC?.c?.Reg_SOL}
-                  </p>
-                </div>
-              </div>
 
-              <div className="protein-info-details  protein-4">
-                <div className="protein-info-logo protein-4-logo">
-                  <p>
-                    {protienDetailD.d
-                      ? protienDetailD.d.amino_acid_1_ltr
-                      : "--"}
-                  </p>
-                  {matrix === 1 && <div></div>}
-                  {matrix === 1 && (
+                <div className="protein-info-details  protein-4">
+                  <div className="protein-info-logo protein-4-logo">
                     <p>
-                      {protienDetailD.d ? protienDetailD.d.Reg_1_ltr : "--"}
+                      {protienDetailD.d
+                        ? protienDetailD.d.amino_acid_1_ltr
+                        : "--"}
                     </p>
-                  )}
+                    {matrix === 1 && <div></div>}
+                    {matrix === 1 && (
+                      <p>
+                        {protienDetailD.d ? protienDetailD.d.Reg_1_ltr : "--"}
+                      </p>
+                    )}
+                  </div>
+                  <div className="protein-info-details-info">
+                    <p>Protein 4</p>
+                    <p>{protienDetailD.d ? protienDetailD.d.position : "--"}</p>
+                    <p>
+                      Level{" "}
+                      {matrix === 0 && protienDetailD?.d
+                        ? protienDetailD?.d?.Seq_AOL
+                        : protienDetailD?.d?.Reg_SOL}
+                    </p>
+                  </div>
                 </div>
-                <div className="protein-info-details-info">
-                  <p>Protein 4</p>
-                  <p>{protienDetailD.d ? protienDetailD.d.position : "--"}</p>
-                  <p>
-                    Level{" "}
-                    {matrix === 0 && protienDetailD?.d
-                      ? protienDetailD?.d?.Seq_AOL
-                      : protienDetailD?.d?.Reg_SOL}
-                  </p>
-                </div>
-              </div>
 
-              <div className="protein-info-details protein-5">
-                <div className="protein-info-logo protein-5-logo">
-                  <p>
-                    {protienDetailE.e
-                      ? protienDetailE.e.amino_acid_1_ltr
-                      : "--"}
-                  </p>
-                  {matrix === 1 && <div></div>}
-                  {matrix === 1 && (
+                <div className="protein-info-details protein-5">
+                  <div className="protein-info-logo protein-5-logo">
                     <p>
-                      {protienDetailE.e ? protienDetailE.e.Reg_1_ltr : "--"}
+                      {protienDetailE.e
+                        ? protienDetailE.e.amino_acid_1_ltr
+                        : "--"}
                     </p>
-                  )}
-                </div>
-                <div className="protein-info-details-info">
-                  <p>Protein 5</p>
-                  <p>{protienDetailE.e ? protienDetailE.e.position : "--"}</p>
-                  <p>
-                    Level{" "}
-                    {matrix === 0 && protienDetailE?.e
-                      ? protienDetailE?.e?.Seq_AOL
-                      : protienDetailE?.e?.Reg_SOL}
-                  </p>
+                    {matrix === 1 && <div></div>}
+                    {matrix === 1 && (
+                      <p>
+                        {protienDetailE.e ? protienDetailE.e.Reg_1_ltr : "--"}
+                      </p>
+                    )}
+                  </div>
+                  <div className="protein-info-details-info">
+                    <p>Protein 5</p>
+                    <p>{protienDetailE.e ? protienDetailE.e.position : "--"}</p>
+                    <p>
+                      Level{" "}
+                      {matrix === 0 && protienDetailE?.e
+                        ? protienDetailE?.e?.Seq_AOL
+                        : protienDetailE?.e?.Reg_SOL}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         )}
       </section>

@@ -5,15 +5,17 @@ import { GlobalContext } from "../context/Provider";
 import "../ProteinDesign/ProteinDesign.css";
 import React from "react";
 
-const ProtienCard = ({ item }) => {
+const ProtienCard = ({ item, indexPrice, setCartListed }) => {
   let variants = item.variants;
   const { cartDispatch } = useContext(GlobalContext);
-  const [index, setIndex] = useState(0);
+  // const [index, setIndex] = useState(0);
   const [clicked, setClicked] = useState(false);
-  const [press, setPress] = useState("home");
+  // const [press, setPress] = useState("home");
   const navigate = useNavigate();
-  const [circleBtn, setCircleBtn] = useState(0);
+  // const [circleBtn, setCircleBtn] = useState(0);
   const [cartList, setCartList] = useState([]);
+
+  let index = indexPrice;
 
   useEffect(() => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -27,10 +29,13 @@ const ProtienCard = ({ item }) => {
       id: item.id,
       title: item.protein_name,
       variant: item.variants[index],
-      image: `https://protein.catkinsofttech-bd.xyz/${item.checkout_image_path}`,
+      stripe_pro_id: item.stripe_pro_id,
+      quantity: 1,
+      image: `https://protien.catkinsofttech-bd.com/${item.image_path}`,
     };
     cart.push(newItem);
     setCartList((prevState) => [...prevState, item.id]);
+    setCartListed((prevState) => [...prevState, item.id]);
     cartDispatch({
       type: "ADD_PRODUCT",
       payload: cart.length,
@@ -44,14 +49,14 @@ const ProtienCard = ({ item }) => {
       <div className="pdesign-card">
         {cartList.includes(item.id) && (
           <div className="pdesign-card-added">
-            <p>
+            <p style={{ textTransform: "capitalize" }}>
               Added <i className="fa-solid fa-check"></i>
             </p>
           </div>
         )}
         <img
-          src={`https://protein.catkinsofttech-bd.xyz/${item.image_path}`}
-          alt={`https://protein.catkinsofttech-bd.xyz/${item.image_path}`}
+          src={`https://protien.catkinsofttech-bd.com/${item.image_path}`}
+          alt={`https://protien.catkinsofttech-bd.com/${item.image_path}`}
         />
         <div className="pdesign-card-btn">
           <div className="pdesign-card-info">
@@ -119,11 +124,15 @@ const ProtienCard = ({ item }) => {
                 className="col-xl-8 col-lg-8 col-md-8 col-sm-8 pdesign-card-price"
                 style={{ margin: "0px" }}
               >
-                <p>$ {variants[index].price}</p>
+                {indexPrice === 0 && <p>$ {variants[0].price}</p>}
+                {indexPrice === 1 && <p>$ {variants[1].price}</p>}
+                {indexPrice === 2 && <p>$ {variants[2].price}</p>}
+
+                {/* <p>$ {variants[index].price}</p> */}
               </div>
             </div>
           </div>
-          <div className="pdesign-card-multi-btn">
+          {/* <div className="pdesign-card-multi-btn">
             {item.variants.map((vr, key) => {
               return (
                 <button
@@ -131,6 +140,7 @@ const ProtienCard = ({ item }) => {
                   onClick={() => {
                     setIndex(key);
                     setCircleBtn(key);
+                    handlePackageName(vr.variant_type);
                   }}
                   className={` ${
                     circleBtn === key
@@ -140,14 +150,16 @@ const ProtienCard = ({ item }) => {
                 ></button>
               );
             })}
-          </div>
+          </div> */}
 
           <div className=" row pdesign-card-chart-btn">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
               <button
                 id={item.id}
                 key={item.id}
-                onClick={addToCart}
+                onClick={() => {
+                  addToCart();
+                }}
                 className={"normal-click"}
               >
                 {"Add to my cart"}{" "}

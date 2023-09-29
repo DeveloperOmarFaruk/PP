@@ -8,11 +8,11 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import PLabDesignEdit from "./PLabDesignEdit";
 import { NavLink } from "react-router-dom";
-import useFetchRanges from "./custom/useFetchRanges";
+import useFetchRanges from "../custom/useFetchRanges";
 import { useDispatch, useSelector } from "react-redux";
 import { addProteinData } from "../PLabReducers/proteinDataSlice";
-import { proteinRangeEndpoints } from "./constant/apiConstant";
-import { sendRequest } from "./api/ApiConfig";
+import { proteinRangeEndpoints } from "../constant/apiConstant";
+import { sendRequest } from "../api/ApiConfig";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -34,9 +34,10 @@ const PLabDesign = () => {
   const [matrix, setMatrix] = useState(1);
   const [singleData, setSingleData] = useState([]);
   const [position, setPosition] = useState("");
+  const [auto, setAuto] = useState(true);
   const [isLoading, setIsLoading] = useState(loading || false);
   const dispatch = useDispatch();
-  const proteinData = useSelector((state) => state.proteinData);
+  const { table } = useSelector((state) => state.proteinData);
 
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);
@@ -52,37 +53,40 @@ const PLabDesign = () => {
   };
 
   useEffect(() => {
-    if (!range) return;
+    const fetchData = async () => {
+      const tableName = proteinRangeEndpoints[protein];
+      const { min, max } = range[tableName];
 
-    const tableName = proteinRangeEndpoints[protein];
-    const { min, max } = range[tableName];
+      const data = {
+        matrix: matrix,
+        optimized_label: classs,
+        lowPosition: min,
+        highPosition: max,
+        auto: matrix ? auto : undefined,
+      };
 
-    const data = {
-      matrix: matrix,
-      optimized_label: classs,
-      lowPosition: min,
-      highPosition: max,
-    };
+      setIsLoading(true);
 
-    setIsLoading(true);
-    sendRequest(protein, data)
-      .then((response) => {
+      try {
+        const response = await sendRequest(protein, data);
+
         if (response && response.all_data && response.all_data.length > 0) {
           setSingleData(response.all_data);
           setPosition(response.all_data[0].position);
-          if (classs === 0 && proteinData.table.name !== tableName) {
-            dispatch(
-              addProteinData({ name: tableName, data: response.all_data })
-            );
-          }
         } else {
           console.log("No data found for the protein.");
         }
-      })
-      .finally(() => {
+      } catch (error) {
+        console.error("An error occurred while fetching data:", error);
+      } finally {
         setIsLoading(false);
-      });
-  }, [classs, protein, range]);
+      }
+    };
+
+    if (range) {
+      fetchData();
+    }
+  }, [classs, protein, range, auto]);
 
   return (
     <>
@@ -258,6 +262,7 @@ const PLabDesign = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
+
                   {matrix === 0 ? <></> : <MenuItem value={0}>All</MenuItem>}
                 </Select>
                 {/* )} */}
@@ -275,6 +280,10 @@ const PLabDesign = () => {
             region={classs}
             positionValue={position}
             isLoading={isLoading}
+            protein={protein}
+            range={range}
+            auto={auto}
+            autoHandler={(flag) => setAuto(flag)}
           />
         )}
       </section>

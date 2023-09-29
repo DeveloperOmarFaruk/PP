@@ -19,7 +19,7 @@ const Cart = () => {
   }, []);
 
   const removeCartItem = (id) => {
-    let newCartItems = ProductData.filter((p) => p.id != id);
+    let newCartItems = ProductData.filter((p) => p.id !== id);
     let total = 0;
     newCartItems.map((p) => (total += parseFloat(p.variant.price)));
     setTotal(total);
@@ -29,6 +29,11 @@ const Cart = () => {
       payload: newCartItems.length,
     });
     localStorage.setItem("cart", JSON.stringify(newCartItems));
+    // localStorage.clear();
+    // localStorage.setItem("pkgName", JSON.stringify(pkgName));
+    // localStorage.setItem("pkgNames", JSON.stringify(pkgNames));
+    // localStorage.setItem("circleBtns", JSON.stringify(circleBtns));
+    // localStorage.setItem("indexPrice", JSON.stringify(indexPrice));
   };
 
   return (

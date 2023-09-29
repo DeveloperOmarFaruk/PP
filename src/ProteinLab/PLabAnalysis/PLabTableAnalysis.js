@@ -6,6 +6,7 @@ import ProteinTable from "./ProteinTable";
 
 const PLabTableAnalysis = ({ graphValue, matrix }) => {
   const [acidType, setAcidType] = useState("amino_acid");
+  const [subAcidType, setSubAcidType] = useState("");
   const [order, setOrder] = useState("asc");
 
   const spike = graphValue.res ? graphValue.res[0].data.all_data : null;
@@ -17,6 +18,24 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
   const orderHandler = () => {
     order === "asc" ? setOrder("dsc") : setOrder("asc");
   };
+
+  useEffect(() => {
+    let subAcidType;
+
+    switch (acidType) {
+      case "amino_acid":
+        subAcidType = matrix ? "Reg_Sub" : "Seq_Sub";
+        break;
+      case "amino_acid_3_ltr":
+        subAcidType = matrix ? "Reg_3_ltr" : "Seq_3_ltr";
+        break;
+      default:
+        subAcidType = matrix ? "Reg_1_ltr" : "Seq_1_ltr";
+        break;
+    }
+
+    setSubAcidType(subAcidType);
+  }, [matrix, acidType]);
 
   return (
     <>
@@ -50,30 +69,35 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
           <ProteinTable
             data={spike}
             acidType={acidType}
+            subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
             data={p2}
             acidType={acidType}
+            subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
             data={p3}
             acidType={acidType}
+            subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
             data={p4}
             acidType={acidType}
+            subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
             data={p5}
             acidType={acidType}
+            subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />

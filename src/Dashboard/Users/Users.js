@@ -29,7 +29,7 @@ const Users = ({
   const handleEditShow = (id) => {
     setEditShow(true);
     axios
-      .get(`https://protein.catkinsofttech-bd.xyz/api/user/${id}`)
+      .get(`https://protien.catkinsofttech-bd.com/api/user/${id}`)
       .then((res) => {
         setUserId(id);
         setUserName(res.data.username);
@@ -47,7 +47,7 @@ const Users = ({
       id: id,
     };
     axios
-      .delete(`https://protein.catkinsofttech-bd.xyz/api/user/delete`, {
+      .delete(`https://protien.catkinsofttech-bd.com/api/user/delete`, {
         data: data,
       })
       .then((res) => {
@@ -69,7 +69,7 @@ const Users = ({
       last_name: last_name,
     };
     axios
-      .post(`https://protein.catkinsofttech-bd.xyz/api/user/create`, data)
+      .post(`https://protien.catkinsofttech-bd.com/api/user/create`, data)
       .then((res) => {
         console.log("added");
         updateUserList(res.data);
@@ -89,7 +89,7 @@ const Users = ({
       email: email,
     };
     axios
-      .patch(`https://protein.catkinsofttech-bd.xyz/api/user/update`, data)
+      .patch(`https://protien.catkinsofttech-bd.com/api/user/update`, data)
       .then((res) => {
         console.log("update");
         editUserList(res.data);

@@ -29,6 +29,8 @@ import LoginPublicRoute from "./context/publicRoute";
 import AdminPrivateRoute from "./context/adminRoute";
 import store from "./store";
 import { Provider } from "react-redux";
+import PaymentSuccessful from "./PaymentSuccessful/PaymentSuccessful";
+import UserAccount from "./UserAccount/UserAccount";
 
 function App() {
   const { authState, authDispatch } = useContext(GlobalContext);
@@ -57,9 +59,29 @@ function App() {
                 </AdminPrivateRoute>
               }
             />
+            <Route path="/" element={<Home />} />
+
+            <Route path="/order/:id" element={<Order />} />
+            <Route path="/about" element={<About />} />
+
+            <Route path="/privacypolicy" element={<Privacy />} />
+            <Route path="/rules" element={<Rules />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/contact-share-story" element={<ContactShare />} />
+            <Route path="/forgot-password" element={<Forgot />} />
+            <Route path="/how-it-works" element={<Work />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/protein-design" element={<ProteinDesign />} />
+            <Route
+              path="/protein-design-bacteria"
+              element={<ProteinDesign />}
+            />
+            <Route path="/protein-design-virus" element={<ProteinDesign />} />
+            <Route path="/success-pay" element={<PaymentSuccessful />} />
 
             <Route element={<LoginPrivateRoute />}>
-              <Route path="/" element={<Home />} />
               <Route path="/protein-lab-analysis" element={<PLabAnalysis />} />
               <Route
                 path="/protein-lab-design"
@@ -69,24 +91,8 @@ function App() {
                   </Provider>
                 }
               />
-              <Route path="/protein-design" element={<ProteinDesign />} />
-              <Route
-                path="/protein-design-bacteria"
-                element={<ProteinDesign />}
-              />
-              <Route path="/protein-design-virus" element={<ProteinDesign />} />
-              <Route path="/order/:id" element={<Order />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/faq" element={<Faq />} />
-              <Route path="/privacypolicy" element={<Privacy />} />
-              <Route path="/rules" element={<Rules />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/contact-share-story" element={<ContactShare />} />
-              <Route path="/forgot-password" element={<Forgot />} />
-              <Route path="/how-it-works" element={<Work />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/cart" element={<Cart />} />
+
+              <Route path="/user-account" element={<UserAccount />} />
             </Route>
           </Routes>
           <Footer />

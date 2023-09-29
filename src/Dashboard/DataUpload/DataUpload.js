@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DataUpload.css";
 import axios from "axios";
 
 const DataUpload = () => {
+  const [spikeProteinFileName, setSpikeProteinFileName] = useState(
+    "Spike protein file name"
+  );
+  const [spikeTableData, setSpikeTableData] = useState(null);
+
+  useEffect(() => {
+    getProteinData();
+  }, []);
+
+  const onChangeFile = (event, params) => {
+    if (params === "spike-create")
+      setSpikeProteinFileName(event.target.files[0].name);
+  };
+
   const saveProteinData = (event, params) => {
     event.preventDefault();
     let file = event.target.pr_file.files[0];
@@ -10,7 +24,7 @@ const DataUpload = () => {
     body.append("file", file);
     axios
       .post(
-        `https://protein.catkinsofttech-bd.xyz/api/import-protein-table/${params}`,
+        `https://protien.catkinsofttech-bd.com/api/import-protein-table/${params}`,
         body
       )
       .then((res) => {
@@ -26,11 +40,30 @@ const DataUpload = () => {
     let body = {};
     axios
       .post(
-        `https://protein.catkinsofttech-bd.xyz/api/import-protein-table/${name}`,
+        `https://protien.catkinsofttech-bd.com/api/import-protein-table/${name}`,
         body
       )
       .then((res) => {
         alert("Data successfully delete");
+        getProteinData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getProteinData = () => {
+    axios
+      .get(
+        `https://protien.catkinsofttech-bd.com/api/import-protein-table/all-csv-names`
+      )
+      .then((res) => {
+        // console.log(res.data)
+        let result = {};
+        res.data.csv_names.map(
+          (data) => (result[data.table_name] = data.file_name)
+        );
+        setSpikeTableData(result);
       })
       .catch((err) => {
         console.log(err);
@@ -51,7 +84,12 @@ const DataUpload = () => {
             <h5> Spike Protein</h5>
             <div className={"button-group"}>
               <form onSubmit={(e) => saveProteinData(e, "spike-create")}>
-                <input type="file" id="pr_file" name="pr_file" />
+                <input
+                  type="file"
+                  id="pr_file"
+                  name="pr_file"
+                  onChange={(e) => onChangeFile(e, "spike-create")}
+                />
                 <button className="data-upload-btn-save" type="submit">
                   Save
                 </button>
@@ -65,7 +103,10 @@ const DataUpload = () => {
                 Delete
               </button>
             </div>
-            <p>Spike protein file name</p>
+            <p>
+              {(spikeTableData && spikeTableData["spike"]) ||
+                "No file uploaded"}
+            </p>
           </div>
 
           <div className="data-upload-label-holder">
@@ -86,7 +127,10 @@ const DataUpload = () => {
                 Delete
               </button>
             </div>
-            <p>Protein 2 file name</p>
+            <p>
+              {(spikeTableData && spikeTableData["protein-2"]) ||
+                "No file uploaded"}
+            </p>
           </div>
 
           <div className="data-upload-label-holder">
@@ -107,7 +151,10 @@ const DataUpload = () => {
                 Delete
               </button>
             </div>
-            <p>Protein 3 file name</p>
+            <p>
+              {(spikeTableData && spikeTableData["protein-3"]) ||
+                "No file uploaded"}
+            </p>
           </div>
 
           <div className="data-upload-label-holder">
@@ -127,7 +174,10 @@ const DataUpload = () => {
                 Delete
               </button>
             </div>
-            <p>Protein 4 file name</p>
+            <p>
+              {(spikeTableData && spikeTableData["protein-4"]) ||
+                "No file uploaded"}
+            </p>
           </div>
 
           <div className="data-upload-label-holder">
@@ -148,7 +198,10 @@ const DataUpload = () => {
                 Delete
               </button>
             </div>
-            <p>Protein 5 file name</p>
+            <p>
+              {(spikeTableData && spikeTableData["protein-5"]) ||
+                "No file uploaded"}
+            </p>
           </div>
         </div>
       </div>

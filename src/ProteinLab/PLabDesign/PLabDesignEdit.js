@@ -9,6 +9,10 @@ import React, { useEffect, useState } from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
 import { Stack } from "react-bootstrap";
+import { getSeqSubTable, getSubTable } from "../api/ApiConfig";
+import { proteinRangeEndpoints } from "../constant/apiConstant";
+import useFetchRanges from "../custom/useFetchRanges";
+import { useSelector } from "react-redux";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -59,18 +63,26 @@ const PLabDesignEdit = ({
   singleData,
   region,
   positionValue,
+  protein,
   isLoading,
+  range,
+  auto,
+  autoHandler,
 }) => {
-  const [reg_sub, setReg_sub] = useState([]);
+  // const { range } = useFetchRanges();
+  const [seq_sub, setSeq_sub] = useState([]);
+  // const [reg_sub, setReg_sub] = useState([]);
   const [seqLength, setSeqLength] = useState(0);
   const [regLength, setRegLength] = useState(0);
   const [position, setPosition] = useState(positionValue);
-  const [auto, setAuto] = useState(true);
   const [maxLength] = useState(20);
+  const [loading, setLoading] = useState(isLoading);
+  // const proteinData = useSelector((state) => state.proteinData);
 
   useEffect(() => {
     setPosition(positionValue);
 
+    // console.log("setproteinData", proteinData);
     // counting sequence substitutes
     setSeqLength(0);
     singleData?.forEach((p) => {
@@ -84,24 +96,58 @@ const PLabDesignEdit = ({
     });
 
     // collect sub amino acid for regions.
-    setReg_sub([]);
-    singleData?.forEach(
-      (element) =>
-        element.Reg_Sub_Table_1_ltr !== "" &&
-        setReg_sub((prev) => [
-          ...prev,
-          {
-            ag: element.Reg_Sub_Table_AG,
-            sub: element.Reg_Sub_Table_1_ltr,
-            posi: element.position,
-          },
-        ])
-    );
+    // setReg_sub([]);
+    // singleData?.forEach(
+    //   (element) =>
+    //     element.Reg_Sub_Table_1_ltr !== "" &&
+    //     setReg_sub((prev) => [
+    //       ...prev,
+    //       {
+    //         ag: element.Reg_Sub_Table_AG,
+    //         sub: element.Reg_Sub_Table_1_ltr,
+    //         posi: element.position,
+    //       },
+    //     ])
+    // );
     // sorting region substitutes by descending order
-    setReg_sub((prev) =>
-      prev.sort((a, b) => parseFloat(b.ag) - parseFloat(a.ag))
-    );
+    // setReg_sub((prev) =>
+    //   prev.sort((a, b) => parseFloat(b.ag) - parseFloat(a.ag))
+    // );
   }, [positionValue, singleData]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const tableName = proteinRangeEndpoints[protein];
+        const { min, max } = range[tableName];
+
+        const data = {
+          matrix: matrix,
+          optimized_label: region,
+          lowPosition: min,
+          highPosition: max,
+          auto: auto,
+        };
+
+        setLoading(true);
+
+        const response = await getSeqSubTable(protein, data);
+
+        if (response.data && response.data.length > 0) {
+          setSeq_sub(response.data);
+        } else {
+          console.log("No data found for the sub protein.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (range) {
+      fetchData();
+    }
+  }, [auto, matrix, protein, range, region]);
 
   return (
     <>
@@ -207,7 +253,7 @@ const PLabDesignEdit = ({
             </Typography>
             <AntSwitch
               value={auto}
-              onChange={(e) => setAuto(e.target.checked)}
+              onChange={(e) => autoHandler(e.target.checked)}
               defaultChecked
               inputProps={{ "aria-label": "ant design" }}
             />
@@ -230,11 +276,13 @@ const PLabDesignEdit = ({
                 return (
                   <PLabDesignEditButton
                     key={index}
+                    isLoading={loading}
                     data={data}
                     auto={auto}
                     matrix={matrix}
                     region={region}
-                    reg_sub={reg_sub.slice(0, maxLength)}
+                    seq_sub={seq_sub}
+                    // reg_sub={reg_sub.slice(0, maxLength)}
                     positionHandler={(posi) => setPosition(posi)}
                   />
                 );

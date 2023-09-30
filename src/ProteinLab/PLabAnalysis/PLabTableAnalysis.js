@@ -4,16 +4,10 @@ import { useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
 import ProteinTable from "./ProteinTable";
 
-const PLabTableAnalysis = ({ graphValue, matrix }) => {
+const PLabTableAnalysis = ({ matrix, spike, p2, p3, p4, p5 }) => {
   const [acidType, setAcidType] = useState("amino_acid");
   const [subAcidType, setSubAcidType] = useState("");
   const [order, setOrder] = useState("asc");
-
-  const spike = graphValue.res ? graphValue.res[0].data.all_data : null;
-  const p2 = graphValue.res ? graphValue.res[1].data.all_data : null;
-  const p3 = graphValue.res ? graphValue.res[2].data.all_data : null;
-  const p4 = graphValue.res ? graphValue.res[3].data.all_data : null;
-  const p5 = graphValue.res ? graphValue.res[4].data.all_data : null;
 
   const orderHandler = () => {
     order === "asc" ? setOrder("dsc") : setOrder("asc");
@@ -67,35 +61,35 @@ const PLabTableAnalysis = ({ graphValue, matrix }) => {
             <th scope="col">Optimized level</th>
           </thead>
           <ProteinTable
-            data={spike}
+            data={spike?.all_data}
             acidType={acidType}
             subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
-            data={p2}
+            data={p2?.all_data}
             acidType={acidType}
             subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
-            data={p3}
+            data={p3?.all_data}
             acidType={acidType}
             subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
-            data={p4}
+            data={p4?.all_data}
             acidType={acidType}
             subAcidType={subAcidType}
             matrix={matrix}
             order={order}
           />
           <ProteinTable
-            data={p5}
+            data={p5?.all_data}
             acidType={acidType}
             subAcidType={subAcidType}
             matrix={matrix}

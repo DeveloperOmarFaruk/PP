@@ -17,14 +17,13 @@ export const getProteinRanges = async () => {
 
 export const sendRequest = async (protein, data) => {
   const proteinEndpoint = proteinEndpoints[protein];
-  console.log("infoooooo", proteinEndpoint, data)
+
   if (!proteinEndpoint) return;
 
   const url = `${BASE_URL}/${proteinEndpoint}`;
 
   try {
     const response = await axios.post(url, data);
-    console.log("urllllllll", response);
     return response.data;
   } catch (error) {
     console.log("Protein error:", error);

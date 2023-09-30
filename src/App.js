@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import PLabAnalysis from "./ProteinLab/PLabAnalysis/PLabAnalysis";
+
 import PLabDesign from "./ProteinLab/PLabDesign/PLabDesign";
 import ProteinDesign from "./ProteinDesign/ProteinDesign";
 import ProteinDesignBacteria from "./ProteinDesign/ProteinDesignBacteria";
@@ -31,6 +31,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 import PaymentSuccessful from "./PaymentSuccessful/PaymentSuccessful";
 import UserAccount from "./UserAccount/UserAccount";
+import PLabAnalysis from "./ProteinLab/PLabAnalysis/PLabAnalysis";
 
 function App() {
   const { authState, authDispatch } = useContext(GlobalContext);

@@ -5,11 +5,13 @@ import ReactApexChart from "react-apexcharts";
 const ApexChart = (props) => {
   const { graphValue, showProtein } = props;
 
-  const spike = graphValue.res ? graphValue.res[0].data.graph_data : null;
-  const p2 = graphValue.res ? graphValue.res[1].data.graph_data : null;
-  const p3 = graphValue.res ? graphValue.res[2].data.graph_data : null;
-  const p4 = graphValue.res ? graphValue.res[3].data.graph_data : null;
-  const p5 = graphValue.res ? graphValue.res[4].data.graph_data : null;
+  const spike = graphValue ? graphValue[0].graph_data : null;
+  const p2 = graphValue ? graphValue[1].graph_data : null;
+  const p3 = graphValue ? graphValue[2].graph_data : null;
+  const p4 = graphValue ? graphValue[3].graph_data : null;
+  const p5 = graphValue ? graphValue[4].graph_data : null;
+
+  console.log("================================", spike, p5);
 
   const [graph, setGraph] = useState({
     series: [
@@ -71,7 +73,7 @@ const ApexChart = (props) => {
   useEffect(() => {
     const seriess = [];
     for (let i = 0; i < 5; i++) {
-      const newData = graphValue.res && graphValue.res[i].data.graph_data;
+      const newData = graphValue && graphValue[i].graph_data;
       const data = newData?.filter((value) => value !== "");
       seriess.push({
         id: graph.series[i].id,
@@ -93,7 +95,7 @@ const ApexChart = (props) => {
         },
       },
     });
-  }, [graphValue.res]);
+  }, [graphValue]);
 
   return (
     <div id="chart">

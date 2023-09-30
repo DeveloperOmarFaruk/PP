@@ -1,3 +1,4 @@
+import { capitalize } from "@material-ui/core";
 import React from "react";
 
 const ProteinInfo = ({ protein, matrix, style }) => {
@@ -11,11 +12,15 @@ const ProteinInfo = ({ protein, matrix, style }) => {
         {matrix === 1 && <p>{protein?.Reg_1_ltr ? protein.Reg_1_ltr : "--"}</p>}
       </div>
       <div className="protein-info-details-info">
-        <p>{protein?.title}</p>
+        <p style={{ textTransform: "capitalize" }}>
+          {style === "protein-1" ? "Spike Protein" : style.replace(/-/g, " ")}
+        </p>
         <p>{protein?.position ? protein.position : "--"}</p>
         <p>
           Level{" "}
-          {matrix === 0 && protein?.Seq_AOL ? protein?.Seq_AOL : protein?.Reg_SOL}
+          {matrix === 0 && protein?.Seq_AOL
+            ? protein?.Seq_AOL
+            : protein?.Reg_SOL}
         </p>
       </div>
     </div>

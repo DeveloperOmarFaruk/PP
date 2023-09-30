@@ -37,7 +37,7 @@ const ProteinTable = ({ data, acidType, subAcidType, matrix, order }) => {
             <td data-label="Substitute">{row[subAcidType]}</td>
             <td data-label="Ag">{!matrix ? row.Seq_AG : row.Reg_AG}</td>
             <td data-label="Region">
-              {!matrix ? row.Seq_AOL : row.Reg_Sub_Table_SOL}
+              {!matrix ? row.Seq_AOL : row.Reg_SOL}
             </td>
           </tr>
         )

@@ -220,6 +220,7 @@ const PLabAnalysis = () => {
             optimized_label: classs,
             lowPosition: position.min,
             highPosition: position.max,
+            auto: true
           }
         )
     );
@@ -677,13 +678,8 @@ const PLabAnalysis = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-                  <MenuItem value={20}>20</MenuItem>
-                  {/* {console.log("checkkkkkk", analysis, matrix)} */}
-                  {analysis === 20 && matrix === 0 ? (
-                    <></>
-                  ) : (
-                    <MenuItem value={0}>All</MenuItem>
-                  )}
+                  {matrix === 0 && <MenuItem value={20}>20</MenuItem>}
+                  <MenuItem value={0}>All</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -728,7 +724,7 @@ const PLabAnalysis = () => {
                 </>
               )}
             </div>
-            {protienDetailA && (
+            {graphValue && (
               <div className="protein-info-container">
                 <div className="protein-info-details">
                   <div className="protein-info-logo">

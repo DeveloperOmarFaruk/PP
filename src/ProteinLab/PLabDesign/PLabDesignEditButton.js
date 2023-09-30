@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ProteinButton.module.css";
 import { useSelector } from "react-redux";
-import { staticTable } from "../constant/staticTable";
+import { staticTable } from "../constant/staticValue";
 
 const PLabDesignEditButton = ({
   data,

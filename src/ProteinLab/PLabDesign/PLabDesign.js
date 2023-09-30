@@ -262,8 +262,11 @@ const PLabDesign = () => {
                   <MenuItem value={17}>17</MenuItem>
                   <MenuItem value={18}>18</MenuItem>
                   <MenuItem value={19}>19</MenuItem>
-
-                  {matrix === 0 ? <></> : <MenuItem value={0}>All</MenuItem>}
+                  {matrix === 0 ? (
+                    <MenuItem value={20}>20</MenuItem>
+                  ) : (
+                    <MenuItem value={0}>All</MenuItem>
+                  )}
                 </Select>
                 {/* )} */}
               </FormControl>

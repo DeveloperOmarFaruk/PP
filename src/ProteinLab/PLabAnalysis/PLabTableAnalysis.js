@@ -4,14 +4,18 @@ import { useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
 import ProteinTable from "./ProteinTable";
 
-const PLabTableAnalysis = ({ matrix, spike, p2, p3, p4, p5 }) => {
+const PLabTableAnalysis = ({ matrix, classs, protein, p4, p5 }) => {
   const [acidType, setAcidType] = useState("amino_acid");
   const [subAcidType, setSubAcidType] = useState("");
-  const [order, setOrder] = useState("asc");
+  const [order, setOrder] = useState("default");
 
   const orderHandler = () => {
     order === "asc" ? setOrder("dsc") : setOrder("asc");
   };
+
+  useEffect(() => {
+    setOrder("default");
+  }, [matrix, classs, protein]);
 
   useEffect(() => {
     let subAcidType;
@@ -60,7 +64,24 @@ const PLabTableAnalysis = ({ matrix, spike, p2, p3, p4, p5 }) => {
             </th>
             <th scope="col">Optimized level</th>
           </thead>
-          <ProteinTable
+          {protein === 4 ? (
+            <ProteinTable
+              data={p4?.all_data}
+              acidType={acidType}
+              subAcidType={subAcidType}
+              matrix={matrix}
+              order={order}
+            />
+          ) : (
+            <ProteinTable
+              data={p5?.all_data}
+              acidType={acidType}
+              subAcidType={subAcidType}
+              matrix={matrix}
+              order={order}
+            />
+          )}
+          {/* <ProteinTable
             data={spike?.all_data}
             acidType={acidType}
             subAcidType={subAcidType}
@@ -80,21 +101,7 @@ const PLabTableAnalysis = ({ matrix, spike, p2, p3, p4, p5 }) => {
             subAcidType={subAcidType}
             matrix={matrix}
             order={order}
-          />
-          <ProteinTable
-            data={p4?.all_data}
-            acidType={acidType}
-            subAcidType={subAcidType}
-            matrix={matrix}
-            order={order}
-          />
-          <ProteinTable
-            data={p5?.all_data}
-            acidType={acidType}
-            subAcidType={subAcidType}
-            matrix={matrix}
-            order={order}
-          />
+          /> */}
         </table>
       </div>
     </>

@@ -69,7 +69,6 @@ const PLabDesignEdit = ({
   auto,
   autoHandler,
 }) => {
-  // const { range } = useFetchRanges();
   const [seq_sub, setSeq_sub] = useState([]);
   // const [reg_sub, setReg_sub] = useState([]);
   const [seqLength, setSeqLength] = useState(0);
@@ -82,7 +81,7 @@ const PLabDesignEdit = ({
   useEffect(() => {
     setPosition(positionValue);
 
-    // console.log("setproteinData", proteinData);
+    console.log("single dataaa", singleData);
     // counting sequence substitutes
     setSeqLength(0);
     singleData?.forEach((p) => {
@@ -282,7 +281,7 @@ const PLabDesignEdit = ({
                     matrix={matrix}
                     region={region}
                     seq_sub={seq_sub}
-                    // reg_sub={reg_sub.slice(0, maxLength)}
+                    singleData={singleData}
                     positionHandler={(posi) => setPosition(posi)}
                   />
                 );

@@ -10,7 +10,7 @@ const PLabDesignEditButton = ({
   matrix,
   region,
   seq_sub,
-  reg_sub,
+  singleData,
   positionHandler,
 }) => {
   const {
@@ -19,11 +19,27 @@ const PLabDesignEditButton = ({
     Reg_1_ltr,
     position,
     Reg_Sub_Table_1_ltr,
+    Reg_Sub_Table_SOL,
   } = data;
   const [protein, setProtein] = useState(amino_acid_1_ltr);
   const [filteredSeq_sub, setFilteredSeq_sub] = useState([]);
   const [flag, setFlag] = useState(true);
   const [ClassName, setClassName] = useState(null);
+  const [reg_sub, setReg_sub] = useState([]);
+
+  useEffect(() => {
+    const filteredRegionData = () => {
+      const filteredData = singleData.filter(
+        (data) => data?.Reg_Sub_Table_SOL === Reg_Sub_Table_SOL
+      );
+      filteredData.sort((a, b) => {
+        return parseInt(b.Reg_Sub_Table_AG) - parseInt(a.Reg_Sub_Table_AG);
+      });
+
+      setReg_sub(filteredData.slice(0, 20)); // drop down menu maximum length 20
+    };
+    filteredRegionData();
+  }, []);
 
   useEffect(() => {
     if (matrix) {
@@ -66,7 +82,7 @@ const PLabDesignEditButton = ({
         setClassName(classes.bg_default);
       } else if (Reg_1_ltr !== "") {
         auto
-          ? setClassName(classes.br_b_green)
+          ? setClassName(classes.br_green) // previous br_b_green
           : setClassName(classes.br_green);
       }
       setFlag(true);
@@ -146,6 +162,20 @@ const PLabDesignEditButton = ({
                     className={classes.bg_default}
                   >
                     {p.Seq_Sub_Table_1_ltr}
+                  </option>
+                );
+              })
+            : Reg_Sub_Table_1_ltr
+            ? reg_sub.length &&
+              reg_sub.map((p, index) => {
+                return (
+                  <option
+                    key={index}
+                    value={p.Reg_Sub_Table_1_ltr}
+                    data={JSON.stringify(p)}
+                    className={classes.bg_default}
+                  >
+                    {p.Reg_Sub_Table_1_ltr}
                   </option>
                 );
               })

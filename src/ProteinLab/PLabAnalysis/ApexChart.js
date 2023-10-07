@@ -11,8 +11,6 @@ const ApexChart = (props) => {
   const p4 = graphValue ? graphValue[3].graph_data : null;
   const p5 = graphValue ? graphValue[4].graph_data : null;
 
-  console.log("================================", spike, p5);
-
   const [graph, setGraph] = useState({
     series: [
       {

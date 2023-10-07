@@ -14,13 +14,20 @@ const ProteinTable = ({ data, acidType, subAcidType, matrix, order }) => {
     newData &&
     [...newData].sort((a, b) => {
       if (!matrix) {
-        const aSeqAG = parseFloat(a.Seq_AG);
-        const bSeqAG = parseFloat(b.Seq_AG);
-        // console.log("seq order", aSeqAG, bSeqAG);
+        const aSeqAG = parseFloat(order === "default" ? a.position : a.Seq_AG);
+        const bSeqAG = parseFloat(order === "default" ? a.position : b.Seq_AG);
+
+        if (order === "default") {
+          return aSeqAG - bSeqAG;
+        }
         return order === "asc" ? aSeqAG - bSeqAG : bSeqAG - aSeqAG;
       } else {
-        const aRegAG = parseFloat(a.Reg_AG);
-        const bRegAG = parseFloat(b.Reg_AG);
+        const aRegAG = parseFloat(order === "default" ? a.position : a.Reg_AG);
+        const bRegAG = parseFloat(order === "default" ? a.position : b.Reg_AG);
+
+        if (order === "default") {
+          return aRegAG - bRegAG;
+        }
         return order === "asc" ? aRegAG - bRegAG : bRegAG - aRegAG;
       }
     });
@@ -36,9 +43,7 @@ const ProteinTable = ({ data, acidType, subAcidType, matrix, order }) => {
             <td data-label="Amino Acid">{row[acidType]}</td>
             <td data-label="Substitute">{row[subAcidType]}</td>
             <td data-label="Ag">{!matrix ? row.Seq_AG : row.Reg_AG}</td>
-            <td data-label="Region">
-              {!matrix ? row.Seq_AOL : row.Reg_SOL}
-            </td>
+            <td data-label="Region">{!matrix ? row.Seq_AOL : row.Reg_SOL}</td>
           </tr>
         )
     );

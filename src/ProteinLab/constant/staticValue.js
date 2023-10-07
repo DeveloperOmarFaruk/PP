@@ -17,6 +17,8 @@ export const staticTable = [
   "S",
   "T",
   "V",
+  "W",
+  "Y"
 ];
 
 export const DEFAULT_RANGES = {
@@ -26,3 +28,4 @@ export const DEFAULT_RANGES = {
   D: { min: 90, max: 260 },
   E: { min: 90, max: 260 },
 };
+

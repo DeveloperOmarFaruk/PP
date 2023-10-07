@@ -47,6 +47,7 @@ const PLabAnalysis = () => {
   const [analysis, setAnalysis] = useState(20);
   const [matrix, setMatrix] = useState(1);
   const [classs, setClasss] = useState(0);
+  const [protein, setProtein] = useState(4);
   const [showProtein, setShowProtein] = useState(false);
   const [aMin, setAMin, aMax, setAMax, aData, aIsLoading] = useApiCall(
     matrix,
@@ -86,8 +87,7 @@ const PLabAnalysis = () => {
   const isLoading =
     aIsLoading | bIsLoading | cIsLoading | dIsLoading | eIsLoading;
 
-
-    useEffect(() => {
+  useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (showProtein && ref.current && !ref.current.contains(e.target)) {
         setShowProtein(false);
@@ -257,239 +257,269 @@ const PLabAnalysis = () => {
                 <MenuItem value={0}>PM Sequence</MenuItem>
               </Select>
             </FormControl>
-
-            <div className="position-relative">
-              <div
-                className={`${classes.proteinPopupButton} ${classes.formControl}`}
-                onClick={handleChangeShowProtein}
+            {analysis === 20 ? (
+              <FormControl
+                variant="filled"
+                className={classes.formControl}
+                style={{
+                  border: "1px solid #808080",
+                  borderRadius: "5px",
+                  width: "170px",
+                }}
               >
-                <span
-                  style={{
-                    color: "black",
-                    fontSize: "17px",
-                    display: "inline-block",
-                  }}
+                <InputLabel
+                  id="demo-simple-select-filled-label"
+                  style={{ color: "#6495ed" }}
                 >
-                  Protein
-                </span>
-                <i
-                  class="fa-solid fa-sort-down"
-                  style={{ color: "#808080" }}
-                ></i>
-              </div>
-              {showProtein && (
-                <div className="protein-pop-up " ref={ref}>
-                  <div className="testing">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <p style={{ margin: "20px 5px" }}>Spike</p>
-                      <input
-                        type="number"
-                        onChange={handleProteinSpikMin}
-                        id="low"
-                        name="low"
-                        value={aMin}
-                        placeholder="1"
-                        style={{
-                          border: "1px solid #808080",
-                          borderRadius: "5px",
-                          width: "60px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                      <input
-                        type="number"
-                        id="high"
-                        name="high"
-                        onChange={handleProteinSpikMax}
-                        value={aMax}
-                        placeholder="1273"
-                        style={{
-                          border: `1px solid #808080}`,
-                          borderRadius: "5px",
-                          width: "70px",
-                          margin: "0px 5px",
-                          padding: "3px 5px",
-                        }}
-                      />
-                    </div>
-                    {analysis !== 20 && (
-                      <>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: "0px 10px",
-                          }}
-                        >
-                          <p style={{ margin: "20px 5px" }}>M</p>
-                          <input
-                            type="number"
-                            id="low"
-                            name="low"
-                            onChange={handleProteinMMin}
-                            placeholder="20"
-                            value={bMin}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "60px",
-                              margin: "0px 5px 0px 30px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                          <input
-                            type="number"
-                            id="high"
-                            name="high"
-                            onChange={handleProteinMMax}
-                            placeholder="450"
-                            value={bMax}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "70px",
-                              margin: "0px 5px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                        </div>
-
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: "0px 10px",
-                          }}
-                        >
-                          <p style={{ margin: "20px 5px" }}>N</p>
-                          <input
-                            type="number"
-                            id="low"
-                            name="low"
-                            onChange={handleProteinNMin}
-                            placeholder="90"
-                            value={cMin}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "60px",
-                              margin: "0px 5px 0px 30px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                          <input
-                            type="number"
-                            id="high"
-                            name="high"
-                            onChange={handleProteinNMax}
-                            placeholder="260"
-                            value={cMax}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "70px",
-                              margin: "0px 5px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                        </div>
-
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: "0px 10px",
-                          }}
-                        >
-                          <p style={{ margin: "20px 5px" }}>E</p>
-                          <input
-                            type="number"
-                            id="low"
-                            name="low"
-                            onChange={handleProteinPMin}
-                            placeholder="90"
-                            value={dMin}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "60px",
-                              margin: "0px 5px 0px 30px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                          <input
-                            type="number"
-                            id="high"
-                            name="high"
-                            onChange={handleProteinPMax}
-                            placeholder="260"
-                            value={dMax}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "70px",
-                              margin: "0px 5px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: "0px 10px",
-                          }}
-                        >
-                          <p style={{ margin: "20px 5px" }}>D</p>
-                          <input
-                            type="number"
-                            id="low"
-                            name="low"
-                            onChange={handleProteinDMin}
-                            placeholder="90"
-                            value={eMin}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "60px",
-                              margin: "0px 5px 0px 30px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                          <input
-                            type="number"
-                            id="high"
-                            name="high"
-                            onChange={handleProteinDMax}
-                            placeholder="260"
-                            value={eMax}
-                            style={{
-                              border: "1px solid #808080",
-                              borderRadius: "5px",
-                              width: "70px",
-                              margin: "0px 5px",
-                              padding: "3px 5px",
-                            }}
-                          />
-                        </div>
-                      </>
-                    )}
-                  </div>
+                  PROTEIN
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={protein}
+                  onChange={(e) => setProtein(e.target.value)}
+                >
+                  {/* <MenuItem value={1}>Spike</MenuItem>
+                  <MenuItem value={2}>Protein 2</MenuItem>
+                  <MenuItem value={3}>Protein 3</MenuItem> */}
+                  <MenuItem value={4}>Protein D</MenuItem>
+                  <MenuItem value={5}>Protein E</MenuItem>
+                </Select>
+              </FormControl>
+            ) : (
+              <div className="position-relative">
+                <div
+                  className={`${classes.proteinPopupButton} ${classes.formControl}`}
+                  onClick={handleChangeShowProtein}
+                >
+                  <span
+                    style={{
+                      color: "black",
+                      fontSize: "17px",
+                      display: "inline-block",
+                    }}
+                  >
+                    Protein
+                  </span>
+                  <i
+                    class="fa-solid fa-sort-down"
+                    style={{ color: "#808080" }}
+                  ></i>
                 </div>
-              )}
-            </div>
+                {showProtein && (
+                  <div className="protein-pop-up " ref={ref}>
+                    <div className="testing">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          padding: "0px 10px",
+                        }}
+                      >
+                        <p style={{ margin: "20px 5px" }}>Spike</p>
+                        <input
+                          type="number"
+                          onChange={handleProteinSpikMin}
+                          id="low"
+                          name="low"
+                          value={aMin}
+                          placeholder="1"
+                          style={{
+                            border: "1px solid #808080",
+                            borderRadius: "5px",
+                            width: "60px",
+                            margin: "0px 5px",
+                            padding: "3px 5px",
+                          }}
+                        />
+                        <input
+                          type="number"
+                          id="high"
+                          name="high"
+                          onChange={handleProteinSpikMax}
+                          value={aMax}
+                          placeholder="1273"
+                          style={{
+                            border: `1px solid #808080}`,
+                            borderRadius: "5px",
+                            width: "70px",
+                            margin: "0px 5px",
+                            padding: "3px 5px",
+                          }}
+                        />
+                      </div>
+                      {analysis !== 20 && (
+                        <>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>M</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinMMin}
+                              placeholder="20"
+                              value={bMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinMMax}
+                              placeholder="450"
+                              value={bMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "70px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>N</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinNMin}
+                              placeholder="90"
+                              value={cMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinNMax}
+                              placeholder="260"
+                              value={cMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "70px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>E</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinPMin}
+                              placeholder="90"
+                              value={dMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinPMax}
+                              placeholder="260"
+                              value={dMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "70px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              padding: "0px 10px",
+                            }}
+                          >
+                            <p style={{ margin: "20px 5px" }}>D</p>
+                            <input
+                              type="number"
+                              id="low"
+                              name="low"
+                              onChange={handleProteinDMin}
+                              placeholder="90"
+                              value={eMin}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "60px",
+                                margin: "0px 5px 0px 30px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                            <input
+                              type="number"
+                              id="high"
+                              name="high"
+                              onChange={handleProteinDMax}
+                              placeholder="260"
+                              value={eMax}
+                              style={{
+                                border: "1px solid #808080",
+                                borderRadius: "5px",
+                                width: "70px",
+                                margin: "0px 5px",
+                                padding: "3px 5px",
+                              }}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             <FormControl
               variant="filled"
@@ -542,9 +572,11 @@ const PLabAnalysis = () => {
       {analysis === 20 && (
         <PLabTableAnalysis
           matrix={matrix}
-          spike={aData}
-          p2={bData}
-          p3={cData}
+          classs={classs}
+          protein={protein}
+          // spike={aData}
+          // p2={bData}
+          // p3={cData}
           p4={dData}
           p5={eData}
         />

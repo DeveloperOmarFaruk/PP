@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ProteinButton.module.css";
 import { useSelector } from "react-redux";
-import { staticTable } from "../constant/staticValue";
+import { dropdownMaxLength, staticTable } from "../constant/staticValue";
 
 const PLabDesignEditButton = ({
   data,
@@ -36,7 +36,7 @@ const PLabDesignEditButton = ({
         return parseInt(b.Reg_Sub_Table_AG) - parseInt(a.Reg_Sub_Table_AG);
       });
 
-      setReg_sub(filteredData.slice(0, 20)); // drop down menu maximum length 20
+      setReg_sub(filteredData.slice(0, dropdownMaxLength)); // drop down menu maximum length 20
     };
     filteredRegionData();
   }, []);

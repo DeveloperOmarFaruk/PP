@@ -23,7 +23,7 @@ const useFetchRanges = () => {
     fetchRanges();
   }, []);
 
-  return { range, loading, error };
+  return [range, loading, error];
 };
 
 export default useFetchRanges;

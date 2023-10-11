@@ -11,6 +11,7 @@ import { DEFAULT_RANGES } from "../constant/staticValue";
 import PLabTableAnalysis from "./PLabTableAnalysis";
 import { NavLink } from "react-router-dom";
 import PLabGraphAnalysis from "./PLabGraphAnalysis";
+import useFetchRanges from "../custom/useFetchRanges";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -43,12 +44,20 @@ const useStyles = makeStyles((theme) => ({
 const PLabAnalysis = () => {
   const classes = useStyles();
   const ref = useRef();
+  const [range, loading] = useFetchRanges();
   const [lab, setLab] = useState(10);
   const [analysis, setAnalysis] = useState(20);
   const [matrix, setMatrix] = useState(1);
   const [classs, setClasss] = useState(0);
   const [protein, setProtein] = useState(4);
   const [showProtein, setShowProtein] = useState(false);
+
+  const minD = analysis === 20 ? range?.table_4.min : DEFAULT_RANGES.D.min;
+  const maxD = analysis === 20 ? range?.table_4.max : DEFAULT_RANGES.D.max;
+
+  const minE = analysis === 20 ? range?.table_5.min : DEFAULT_RANGES.E.min;
+  const maxE = analysis === 20 ? range?.table_5.max : DEFAULT_RANGES.E.max;
+
   const [aMin, setAMin, aMax, setAMax, aData, aIsLoading] = useApiCall(
     matrix,
     classs,
@@ -73,19 +82,20 @@ const PLabAnalysis = () => {
   const [dMin, setDMin, dMax, setDMax, dData, dIsLoading] = useApiCall(
     matrix,
     classs,
-    DEFAULT_RANGES.D.min,
-    DEFAULT_RANGES.D.max,
+    minD,
+    maxD,
     4
   );
   const [eMin, setEMin, eMax, setEMax, eData, eIsLoading] = useApiCall(
     matrix,
     classs,
-    DEFAULT_RANGES.E.min,
-    DEFAULT_RANGES.E.max,
+    minE,
+    maxE,
     5
   );
+
   const isLoading =
-    aIsLoading | bIsLoading | cIsLoading | dIsLoading | eIsLoading;
+    loading | aIsLoading | bIsLoading | cIsLoading | dIsLoading | eIsLoading;
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -98,8 +108,6 @@ const PLabAnalysis = () => {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [showProtein]);
-
-  const handleChangeShowProtein = () => setShowProtein(true);
 
   const handleChangeAnalysis = (event) => {
     if (event.target.value === 20 && matrix === 0) {
@@ -118,6 +126,8 @@ const PLabAnalysis = () => {
     }
     setMatrix(event.target.value);
   };
+
+  const handleChangeShowProtein = () => setShowProtein(true);
 
   const handleChangeLab = (event) => setLab(event.target.value);
 

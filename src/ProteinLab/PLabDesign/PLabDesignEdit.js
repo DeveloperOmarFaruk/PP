@@ -81,7 +81,6 @@ const PLabDesignEdit = ({
   useEffect(() => {
     setPosition(positionValue);
 
-    console.log("single dataaa", singleData);
     // counting sequence substitutes
     setSeqLength(0);
     singleData?.forEach((p) => {

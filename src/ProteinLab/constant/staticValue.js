@@ -18,7 +18,7 @@ export const staticTable = [
   "T",
   "V",
   "W",
-  "Y"
+  "Y",
 ];
 
 export const DEFAULT_RANGES = {
@@ -29,3 +29,4 @@ export const DEFAULT_RANGES = {
   E: { min: 90, max: 260 },
 };
 
+export const dropdownMaxLength = 20;

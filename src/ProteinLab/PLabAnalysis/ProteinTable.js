@@ -15,7 +15,7 @@ const ProteinTable = ({ data, acidType, subAcidType, matrix, order }) => {
     [...newData].sort((a, b) => {
       if (!matrix) {
         const aSeqAG = parseFloat(order === "default" ? a.position : a.Seq_AG);
-        const bSeqAG = parseFloat(order === "default" ? a.position : b.Seq_AG);
+        const bSeqAG = parseFloat(order === "default" ? b.position : b.Seq_AG);
 
         if (order === "default") {
           return aSeqAG - bSeqAG;
@@ -23,7 +23,7 @@ const ProteinTable = ({ data, acidType, subAcidType, matrix, order }) => {
         return order === "asc" ? aSeqAG - bSeqAG : bSeqAG - aSeqAG;
       } else {
         const aRegAG = parseFloat(order === "default" ? a.position : a.Reg_AG);
-        const bRegAG = parseFloat(order === "default" ? a.position : b.Reg_AG);
+        const bRegAG = parseFloat(order === "default" ? b.position : b.Reg_AG);
 
         if (order === "default") {
           return aRegAG - bRegAG;

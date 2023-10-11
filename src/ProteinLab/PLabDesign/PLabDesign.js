@@ -9,8 +9,8 @@ import Select from "@material-ui/core/Select";
 import PLabDesignEdit from "./PLabDesignEdit";
 import { NavLink } from "react-router-dom";
 import useFetchRanges from "../custom/useFetchRanges";
-import { useDispatch, useSelector } from "react-redux";
-import { addProteinData } from "../PLabReducers/proteinDataSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { addProteinData } from "../PLabReducers/proteinDataSlice";
 import { proteinRangeEndpoints } from "../constant/apiConstant";
 import { sendRequest } from "../api/ApiConfig";
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PLabDesign = () => {
   const classes = useStyles();
-  const { range, loading } = useFetchRanges();
+  const [range, loading] = useFetchRanges();
   const [classs, setDesignClasss] = useState(0);
   const [dlab, setDLab] = useState(10);
   const [protein, setProtein] = useState(1);
@@ -36,8 +36,8 @@ const PLabDesign = () => {
   const [position, setPosition] = useState("");
   const [auto, setAuto] = useState(true);
   const [isLoading, setIsLoading] = useState(loading || false);
-  const dispatch = useDispatch();
-  const { table } = useSelector((state) => state.proteinData);
+  // const dispatch = useDispatch();
+  // const { table } = useSelector((state) => state.proteinData);
 
   const handleChangeDLab = (event) => {
     setDLab(event.target.value);

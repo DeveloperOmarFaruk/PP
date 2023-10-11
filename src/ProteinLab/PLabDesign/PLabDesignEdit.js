@@ -9,10 +9,10 @@ import React, { useEffect, useState } from "react";
 import "./PLabDesign.css";
 import PLabDesignEditButton from "./PLabDesignEditButton";
 import { Stack } from "react-bootstrap";
-import { getSeqSubTable, getSubTable } from "../api/ApiConfig";
+import { getSeqSubTable } from "../api/ApiConfig";
 import { proteinRangeEndpoints } from "../constant/apiConstant";
-import useFetchRanges from "../custom/useFetchRanges";
-import { useSelector } from "react-redux";
+// import useFetchRanges from "../custom/useFetchRanges";
+// import { useSelector } from "react-redux";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -74,7 +74,6 @@ const PLabDesignEdit = ({
   const [seqLength, setSeqLength] = useState(0);
   const [regLength, setRegLength] = useState(0);
   const [position, setPosition] = useState(positionValue);
-  const [maxLength] = useState(20);
   const [loading, setLoading] = useState(isLoading);
   // const proteinData = useSelector((state) => state.proteinData);
 
